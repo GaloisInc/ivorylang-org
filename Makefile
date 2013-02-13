@@ -2,10 +2,10 @@
 default: build
 
 clean:
-	./site clean
-	-rm site.o site.hi site
+	-./site clean
+	-rm *.o *.hi site
 
-site: site.hs
+site: site.hs Sidebar.hs
 	ghc --make site.hs
 	./site clean
 
