@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>SMACCMPilot - $title$</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,7 +31,7 @@
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
+      <script src="/js/html5shiv.js"></script>
     <![endif]-->
 
  </head>
@@ -60,27 +60,48 @@
               $sidebar$
         </div><!--/span-->
         <div class="span9">
-          <div class="hero-unit">
-                $body$
-              <a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-          </div>
+            <div class="row-fluid">
+                <div class="span9">
+                    <div class="hero-unit">
+                        $body$
+                    </div>
+                </div>
+
+                <div class="span3">
+                    <img src="/images/px4ioar_400.jpg">
+                </div>
+            </div> <!--/row-fluid-->
           <div class="row-fluid">
             <div class="span4">
               <h2>Hardware Guide</h2>
-              <p>Learn about the hardware required to build and fly the
-                 SMACCMPilot platform.</p>
+              <p>Complete instructions on building build a SMACCMPilot based
+              quadcopter.
+              </p>
+              <p>The SMACCMPilot platform is based on hardware from the
+              open-source <a href="http://pixhawk.ethz.ch/px4/">
+              Pixhawk PX4 Autopilot project</a>,
+              and uses the popular Parrot AR Drone as an airframe.
+              </p>
               <p><a class="btn" href="/hardware/">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="span4">
               <h2>Software Guide</h2>
-              <p>Learn about the software which makes up the SMACCMPilot
-                 platform.</p>
+              <p>The SMACCMPilot software platform is part of a
+              research project which takes a fresh domain-specific language
+              based approach to building high-assurance software systems. 
+              </p>
+              <p>Learn about how the SMACCMPilot software platform works, and
+              how to develop for it.
+              </p>
               <p><a class="btn" href="/software/">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="span4">
-              <h2>Flight Guide</h2>
-              <p>Enough nerd stuff, lets get flying.</p>
-              <p><a class="btn" href="/flying/">View details &raquo;</a></p>
+              <h2>Open Source</h2>
+              <p>The SMACCMPilot platform is an open-source project, released
+              under a liberal BSD license.</p>
+              <p><a class="btn"
+                    href="http://github.com/GaloisInc/smaccmpilot-stm32f4">
+                  Source code on Github &raquo;</a></p>
             </div><!--/span-->
           </div><!--/row-->
         </div><!--/span-->

@@ -2,4 +2,5 @@
 
 ## An Unmanned Air Vehicle Research Platform
 
-Open source software, something something high assurance.
+Something something high assurance, something something domain specific
+language approach.

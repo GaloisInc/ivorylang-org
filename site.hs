@@ -6,6 +6,13 @@ import           Hakyll
 
 import           Sidebar
 --------------------------------------------------------------------------------
+
+standardPandocPagesSubdir d = do
+    match (fromGlob ("pages/" ++ d ++ "*.md")) $ do
+        route   $ gsubRoute "pages/"  (const "") `composeRoutes` 
+                  setExtension "html"
+        compile $ pandocCompiler >>= (templated "templates/standard.html")
+
 main :: IO ()
 main = hakyll $ do
 
@@ -18,19 +25,19 @@ main = hakyll $ do
         compile compressCssCompiler
     
     match "bootstrap/css/*" $ do
-        route   $ gsubRoute "bootstrap/"  (const "")
+        route   $ gsubRoute "bootstrap/" (const "")
         compile compressCssCompiler
     
     match "bootstrap/js/*.js" $ do
-        route   $ gsubRoute "bootstrap/"  (const "")
+        route   $ gsubRoute "bootstrap/" (const "")
         compile copyFileCompiler
     
     match "jquery/*.js" $ do
-        route   $ gsubRoute "jquery/"  (const "js/")
+        route   $ gsubRoute "jquery/" (const "js/")
         compile copyFileCompiler
     
     match "bootstrap/img/*" $ do
-        route   $ gsubRoute "bootstrap/"  (const "")
+        route   $ gsubRoute "bootstrap/" (const "")
         compile copyFileCompiler
     
     match "pages/index.md" $ do
@@ -38,42 +45,53 @@ main = hakyll $ do
                   setExtension "html"
         compile $ pandocCompiler >>= (templated "templates/frontpage.html")
     
-    match "pages/*.md" $ do
-        route   $ gsubRoute "pages/"  (const "") `composeRoutes` 
-                  setExtension "html"
-        compile $ pandocCompiler >>= (templated "templates/standard.html")
-
-    match "pages/hardware/*.md" $ do
-        route   $ gsubRoute "pages/"  (const "") `composeRoutes` 
-                  setExtension "html"
-        compile $ pandocCompiler >>= (templated "templates/standard.html")
-
     match "templates/*" $ compile templateCompiler
 
+    standardPandocPagesSubdir ""
+    standardPandocPagesSubdir "hardware/"
+    standardPandocPagesSubdir "software/"
 
 sitemap :: PageTree
 sitemap = Tree "/" "Home" [ (Page "index.html" "Overview" "Overview")
                           , (Tree "hardware" "Hardware" hardwarepages)
+                          , (Tree "software" "Software" softwarepages)
+                          , (Page "about.html" "About" "About")
                           ]
   where
   hardwarepages = [ Page "index.html" "Overview" "Hardware Overview"
+                  , Page "shoppinglist.html" "Shopping List" 
+                          "Hardware Shopping List"
                   , Page "px4fmu.html" "PX4FMU" "PX4FMU Flight Controller"
                   , Page "ardrone.html" "AR Drone" "AR Drone Airframe"
-                  , Page "arducopter.html" "ArduCopter" "ArduCopter Airframe"
+                  ]
+  softwarepages = [ Page "index.html" "Overview" "Software Overview"
+                  ]
+  flyingpages   = [ Page "index.html" "Overview" "Flying Overview"
                   ]
 
-navbar :: String
-navbar = "<ul class=\"nav\"> " ++
-         "<li><a href=\"/index.html\">Home</a></li> " ++
-         "<li><a href=\"/about.html\">About</a></li> " ++
-         "</ul>"
+navbar :: FilePath -> String
+navbar currentpath = unlines $ 
+  [ "<ul class=\"nav\"> "
+  , entry "/index.html" "Home"
+  , entry "/hardware/index.html" "Hardware"
+  , entry "/software/index.html" "Software"
+  , entry "/about.html" "About"
+  , "</ul>"
+  ]
+  where
+  entry path desc =
+    "<li" ++ (emphif path) ++ "><a href=\"" ++ path ++ "\">" ++
+    desc ++ "</a></li> "
+  emphif path = case currentpath == path of
+    True  -> " class=\"active\" "
+    False -> ""
 
 templated :: Identifier -> Item String -> Compiler (Item String)
 templated t input = loadAndApplyTemplate t ctx input >>= relativizeUrls
   where
   ctx :: Context String
   ctx = mconcat
-    [ field "navbar"    $ \_    -> return navbar
+    [ field "navbar"    $ \item -> return (navbar (itemFilePath item))
     , field "sidebar"   $ \item -> return (sidebarHTML sitemap item)
     , field "directory" $ \item -> return (itemDirectory item)
     , field "filepath"  $ \item -> return (itemFilePath item)
