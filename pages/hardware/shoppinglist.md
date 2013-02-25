@@ -51,9 +51,18 @@ DJT-JR Transmitter module available [from Aloft Hobbies][djt_store].
 
 D4R-II Receiver available [from Aloft Hobbies][d4rii_store].
 
+You will need a single female to female servo extension cable to connect the
+receiver to the PX4IOAR's PPM input port. (Note that most servo extension
+cables sold have one male and one female connector, and you need two female
+connectors.)
+
+Appropriate servo extension cable available [from 3D Robotics][servoext_store].
+
 [t9xr_store]: http://hobbyking.com/hobbyking/store/__31544__Turnigy_9XR_Transmitter_Mode_2_No_Module_.html
 [djt_store]: http://www.alofthobbies.com/jr-transmiter-telemetry-module.html
 [d4rii_store]: http://www.alofthobbies.com/frsky-d4r-ii.html
+[servoext_store]: http://store.diydrones.com/Servo_Jumper_Female_double_sided_p/pr-0003-03-10cm.htm
+
 
 -------------------------------------------------------------------------------
 
