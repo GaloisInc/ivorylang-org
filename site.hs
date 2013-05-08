@@ -23,28 +23,28 @@ main = hakyll $ do
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
-    
+
     match "bootstrap/css/*" $ do
         route   $ gsubRoute "bootstrap/" (const "")
         compile compressCssCompiler
-    
+
     match "bootstrap/js/*.js" $ do
         route   $ gsubRoute "bootstrap/" (const "")
         compile copyFileCompiler
-    
+
     match "jquery/*.js" $ do
         route   $ gsubRoute "jquery/" (const "js/")
         compile copyFileCompiler
-    
+
     match "bootstrap/img/*" $ do
         route   $ gsubRoute "bootstrap/" (const "")
         compile copyFileCompiler
-    
+
     match "pages/index.md" $ do
         route   $ gsubRoute "pages/"  (const "") `composeRoutes` 
                   setExtension "html"
         compile $ pandocCompiler >>= (templated "templates/frontpage.html")
-    
+
     match "templates/*" $ compile templateCompiler
 
     standardPandocPagesSubdir ""
@@ -65,6 +65,10 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview" "Overview")
                   , Page "ardrone.html" "AR Drone" "AR Drone Airframe"
                   ]
   softwarepages = [ Page "index.html" "Overview" "Software Overview"
+                  , Page "prerequisites.html" "Prerequisites" "Prerequisites"
+                  , Page "build.html" "Building SMACCMPilot" "Building"
+                  , Page "ivory-overview.html" "Ivory Language Overview" "Ivory Language"
+                  , Page "tower-overview.html" "Tower Overview" "Tower Language"
                   ]
   flyingpages   = [ Page "index.html" "Overview" "Flying Overview"
                   ]
