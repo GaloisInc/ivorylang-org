@@ -73,6 +73,9 @@ Then, you can run the code generators and build the C sources into executables:
 make
 ```
 
-### Continue to [loading SMACCMPilot on PX4][uploading].
+At this point you will have a complete set of SMACCMPilot binaries, including
+the primary flight binary `stabilize`.
 
-[uploading]: /software/uploading.html
+### Continue to [loading SMACCMPilot on PX4][loading].
+
+[loading]: /software/loading.html

@@ -60,13 +60,15 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview" "Overview")
   where
   hardwarepages = [ Page "index.html" "Overview" "Hardware Overview"
                   , Page "shoppinglist.html" "Shopping List" 
-                          "Hardware Shopping List"
-                  , Page "px4fmu.html" "PX4FMU" "PX4FMU Flight Controller"
-                  , Page "ardrone.html" "AR Drone" "AR Drone Airframe"
+                          "Shopping List"
+                  , Page "px4fmu.html" "PX4FMU Flight Controller" "Flight Controller"
+                  , Page "ardrone.html" "AR Drone Air Vehicle" "Air Vehicle"
+                  , Page "blackmagic.html" "Black Magic Probe Debugger" "Debugger"
                   ]
   softwarepages = [ Page "index.html" "Overview" "Software Overview"
                   , Page "prerequisites.html" "Prerequisites" "Prerequisites"
                   , Page "build.html" "Building SMACCMPilot" "Building"
+                  , Page "loading.html" "Uploading SMACCMPilot" "Loading"
                   , Page "ivory-overview.html" "Ivory Language Overview" "Ivory Language"
                   , Page "tower-overview.html" "Tower Overview" "Tower Language"
                   ]
