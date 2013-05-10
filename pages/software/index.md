@@ -8,8 +8,8 @@ language.
 
 For convenience, we have provided the [SMACCMPilot-Build][smaccmpilot-build]
 repository which includes all of the sources required to build SMACCMPilot as a
-collection of submodules. Use of the build repository is [described on the
-Prerequisites page](/software/prerequisites.html).
+collection of submodules. There are instructions for [building this
+repository](/software/build.html).
 
 ### Flight Control Software
 
