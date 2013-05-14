@@ -9,7 +9,7 @@ language.
 For convenience, we have provided the [SMACCMPilot-Build][smaccmpilot-build]
 repository which includes all of the sources required to build SMACCMPilot as a
 collection of submodules. There are instructions for [building this
-repository](/software/build.html).
+repository](build.html).
 
 ### Flight Control Software
 
@@ -76,9 +76,9 @@ Tower targets [FreeRTOS][freertos] as the operating system.
 [ivory-manual]: http://github.com/GaloisInc/ivory/blob/master/ivory/user-guide.md
 [ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples/examples
 
-[ivory-overview]: /software/ivory-overview.html
+[ivory-overview]: ivory-overview.html
 
-[tower-overview]: /software/tower-overview.html
+[tower-overview]: tower-overview.html
 [tower-example]: http://github.com/GaloisInc/tower/blob/master/ivory-tower/src/Ivory/Tower/Test/FooBarTower.hs 
 
 [freertos]: http://freertos.org

@@ -12,10 +12,13 @@ on the [Black Magic Probe][blackmagic] page.
 
 ### Loading via USB Bootloader
 
-We should work on this... XXX
+The PX4 Project has written a very nice USB bootloader for the STM32F4 and a
+variety of loading utilities for Windows, Mac, and Linux users.
 
+This bootloader is not supported at this time, but we will be integrating it
+in the near future.
 
-[building]: /software/building.html
-[hardware]: /hardware/overview.html
-[blackmagic]: /hardware/blackmagic.html
+[building]: building.html
+[hardware]: ../hardware/overview.html
+[blackmagic]: ../hardware/blackmagic.html
 

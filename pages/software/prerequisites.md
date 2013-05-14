@@ -59,4 +59,4 @@ cabal install cabal-dev
 [cabal-dev]: http://hackage.haskell.org/package/cabal-dev
 
 ------------------------
-### Continue to [building SMACCMPilot](/software/build.html).
+### Continue to [building SMACCMPilot](build.html).

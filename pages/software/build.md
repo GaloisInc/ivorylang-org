@@ -3,7 +3,7 @@
 These instructions assume you've completed the instructions for [installing
 prerequisites][prereqs].
 
-[prereqs]: /software/prerequisites.html
+[prereqs]: prerequisites.html
 
 ## Fetching Source Dependencies
 
@@ -78,4 +78,4 @@ the primary flight binary `stabilize`.
 
 ### Continue to [loading SMACCMPilot on PX4][loading].
 
-[loading]: /software/loading.html
+[loading]: loading.html
