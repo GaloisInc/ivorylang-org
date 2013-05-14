@@ -1,7 +1,5 @@
 # Shopping List
 
--------------------------------------------------------------------------------
-
 For your convenience, links to each of the components you need to build a
 complete system. Many of these components and vendors have alternatives, this
 is not an endorsement of any particular brand or vendor.
@@ -10,15 +8,20 @@ is not an endorsement of any particular brand or vendor.
 
 ## PX4 Autopilot
 
-3D Robotics makes and sells the PX4 Autopilot system. Other distributors
-carry 3DR products worldwide.
+3D Robotics makes and sells the PX4 Autopilot system. [Other
+distributors][3drdisty] carry 3DR products worldwide.
 
 PX4FMU v1.7 [from 3D Robotics][px4fmu_store].
 
 PX4IOAR [from 3D Robotics][px4ioar_store].
 
-[px4fmu_store]: https://store.diydrones.com/category_s/63.htm
-[px4ioar_store]: http://store.diydrones.com/PX4IOAR_p/br-pxioar.htm
+PX4FMU and PX4IOAR packaged as a kit [from 3D Robotics][px4kit_store].
+
+[3drdisty]: http://diydrones.com/profiles/blogs/list-of-all-diy-drones
+
+[px4fmu_store]: http://store.3drobotics.com/products/px4fmu-1
+[px4ioar_store]: http://store.3drobotics.com/products/px4ioar-1-2
+[px4kit_store]: http://store.3drobotics.com/products/px4-fmu-flight-management-unit-plus-ioar-ar-dot-drone-adapter-board-kit
 
 -------------------------------------------------------------------------------
 
@@ -30,7 +33,7 @@ as the 433MHz spectrum.
 
 3DR Radio kit [from 3D Robotics][3drradio_store].
 
-[3drradio_store]: https://store.diydrones.com/category_s/13.htm
+[3drradio_store]: http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz 
 
 -------------------------------------------------------------------------------
 
@@ -61,7 +64,7 @@ Appropriate servo extension cable available [from 3D Robotics][servoext_store].
 [t9xr_store]: http://hobbyking.com/hobbyking/store/__31544__Turnigy_9XR_Transmitter_Mode_2_No_Module_.html
 [djt_store]: http://www.alofthobbies.com/jr-transmiter-telemetry-module.html
 [d4rii_store]: http://www.alofthobbies.com/frsky-d4r-ii.html
-[servoext_store]: http://store.diydrones.com/Servo_Jumper_Female_double_sided_p/pr-0003-03-10cm.htm
+[servoext_store]: http://store.3drobotics.com/products/servo-extension-cable-female-female
 
 
 -------------------------------------------------------------------------------
@@ -83,16 +86,16 @@ Torx T6 screwdriver [on Amazon][torxt6_store].
 
 ## Battery and Charger
 
-The Parrot AR Drone comes with a battery and charger. You can use the included
-battery with the PX4IOAR by clipping the battery lead from the AR Drone
+The Parrot AR Drone comes with a battery and charger.  It is possible to use the
+included battery with the PX4IOAR by clipping the battery lead from the AR Drone
 motherboard and soldering the wires to the PX4IOAR.
 
 You can purchase extra AR Drone batteries [on Amazon][arbatt_store].
 
-You can use generic Radio Control Airplane style Lithium Polymer batteries
-and faster battery chargers. You will need also need to use a 'Deans Plug'
-battery connector on the PX4IOAR. If you'll be doing a lot of flying, this
-is the recommended solution.
+The suggested alternative is to use generic Radio Control Airplane style Lithium
+Polymer batteries and faster battery chargers. You will need also need to use a
+'Deans Plug' battery connector on the PX4IOAR. If you'll be doing a lot of
+flying, this is the recommended solution.
 
 A LiPo battery charger [from Tower Hobbies][charger_store].
 
