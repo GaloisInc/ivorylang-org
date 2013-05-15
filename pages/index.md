@@ -1,6 +1,8 @@
 # SMACCMPilot
 
-## An Unmanned Air Vehicle Research Platform
+### An Embedded Systems Software Research Project
 
-Something something high assurance, something something domain specific
-language approach.
+We're building open-source autopilot software for small unmanned aerial vehicles (UAVs)
+using new high-assurance software methods.
+
+

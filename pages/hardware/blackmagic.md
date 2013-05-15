@@ -4,6 +4,8 @@ There are many JTAG and SWD debuggers available for the ARM Cortex-M4
 processor. We have had good results using the [Black Magic Probe][bmprobe]
 from [Black Sphere Technologies][blacksphere].
 
+![Black Magic Probe](../images/blackmagic.jpg)
+
 ### PX4 Autopilot Project Guide
 
 As your primary resource, please read the PX4 Autopilot project wiki [guide to
