@@ -50,11 +50,12 @@ expect many Ivory users will want to use an external Worst-Case Execution Time
 (WCET) tool as part of safety or schedulability analysis, therefore, we have
 ensured that it will be trivial for external tools to discover loop bounds.
 
-It is possible to create nonterminating programs in Ivory through two
-techniques: using the `forever` control flow primitives, which is designed
-for implementing programs which *should never* terminate, or by using recursion.
-At this time, the use of forever and recursion are allowed by the Ivory
-compiler, but these features may be restricted or removed in the future.
+It is possible to create nonterminating programs in Ivory using the `forever`
+control flow primitive, which is designed for implementing programs which
+*should never* terminate.  It is also possible to build nonterminating programs
+by call recursion.  At this time, the use of forever and recursion are allowed
+by the Ivory compiler, but these features may be restricted or removed in the
+future.
 
 ## An Embedded Language
 
@@ -87,5 +88,5 @@ includes integration for CBMC verification of the SMACCMPilot source code.
 
 Further documentation on Ivory's verification support is forthcoming.
 
-[embedded]: http://wikipedia.com/wiki/edsl XXX
-[cbmc]: http://google.com XXX
+[embedded]:http://wikipedia.com/wiki/Domain-specific_language#Domain-specific_language_topics
+[cbmc]: http://www.cprover.org/cbmc/
