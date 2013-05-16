@@ -5,6 +5,17 @@ You can consider Ivory to be a lot like a restricted version of the C
 programming language. Ivory's restrictions are designed to eliminate certain
 classes of bugs.
 
+```haskell
+puts :: Def ('[IString] :-> Sint32)
+puts  = importProc "puts" "stdio.h"
+
+main :: Def ('[] :-> ())
+main  = proc "main" $ body $ do
+  call_ puts "hello, world\n"
+  retVoid
+```
+*Hello World in Ivory.*
+
 ## A Systems Language
 
 Ivory is a systems language designed for a natural compilation to C. Most of the
@@ -28,6 +39,26 @@ or time than functionally equivelant safe programs written in C.
 While this means Ivory may not be a good language for all applications, Within
 the domain of creating high assurance software, these trade-offs are what make
 Ivory ideal.
+
+```haskell
+fib_loop :: Def ('[Ix 1000] :-> Uint32)
+fib_loop  = proc "fib_loop" $ \ n -> body $ do
+  a <- local (ival 0)
+  b <- local (ival 0)
+
+  n `times` \ _ -> do
+    a' <- deref a
+    b' <- deref b
+    store a b'
+    store b (a' + b')
+
+  result <- deref a
+  ret result
+```
+*An Ivory program for computing fibonocci numbers. [A detailed explanation
+of this code sample][fibwalkthrough].*
+
+[fibwalkthrough]: fibwalkthrough.html
 
 ## Differences from the C Language
 
@@ -80,7 +111,20 @@ should first have basic familiarity with the Haskell programming language.
 
 Ivory was created to improve safety for systems and application programmers.
 While the Ivory language does guarantee some safety properties by construction,
-it also supports specifying run-time properties using the 
+it also supports specifying run-time properties using external provers.
+
+```haskell
+add :: Def ('[Uint32,Uint32] :-> Uint32)
+add  = proc "add"
+     $ \ x y -> ensures (\r -> r ==? x + y)
+     $ body
+     $ ret (x + y)
+
+```
+*A sample ivory program decorated with an `ensures` clause, checking the return
+value against a specification. This is a trivial case where the specification
+and implementation are identical.*
+
 
 The C language backend supports rendering Ivory assertions for static checking
 with the [CBMC model checker][cbmc]. The SMACCMPilot project build system
