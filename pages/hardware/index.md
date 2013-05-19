@@ -71,7 +71,7 @@ electronics installed"
 
 For developing and flying with SMACCMPilot, you will need accessories including
 [radio modems][3drradio], a [hobby radio controller][rc], spare batteries,
-battery charger, and some miscellanious cables. We have compiled a [shopping
+battery charger, and some miscellaneous cables. We have compiled a [shopping
 list][shoppinglist] of all of the parts you will need to build a complete
 SMACCMPilot flight platform.
 

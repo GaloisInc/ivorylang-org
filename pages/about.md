@@ -23,7 +23,7 @@ or [view the archives][archives].
 ### About the name
 
 SMACCMPilot is developed as part of the Secure Mathematically-Assured
-Composition of Control Models (SMACCM) research project under DARPA's
+Composition of Control Models (SMACCM) research project, under DARPA's
 [High-Assurance Cyber Military Systems][hacms] (HACMS) program.
 
 [hacms]: http://www.darpa.mil/Our_Work/I2O/Programs/High-Assurance_Cyber_Military_Systems_(HACMS).aspx

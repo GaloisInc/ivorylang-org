@@ -16,7 +16,7 @@ repository](build.html).
 The SMACCMPilot application and all of the support for the hardware platform are
 found in the [SMACCMPilot-STM32F4][smaccmpilot-stm32f4] repository.
 
-The majority of the SMACCMPilot applicaton is written in the Ivory programming
+The majority of the SMACCMPilot application is written in the Ivory programming
 language and the Tower framework. The Haskell package
 [`smaccmpilot`][smaccmpilot-cabal], packages the Ivory sources and compiler into
 a single Haskell program which, when run, generates C sources for the

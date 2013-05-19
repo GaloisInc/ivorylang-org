@@ -1,9 +1,27 @@
 # Ivory Language
 
-Ivory is an embedded domain specific language for safer systems programming.
+#### Ivory is an embedded domain-specific language for safer systems programming.
+
+That's a mouthful. Lets break that down:
+
+* *Embedded*: Ivory is implemented as a library of [the Haskell programming
+  language][haskell]. Ivory programs are written using Haskell syntax and types.
+* *Domain-specific*: Ivory is not a general purpose programming language.
+  It aims to be a good language for writing a restricted subset of programs.
+* *Language*: Ivory can be used to construct whole programs. Ivory is designed
+  to for compilation to C.
+* *Safer*: Ivory gives strong guarantees of type and memory safety, and has
+  features which allow the programmer to specify other safety properties.
+* *Systems Programming*: Ivory is well suited for writing programs which
+  are close to the metal and do not rely on dynamic memory allocation or
+  a language runtime.
+
 You can consider Ivory to be a lot like a restricted version of the C
-programming language. Ivory's restrictions are designed to eliminate certain
-classes of bugs.
+programming language, embedded in Haskell.
+
+[haskell]: http://haskell.org
+
+## Hello World
 
 ```haskell
 puts :: Def ('[IString] :-> Sint32)
@@ -15,6 +33,18 @@ main  = proc "main" $ body $ do
   retVoid
 ```
 *Hello World in Ivory.*
+
+In this example, we tell Ivory about an external procedure called `puts` in
+`stdio.h`. The `puts` procedure takes an `IString` (the Ivory type for strings)
+as an argument, and returns a `Sint32` (a signed 32 bit integer).
+
+Then, we create a procedure called `main` which takes no arguments and returns
+nothing of interest. The procedure body makes a call to `puts`, supplying the
+string `"hello, world\n"` as an argument. The underscore in `call_` indicates
+the result of the procedure is discarded.
+
+After the call, the next statement in `main` is `retVoid`, which causes the
+procedure to exit.
 
 ## A Systems Language
 
@@ -34,7 +64,7 @@ which are possible to write in C.  In general, Ivory eliminates many sources of
 run-time polymorphism and restricts control flow in favor of safety. Average
 case performance is often sacrificed in order to bound the worst case; the
 programmer can expect compiled Ivory programs to perhaps use more memory, code,
-or time than functionally equivelant safe programs written in C.
+or time than functionally equivalent safe programs written in C.
 
 While this means Ivory may not be a good language for all applications, Within
 the domain of creating high assurance software, these trade-offs are what make
@@ -55,7 +85,7 @@ fib_loop  = proc "fib_loop" $ \ n -> body $ do
   result <- deref a
   ret result
 ```
-*An Ivory program for computing fibonocci numbers. [A detailed explanation
+*An Ivory program for computing Fibonacci numbers. [A detailed explanation
 of this code sample][fibwalkthrough].*
 
 [fibwalkthrough]: fibwalkthrough.html

@@ -47,7 +47,7 @@ FRSKY digital radio modules.
 
 The Turnigy 9XR is available [from Hobby King][t9xr_store].
 
-The FRSKY DJT - JR tramsitter module fits the Turnigy 9XR system.
+The FRSKY DJT - JR transmitter module fits the Turnigy 9XR system.
 The FRSKY D4R-II receiver is compact and supports PPM output.
 
 DJT-JR Transmitter module available [from Aloft Hobbies][djt_store].
@@ -71,7 +71,7 @@ Appropriate servo extension cable available [from 3D Robotics][servoext_store].
 
 ## AR Drone Airframe
 
-The Parrot AR Drone 2.0 is available from many retailers wordwide.
+The Parrot AR Drone 2.0 is available from many retailers worldwide.
 
 The Parrot AR Drone 2.0 [on Amazon][ardrone_store].
 

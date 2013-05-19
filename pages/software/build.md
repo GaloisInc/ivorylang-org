@@ -5,6 +5,16 @@ prerequisites][prereqs].
 
 [prereqs]: prerequisites.html
 
+## Open Source
+
+All of the source code for the SMACCMPilot project is available as open source
+and available on Github.
+
+<p><a class="btn btn-primary"
+      href="http://github.com/galoisinc/smaccmpilot-build">
+    Find it on Github &raquo;</a>
+</p>
+
 ## Fetching Source Dependencies
 
 The [smaccmpilot-build][] repository contains all of the sources you will need
