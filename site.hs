@@ -69,6 +69,7 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview" "Overview")
                   , Page "build.html" "Building SMACCMPilot" "Building"
                   , Page "loading.html" "Uploading SMACCMPilot" "Loading"
                   , Page "ivory-overview.html" "Ivory Language Overview" "Ivory Language"
+                  , Page "fibwalkthrough.html" "Ivory Language Tutorial" "Ivory Tutorial"
                   , Page "tower-overview.html" "Tower Framework Overview" "Tower Framework"
                   ]
   flyingpages   = [ Page "index.html" "Overview" "Flying Overview"

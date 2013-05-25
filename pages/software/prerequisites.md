@@ -31,8 +31,8 @@ which should report version 7.6.2.
 
 ## Haskell Package Manager
 
-[Cabal][cabal] is a package manager for Haskell modules. You'll need to install
-Cabal ([downloadable as a binary][cabal-download]) in order to install the
+[Cabal][cabal] is the package manager for Haskell. You'll need to install Cabal
+([downloadable as a binary][cabal-download]) in order to install the
 prerequisites for the [SMACCMPilot build][smaccmpilot-build].
 
 Once you've installed cabal, you should update the package list on your machine:

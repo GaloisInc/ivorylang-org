@@ -1,12 +1,14 @@
-# Fibonacci Walkthrough
+# Ivory Tutorial
 
-This is an informal tutorial in which we'll  present an Ivory program for
-computing Fibonacci numbers, and walk through it line-by-line as a way of
-discussing some of the basics of the Ivory language.
+This is an informal tutorial on the [Ivory Language](ivory-overview.html).
 
-Ivory is embedded in the Haskell language. Since Ivory reuses the syntax
-and type system of Haskell, you'll need to be comfortable with the Haskell
-language before learning Ivory.
+We will present an Ivory program for computing Fibonacci numbers, and walk
+through it line-by-line as a way of discussing some of the basics of the Ivory
+language.
+
+Ivory is embedded in the Haskell language: this means that Ivory reuses the
+syntax and type system of Haskell. It is best if you are comfortable with the
+Haskell language before learning Ivory.
 
 If you don't know Haskell, don't panic. There are a lot of good resources on the
 web for learning the Haskell. We have recommended beginners read [Learn You A
@@ -238,4 +240,18 @@ through the use of `+` on line 10, `b'` also must have that type.
 
 This is a nice example of how using Haskell gives us strong guarantees of type
 correctness without having to write out a lot of type information explicitly.
+
+---
+
+### What's Next?
+
+One good next step to learning the Ivory Language is to [install Ivory][install]
+on your computer and go through the contents of the
+[`ivory-examples`][ivory-examples] package to see some more examples and examine
+some of the generated C sources.
+
+[install]: software/build.html
+
+[ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples
+
 
