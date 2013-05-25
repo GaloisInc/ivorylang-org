@@ -6,20 +6,37 @@ That's a mouthful. Lets break that down:
 
 * *Embedded*: Ivory is implemented as a library of [the Haskell programming
   language][haskell]. Ivory programs are written using Haskell syntax and types.
-* *Domain-specific*: Ivory is not a general purpose programming language.
-  It aims to be a good language for writing a restricted subset of programs.
-* *Language*: Ivory can be used to construct whole programs. Ivory is designed
-  to for compilation to C.
+* *Domain-specific Language*: Ivory is not a general purpose programming
+  language.  It aims to be a good language for writing a restricted subset of
+  programs.
 * *Safer*: Ivory gives strong guarantees of type and memory safety, and has
   features which allow the programmer to specify other safety properties.
 * *Systems Programming*: Ivory is well suited for writing programs which
-  are close to the metal and do not rely on dynamic memory allocation or
-  a language runtime.
+  interact directly with hardware and do not require dynamic memory allocation.
 
 You can consider Ivory to be a lot like a restricted version of the C
 programming language, embedded in Haskell.
 
 [haskell]: http://haskell.org
+
+## An Embedded Language
+
+We will discuss how Ivory has several restrictions which make it less expressive
+than the C programming language. On their own, these restrictions would make it
+quite laborious to build programs in Ivory. However, Ivory has been built as an
+[embedded][] language inside the Haskell programming language. This means Ivory
+programs can be constructed using the Haskell language as a macro language.
+
+Rather than inventing its own syntax and type system, the Ivory language reuses
+the syntax and type system of Haskell.  So, when we refer to programs in the
+Ivory language, we're really talking about a Haskell value which is constructed
+using the Haskell library `Ivory.Language`.  These values can then be
+interpreted by the Ivory interpreter, or compiled by an Ivory language backend.
+Currently, the Ivory language has a single backend which produces C source
+files.
+
+Because Ivory programs use Haskell syntax and types, an Ivory programmer
+should first have basic familiarity with the Haskell programming language.
 
 ## Hello World
 
@@ -58,13 +75,13 @@ compiler backend to output C source code. Ivory also supports importing and
 calling external C code, and coercing Ivory types to C types.
 
 Ivory is designed for implementing systems and application software for high
-assurance systems. In Ivory, trade-offs have been made to guarantee bounded
-behavior.  Ivory's feature restrictions eliminate many valid, correct programs
-which are possible to write in C.  In general, Ivory eliminates many sources of
-run-time polymorphism and restricts control flow in favor of safety. Average
-case performance is often sacrificed in order to bound the worst case; the
-programmer can expect compiled Ivory programs to perhaps use more memory, code,
-or time than functionally equivalent safe programs written in C.
+assurance systems. Therefore, some language trade-offs have been made so that
+programs can have safety properties guaranteed by construction. Ivory's feature
+restrictions eliminate many valid, correct programs which are possible to write
+in C.  In general, Ivory eliminates many sources of dynamic behavior in favor of
+safety. Average case performance is often sacrificed in order to bound the worst
+case; the programmer can expect compiled Ivory programs to perhaps use more
+memory, code, or time than functionally equivalent safe programs written in C.
 
 While this means Ivory may not be a good language for all applications, Within
 the domain of creating high assurance software, these trade-offs are what make
@@ -117,25 +134,6 @@ control flow primitive, which is designed for implementing programs which
 by call recursion.  At this time, the use of forever and recursion are allowed
 by the Ivory compiler, but these features may be restricted or removed in the
 future.
-
-## An Embedded Language
-
-As discussed, Ivory has several restrictions which make it less expressive than
-the C programming language. On their own, these restrictions would make it quite
-laborious to build programs in Ivory. However, Ivory has been built as an
-[embedded][] language inside the Haskell programming language. This means Ivory
-programs can be constructed using the Haskell language as a macro language.
-
-Rather than inventing its own syntax and type system, the Ivory language reuses
-the syntax and type system of Haskell.  So, when we refer to programs in the
-Ivory language, we're really talking about a Haskell value which is constructed
-using the Haskell library `Ivory.Language`.  These values can then be
-interpreted by the Ivory interpreter, or compiled by an Ivory language backend.
-Currently, the Ivory language has a single backend which produces C source
-files.
-
-Because Ivory programs use Haskell syntax and types, an Ivory programmer
-should first have basic familiarity with the Haskell programming language.
 
 ## Support for Verification
 

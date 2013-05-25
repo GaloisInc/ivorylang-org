@@ -44,7 +44,7 @@ optional foam fuselage and guard are used by SMACCMPilot, but the included
 AR Drone flight controller electronics, cameras, and sensors are removed.
 
 *AR Drone is a trademark of Parrot SA, Paris. The SMACCMPilot project is
-not affiliated to Parrot, and does not use any Parrot technology or
+not affiliated with Parrot, and does not use any Parrot technology or
 software.*
 
 ![AR Drone Flight Platform with PX4 electronics installed][modifiedardrone_img]

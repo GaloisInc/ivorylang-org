@@ -15,7 +15,7 @@ web for learning the Haskell. We have recommended beginners read [Learn You A
 Haskell][lyah] followed by working through at least some of [Real World
 Haskell][rwh].
 
-Before going much further, let's check-in on some Haskell concepts that should
+Before going much further, let's check in on some Haskell concepts that should
 at least be familar:
 
 [lyah]: http://learnyouahaskell.com
@@ -35,23 +35,47 @@ at least be familar:
 
 ------------------
 
+If you'd like to follow along with this tutorial in `ghci`, you can [get the
+Ivory repository on github][github], and [find this tutorial][tutorial-github]
+in the [ivory-examples][ivory-examples] package.
+
+[github]: http://github.com/galoisinc/ivory
+[tutorial-github]: http://github.com/GaloisInc/ivory/blob/master/ivory-examples/examples/FibTutorial.hs
+[ivory-examples]: http://github.com/GaloisInc/ivory/blob/master/ivory-examples/ivory-examples.cabal
+
+------------------
+
 Here's an Ivory procedure which computes Fibonacci numbers by mutating values
-on the stack in a loop. (We've annotated the program text with line numbers.)
+on the stack in a loop.
 
 ```haskell
-1.  fib_loop :: Def ('[Ix 1000] :-> Uint32)
-2.  fib_loop  = proc "fib_loop" $ \ n -> body $ do
-3.    a <- local (ival 0)
-4.    b <- local (ival 0)
-5.
-6.    n `times` \ _ -> do
-7.      a' <- deref a
-8.      b' <- deref b
-9.      store a b'
-10.     store b (a' + b')
-11.
-12.  result <- deref a
-13.  ret result
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeOperators #-}
+
+import Ivory.Language
+import qualified Ivory.Compile.C.CmdlineFrontend as C (compile)
+
+fib_loop :: Def ('[Ix 1000] :-> Uint32)
+fib_loop  = proc "fib_loop" $ \ n -> body $ do
+  a <- local (ival 0)
+  b <- local (ival 0)
+
+  n `times` \ _ -> do
+    a' <- deref a
+    b' <- deref b
+    store a b'
+    store b (a' + b')
+
+  result <- deref a
+  ret result
+
+fib_tutorial_module :: Module
+fib_tutorial_module = package "fib_tutorial" $ do
+  incl fib_loop
+
+main :: IO ()
+main = C.compile [ fib_tutorial_module ]
+
 ```
 
 ------------------------------------------------------------------
@@ -59,7 +83,36 @@ on the stack in a loop. (We've annotated the program text with line numbers.)
 Let's break this program down line by line.
 
 ```haskell
-1.  fib_loop :: Def ('[Ix 1000] :-> Uint32)
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeOperators #-}
+```
+
+The Ivory language type system uses the DataKinds and TypeOperators extensions
+to Haskell. You'll need to use these Language pragmas in any program defining
+an Ivory `Def`.
+
+In other parts of the Ivory language, you'll need the QuasiQuotes and
+FlexibleInstances extensions as well. This particular program doesn't require
+them.
+
+--------
+
+```haskell
+import Ivory.Language
+import qualified Ivory.Compile.C.CmdlineFrontend as C (compile)
+```
+
+The `Ivory.Language` module exports the public interface of the Ivory language.
+The `Ivory.Compile.C.CmdlineFrontend` module provides a function `compile` which
+will allow us to run this Haskell program as a command-line application for
+compiling the Ivory programs contained within.
+
+--------
+
+OK, time for some actual Ivory code.
+
+```haskell
+fib_loop :: Def ('[Ix 1000] :-> Uint32)
 ```
 
 This is the type signature for `fib_loop`, indicating that it is an
@@ -68,18 +121,18 @@ All Ivory code must eventaully be part of a `Def` in order to be compiled.
 
 `Def` is a type constructor with the argument `'[Ix 1000] :-> Uint32`.  Every
 Def will have an argument with the form `a :-> b` : the `:->` symbol is an
-infixed type constructor.  The first argument to `:->` is always a type level
+infixed type constructor.  The argument type of `:->` is always a type level
 list (note the leading bracket is prefixed with a single quote `'`) containing
-zero or more types for the procedure arguments. The second argument to the
+zero or more types for the procedure arguments. The return type of the
 `:->` constructor is the return type of the procedure.
 
 So, in this example, the `fib_loop` procedure takes a single argument of type
 `Ix 1000` and returns a value of type `Uint32`.
 
 The type `Ix 1000` is the type constructor `Ix` applied to the type level
-natural `1000`. Ix stands for *Index* it is used to construct a type for a
-value which is always less than the argument (and never less than 0). So, the
-Ivory type `Ix 1000` is for a value in the range `0 =< value < 1000`.
+natural `1000`. Ix stands for *Index*, and constructs a type for a value which is
+always greater than zero and never greater than the argument to Ix.
+So, `Ix 1000` is the type for a value in the range `0 =< value < 1000`.
 
 We use `Ix` types anytime we need to perform a looping operation so that we
 ensure the loop's execution is bounded, and anytime we need to index into an
@@ -99,7 +152,7 @@ is equivelant to a function with a `void` return type in C.
 Ready for the next line?
 
 ```haskell
-2.  fib_loop  = proc "fib_loop" $ \ n -> body $ do
+fib_loop  = proc "fib_loop" $ \ n -> body $ do
 ```
 
 This starts off our definition of the `fib_loop` procedure.
@@ -142,8 +195,8 @@ We've given a lot of background so far. The rest of the program is easier, we
 promise.
 
 ```haskell
-3.    a <- local (ival 0)
-4.    b <- local (ival 0)
+   a <- local (ival 0)
+   b <- local (ival 0)
 ```
 
 These are the first lines in the `Ivory eff` monad introduced above.
@@ -167,7 +220,7 @@ Now that we have some local state we can mutate, its time to make a loop in
 which we mutate it.
 
 ```haskell
-6.    n `times` \ _ -> do
+  n `times` \ _ -> do
 ```
 
 As discussed above, the variable `n` has type `Ix 1000`. All of the looping
@@ -190,13 +243,14 @@ of C to enforce safety.
 
 ----------
 
-Heres the body of our loop.
+Here is the loop again, with the loop body:
 
 ```haskell
-7.      a' <- deref a
-8.      b' <- deref b
-9.      store a b'
-10.     store b (a' + b')
+  n `times` \ _ -> do
+    a' <- deref a
+    b' <- deref b
+    store a b'
+    store b (a' + b')
 ```
 
 The loop body does a series of operations on the stack variables at
@@ -207,7 +261,7 @@ Ivory `Ref`s are a lot like Haskell's `Data.IORef`: they support reading
 `Ivory` monad.
 
 In lines 7 and 8, we read the current value stored at the `Ref` with `deref`.
-That value is bound to the haskell variables `a'` and `b'`. Since `a` has type
+That value is bound to the Haskell variables `a'` and `b'`. Since `a` has type
 `Ref s Uint32`, `a'` has type `Uint32`.
 
 In lines 9 and 10, we `store` new values into the references `a` and `b`. Note
@@ -219,8 +273,8 @@ would with Haskell integers and floats.
 ----------
 
 ```haskell
-12.  result <- deref a
-13.  ret result
+  result <- deref a
+  ret result
 ```
 
 After the loop is complete, we have a value stored in `a` which is the `n`th
@@ -243,6 +297,58 @@ correctness without having to write out a lot of type information explicitly.
 
 ---
 
+We've now made a complete Ivory `Def` called `fib_loop`, but we can't yet do
+anything with it.
+
+```haskell
+fib_tutorial_module :: Module
+fib_tutorial_module = package "fib_tutorial" $ do
+  incl fib_loop
+```
+
+In Ivory, the unit of compilation is the `Module`. Modules are Haskell values
+which collect up `Def`s, user defined structures, and global memory declarations
+for compilation.
+
+When compiling to C, `Modules` are compiled to a pair of header and
+implementation files with a name specified by the first argument to `package`.
+So, this Module will produce the files `fib_tutorial.h` and `fib_tutorial.c`.
+
+The second argument to `package` is a Monad of type `ModuleDef`. The Monad class
+here is just to provide a convenient syntax: really, `ModuleDef`s could be lists
+or some other Monoid.
+
+The `incl` function takes an Ivory `Def` and adds it to a `ModuleDef`. The
+result is that the procedure `fib_loop` will be compiled to a C function,
+exported by the `fib_tutorial.h` header, and implemented in `fib_tutorial.c`.
+
+Note that it is a responsibility of the user to make sure all procedures in a
+`Module` have a unique `proc` name. So, if you duplicate the value `fib_loop' =
+fib_loop` under a separate Haskell name, an `incl fib_loop'` in this `Module`,
+the result would be generating two C functions named `uint32_t
+fib_loop(int32_t)` in the same C file. While this would be a valid Ivory
+compilation, it would cause your C compilation to fail.
+
+---
+
+At last, we have a Haskell program which implements an Ivory function and has it
+packaged up for compilation.
+
+```haskell
+main :: IO ()
+main = C.compile [ fib_tutorial_module ]
+```
+
+The function `C.compile` takes a `[Module]` and produces an `IO ()` which
+compiles the given modules to C and writes the result to the disk.
+
+By default he compiler will write the generated C files to the current
+directory. However, it can also parse command line arguments for setting
+compilation flags for the Ivory compiler. Try running the executable with the
+`--help` flag to see some options.
+
+---
+
 ### What's Next?
 
 One good next step to learning the Ivory Language is to [install Ivory][install]
@@ -253,5 +359,4 @@ some of the generated C sources.
 [install]: software/build.html
 
 [ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples
-
 

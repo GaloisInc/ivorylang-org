@@ -1,8 +1,8 @@
 # Software
 
 The SMACCMPilot software project is both an innovative open-source flight
-controller and the flagship project for the development of a new programming
-language.
+controller and the flagship project for the development of [a new programming
+language](ivory-overview.html).
 
 ### Umbrella Repository
 

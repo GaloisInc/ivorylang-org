@@ -27,6 +27,9 @@ PX4FMU and PX4IOAR packaged as a kit [from 3D Robotics][px4kit_store].
 
 ## Radio Modems
 
+The SMACCMPilot project requires a radio modem system for streaming telemetry
+and taking commands from a computer.
+
 The 3DR Radio, by 3D Robotics, is the recommended radio modem system. It
 is available in the 915MHz spectrum for unlicensed use in the US, as well
 as the 433MHz spectrum.
@@ -39,20 +42,26 @@ as the 433MHz spectrum.
 
 ## Hobby Radio Controller
 
-Many hobby radio transmitters and receivers will work with the SMACCMPilot
-system: the primary requirement is that the receiver support PPM output.
+The SMACCMPilot project requires a hobby-style radio controller for piloting the
+quadcopter. This is a separate radio system from the 3DR Radio modems described
+above.
 
-One inexpensive system which works well is the Turnigy 9XR Transmitter with
-FRSKY digital radio modules.
+You will need hobby-style radio controller with six or more channels, and a
+receiver supporting PPM output.
 
-The Turnigy 9XR is available [from Hobby King][t9xr_store].
+One inexpensive system which works well is the Turnigy 9XR, which is sold as a
+handheld unit without a transmitter radio module installed.
+Available [from Hobby King][t9xr_store].
+
+You will need to provide some sort of transmitter and receiver module to
+complete the 9XR radio controller system.  We have had success using FRSKY
+digital transmitter radio modules and receivers.
 
 The FRSKY DJT - JR transmitter module fits the Turnigy 9XR system.
+Available [from Aloft Hobbies][djt_store].
+
 The FRSKY D4R-II receiver is compact and supports PPM output.
-
-DJT-JR Transmitter module available [from Aloft Hobbies][djt_store].
-
-D4R-II Receiver available [from Aloft Hobbies][d4rii_store].
+Available [from Aloft Hobbies][d4rii_store].
 
 You will need a single female to female servo extension cable to connect the
 receiver to the PX4IOAR's PPM input port. (Note that most servo extension

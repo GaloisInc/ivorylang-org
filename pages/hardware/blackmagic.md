@@ -35,7 +35,7 @@ attach 1
 ### Using GDB
 
 From the root of the `smaccmpilot-stm32f4` repository, after successfully
-[building the SMACCMPilot application][building the SMACCMPilot executable],
+[building the SMACCMPilot executable](../software/build.html),
 start your ARM toolchain gdb with the `stabilize` executable.
 
 ```
