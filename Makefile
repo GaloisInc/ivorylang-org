@@ -15,3 +15,5 @@ build: site
 preview: build
 	./site preview
 
+deploy: build
+	./site deploy
