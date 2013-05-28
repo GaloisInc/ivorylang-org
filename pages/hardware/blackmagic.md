@@ -39,7 +39,7 @@ From the root of the `smaccmpilot-stm32f4` repository, after successfully
 start your ARM toolchain gdb with the `stabilize` executable.
 
 ```
-arm-none-eabi-gdb build/cortex-m4/px4/img/stabilize
+arm-none-eabi-gdb build/px4/fmu_v17/img/stabilize
 
 ```
 
