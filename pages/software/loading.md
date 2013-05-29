@@ -4,7 +4,7 @@ These instructions assume you've completed the instructions for [building
 SMACCMPilot][building], you have a complete [SMACCMPilot flight
 platform][hardware].
 
-[building]: building.html
+[building]: build.html
 [hardware]: ../hardware/overview.html
 
 ## PX4 USB Bootloader
