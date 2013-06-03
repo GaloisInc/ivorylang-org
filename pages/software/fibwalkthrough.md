@@ -131,7 +131,7 @@ So, in this example, the `fib_loop` procedure takes a single argument of type
 
 The type `Ix 1000` is the type constructor `Ix` applied to the type level
 natural `1000`. Ix stands for *Index*, and constructs a type for a value which is
-always greater than zero and never greater than the argument to Ix.
+never less than than zero and always less than the argument to Ix.
 So, `Ix 1000` is the type for a value in the range `0 =< value < 1000`.
 
 We use `Ix` types anytime we need to perform a looping operation so that we
