@@ -11,7 +11,7 @@ At this time, Tower has [a single backend][tower-freertos] for the [FreeRTOS][]
 operating system.
 
 [tower]: http://github.com/GaloisInc/tower
-[tower-freertos]: http://fixme
+[tower-freertos]: http://github.com/GaloisInc/tower/tree/master/ivory-tower-freertos
 [FreeRTOS]: http://freertos.org
 
 ### Tower Concepts
