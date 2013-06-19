@@ -85,6 +85,13 @@ make
 At this point you will have a complete set of SMACCMPilot binaries, including
 the primary flight binary `stabilize`.
 
-### Continue to [loading SMACCMPilot on PX4][loading].
+#### More Details
 
+For more details on how the SMACCMPilot build system works, there is a [document
+in the git repository][build-doc] explaining the specifics of the project
+Makefiles.
+
+### Continue to [loading SMACCMPilot on PX4][loading].
 [loading]: loading.html
+[build-doc]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/doc/build-system.md
+
