@@ -14,12 +14,14 @@ directory explicitly to the SMACCMPilot build.
 ## The GHC Haskell Compiler
 
 To build programs which use Ivory, you'll need the [Glasgow Haskell Compiler
-(GHC)][ghc] version 7.6.2. (We've had problems with the latest release 7.6.3). Please
-[download and install][ghc762] the appropriate GHC binary release for your
-platform.
+(GHC)][ghc] version 7.6.2 or higher. You can either [download and
+install][ghc762] the appropriate GHC binary release for your platform, or use
+the latest release of the [Haskell Platform][haskell-platform], which provides
+GHC 7.6.3.
 
 [ghc]: http://www.haskell.org/ghc/
 [ghc762]: http://www.haskell.org/ghc/download_ghc_7_6_2
+[haskell-platform]: http://www.haskell.org/platform/
 
 You can confirm the correct version of GHC is installed in your path by running
 
@@ -31,9 +33,11 @@ which should report version 7.6.2.
 
 ## Haskell Package Manager
 
-[Cabal][cabal] is the package manager for Haskell. You'll need to install Cabal
-([downloadable as a binary][cabal-download]) in order to install the
-prerequisites for the [SMACCMPilot build][smaccmpilot-build].
+[Cabal][cabal] is the package manager for Haskell.
+
+If you already installed the [Haskell Platform][haskell-platform], you already
+have cabal. Otherwise, you'll need to install cabal separately. Cabal is
+[downloadable as a binary][cabal-download].
 
 Once you've installed cabal, you should update the package list on your machine:
 
@@ -55,6 +59,7 @@ cabal install cabal-dev
 ```
 
 [cabal]: http://haskell.org/cabal
+[cabal-download]: http://haskell.org/cabal/download.html
 [smaccmpilot-build]: http://github.com/galoisinc/smaccmpilot-build
 [cabal-dev]: http://hackage.haskell.org/package/cabal-dev
 
