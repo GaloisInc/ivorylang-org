@@ -9,7 +9,7 @@ import           Sidebar
 
 standardPandocPagesSubdir d = do
     match (fromGlob ("pages/" ++ d ++ "*.md")) $ do
-        route   $ gsubRoute "pages/"  (const "") `composeRoutes` 
+        route   $ gsubRoute "pages/"  (const "") `composeRoutes`
                   setExtension "html"
         compile $ pandocCompiler >>= (templated "templates/standard.html")
 
@@ -45,7 +45,7 @@ main = hakyllWith config $ do
         compile copyFileCompiler
 
     match "pages/index.md" $ do
-        route   $ gsubRoute "pages/"  (const "") `composeRoutes` 
+        route   $ gsubRoute "pages/"  (const "") `composeRoutes`
                   setExtension "html"
         compile $ pandocCompiler >>= (templated "templates/frontpage.html")
 
@@ -62,25 +62,26 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview" "Overview")
                           , (Page "about.html" "About" "About")
                           ]
   where
-  hardwarepages = [ Page "index.html" "Overview" "Hardware Overview"
-                  , Page "shoppinglist.html" "Shopping List" 
-                          "Shopping List"
-                  , Page "flightcontroller.html" "Flight Controller" "Flight Controller"
-                  , Page "blackmagic.html" "Black Magic Probe Debugger" "Debugger"
-                  ]
-  softwarepages = [ Page "index.html" "Overview" "Software Overview"
-                  , Page "prerequisites.html" "Prerequisites" "Prerequisites"
-                  , Page "build.html" "Building SMACCMPilot" "Building"
-                  , Page "loading.html" "Uploading SMACCMPilot" "Loading"
-                  , Page "ivory-overview.html" "Ivory Language Overview" "Ivory Language"
-                  , Page "fibwalkthrough.html" "Ivory Language Tutorial" "Ivory Tutorial"
-                  , Page "tower-overview.html" "Tower Framework Overview" "Tower Framework"
-                  ]
+  hardwarepages =
+    [ Page "index.html" "Overview" "Hardware Overview"
+    , Page "shoppinglist.html" "Shopping List" "Shopping List"
+    , Page "flightcontroller.html" "Flight Controller" "Flight Controller"
+    , Page "blackmagic.html" "Black Magic Probe Debugger" "Debugger"
+    ]
+  softwarepages =
+    [ Page "index.html" "Overview" "Software Overview"
+    , Page "prerequisites.html" "Prerequisites" "Prerequisites"
+    , Page "build.html" "Building SMACCMPilot" "Building"
+    , Page "loading.html" "Uploading SMACCMPilot" "Loading"
+    , Page "ivory-overview.html" "Ivory Language Overview" "Ivory Language"
+    , Page "fibwalkthrough.html" "Ivory Language Tutorial" "Ivory Tutorial"
+    , Page "tower-overview.html" "Tower Framework Overview" "Tower Framework"
+    ]
   flyingpages   = [ Page "index.html" "Overview" "Flying Overview"
                   ]
 
 navbar :: FilePath -> String
-navbar currentpath = unlines $ 
+navbar currentpath = unlines $
   [ "<ul class=\"nav\"> "
   , entry "/index.html" "Home"
   , entry "/hardware/index.html" "Hardware"

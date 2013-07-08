@@ -1,5 +1,12 @@
 # Prerequisite Software
 
+We have tested the software on various versions of Linux and make use of GNU
+Make and a small Bash script.  For best results, ensure your system is
+compatible (if you do not have Linux natively installed, running Linux in a
+[virtual machine][vbox] is ideal).
+
+[vbox]: https://www.virtualbox.org/
+
 ## GCC Cross Compiler
 
 Building the SMACCMPilot C sources require a GCC toolchain for the ARM Cortex-M4
@@ -10,6 +17,18 @@ You may install this toolchain into your PATH, or provide the installation
 directory explicitly to the SMACCMPilot build.
 
 [arm-gcc-embedded]: http://launchpad.net/gcc-arm-embedded
+
+## GCC Compiler
+
+If you are building the [runtime monitoring task][rv-app], you will need a GCC
+compiler built for your own machine to build the GCC-plugin used.  See the
+[README][rv-readme] for more details.  Note that how you invoke the makefile
+depends on whether your GCC compiler is 32-bit or 64-bit.
+
+[rv-app]:
+https://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/apps/sample-rtv-task
+[rv-readme]: https://github.com/GaloisInc/ivory-rtverification/blob/master/README.md
+
 
 ## The GHC Haskell Compiler
 
