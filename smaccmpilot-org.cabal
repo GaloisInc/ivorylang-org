@@ -1,0 +1,20 @@
+name:                smaccmpilot-org
+version:             0.1.0.0
+synopsis:            smaccmpilot.org website
+-- description:
+license:             BSD3
+license-file:        LICENSE
+author:              Pat Hickey
+maintainer:          pat@galois.com
+copyright:           2013 (c) Galois, Inc.
+-- category:
+build-type:          Simple
+cabal-version:       >=1.8
+
+executable smaccmpilot-org
+  main-is: site.hs
+  -- other-modules:
+  build-depends:       base,
+                       filepath,
+                       hakyll,
+                       MissingH

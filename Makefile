@@ -1,19 +1,20 @@
+EXEC = cabal-dev/bin/smaccmpilot-org
 
 default: build
 
 clean:
-	-./site clean
-	-rm *.o *.hi site
+	-./smaccmpilot-org clean
+	-rm -rf cabal-dev
 
-site: site.hs Sidebar.hs
-	ghc --make site.hs
-	./site clean
+smaccmpilot-org: site.hs Sidebar.hs
+	cabal-dev install
+	./$(EXEC) clean
 
-build: site
-	./site build
+build: smaccmpilot-org
+	./$(EXEC) build
 
 preview: build
-	./site preview
+	./$(EXEC) preview
 
 deploy: build
-	./site deploy
+	./$(EXEC) deploy
