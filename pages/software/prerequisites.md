@@ -3,8 +3,8 @@
 ## GCC Cross Compiler
 
 Building the SMACCMPilot C sources require a GCC toolchain for the ARM Cortex-M4
-processor. We recommend the *arm-gcc-embedded* toolchain [available on
-Launchpad][arm-gcc-embedded].
+processor. We recommend using the *arm-gcc-embedded* toolchain, maintained by
+ARM Ltd. [Download arm-gcc-embedded from Launchpad][arm-gcc-embedded].
 
 You may install this toolchain into your PATH, or provide the installation
 directory explicitly to the SMACCMPilot build.
@@ -29,7 +29,7 @@ You can confirm the correct version of GHC is installed in your path by running
 ghc --version
 ```
 
-which should report version 7.6.2.
+which should report version 7.6.2 or higher.
 
 ## Haskell Package Manager
 
