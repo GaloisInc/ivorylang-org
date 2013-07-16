@@ -50,7 +50,7 @@ For example, you can test to make sure the code generator for SMACCMPilot exists
 and runs with the command
 
 ```
-./cabal-dev/bin/smaccmpilot-get --help
+./cabal-dev/bin/smaccmpilot-gen --help
 ```
 
 ### C Build

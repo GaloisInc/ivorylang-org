@@ -54,39 +54,43 @@ main = hakyllWith config $ do
     standardPandocPagesSubdir ""
     standardPandocPagesSubdir "hardware/"
     standardPandocPagesSubdir "software/"
+    standardPandocPagesSubdir "languages/"
 
 sitemap :: PageTree
-sitemap = Tree "/" "Home" [ (Page "index.html" "Overview" "Overview")
-                          , (Tree "hardware" "Hardware" hardwarepages)
-                          , (Tree "software" "Software" softwarepages)
-                          , (Page "about.html" "About" "About")
+sitemap = Tree "/" "Home" [ (Page "index.html" "Overview"  "Overview")
+                          , (Tree "languages"  "Languages" langpages)
+                          , (Tree "software"   "Software"  softwarepages)
+                          , (Tree "hardware"   "Hardware"  hardwarepages)
+                          , (Page "about.html" "About"     "About")
                           ]
   where
   hardwarepages =
-    [ Page "index.html" "Overview" "Hardware Overview"
-    , Page "shoppinglist.html" "Shopping List" "Shopping List"
-    , Page "flightcontroller.html" "Flight Controller" "Flight Controller"
-    , Page "blackmagic.html" "Black Magic Probe Debugger" "Debugger"
+    [ Page "index.html"            "Overview"                   "Hardware Overview"
+    , Page "shoppinglist.html"     "Shopping List"              "Shopping List"
+    , Page "flightcontroller.html" "Flight Controller"          "Flight Controller"
+    , Page "blackmagic.html"       "Black Magic Probe Debugger" "Debugger"
     ]
   softwarepages =
-    [ Page "index.html" "Overview" "Software Overview"
-    , Page "prerequisites.html" "Prerequisites" "Prerequisites"
-    , Page "build.html" "Building SMACCMPilot" "Building"
-    , Page "loading.html" "Uploading SMACCMPilot" "Loading"
-    , Page "ivory-overview.html" "Ivory Language Overview" "Ivory Language"
-    , Page "fibwalkthrough.html" "Ivory Language Tutorial" "Ivory Tutorial"
+    [ Page "index.html"         "Overview"              "Software Overview"
+    , Page "prerequisites.html" "Prerequisites"         "Prerequisites"
+    , Page "build.html"         "Building SMACCMPilot"  "Building"
+    , Page "loading.html"       "Uploading SMACCMPilot" "Loading"
+    ]
+  langpages =
+    [ Page "index.html"          "Overview"                 "Languages Overview"
+    , Page "ivory-overview.html" "Ivory Language Overview"  "Ivory Language"
+    , Page "fibwalkthrough.html" "Ivory Language Tutorial"  "Ivory Tutorial"
     , Page "tower-overview.html" "Tower Framework Overview" "Tower Framework"
     ]
-  flyingpages   = [ Page "index.html" "Overview" "Flying Overview"
-                  ]
 
 navbar :: FilePath -> String
 navbar currentpath = unlines $
   [ "<ul class=\"nav\"> "
-  , entry "/index.html" "Home"
-  , entry "/hardware/index.html" "Hardware"
-  , entry "/software/index.html" "Software"
-  , entry "/about.html" "About"
+  , entry "/index.html"           "Home"
+  , entry "/languages/index.html" "Languages"
+  , entry "/software/index.html"  "Software"
+  , entry "/hardware/index.html"  "Hardware"
+  , entry "/about.html"           "About"
   , "</ul>"
   ]
   where
