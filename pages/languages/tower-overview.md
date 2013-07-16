@@ -19,20 +19,34 @@ operating system.
 The basic communication primitives of Tower are `DataPort` and `Channel`,
 which implement shared state and first-in first-out queues, respectively.
 
-A Tower `Task` collects the `DataPort`s and `Channel`s 
+A Tower `Task` is a collection of event handlers which share common state and
+are cooperatively scheduled. You can think of a task as a `select` loop which
+demultiplexes incoming events into assigned handlers. Event sources can be a
+timer tick, scheduled on a fixed period using the `onPeriod` handler, or a new
+value available on a `ChannelSink`, using the `onChannel` handler.
+
+A Tower `Signal` is a single handler for an asynchronous event. `Signal`s are
+designed for implementing Interrupt Service Handlers (ISRs) on embedded systems.
+Signals are restricted to using `Channel` primitives, and cannot access
+`DataPort`s.
 
 ### Tower Example
 
 A simple example use of the Tower framework is found in
-[`Ivory.Tower.Test.FooBarTower`][fbtower]. The example connects three
+[`Ivory.Tower.Test.FooBarSimple`][fbsimple]. The example connects three
 `Task`s using one `DataPort` and one `Channel`.
 
-You can build the `FooBarTower` example using
-the [FreeRTOS code generator example][fbtower-freertos] found in the 
+You can build the `FooBarSimple` example using
+the [FreeRTOS code generator example][fbsimple-freertos] found in the 
 [ivory-tower-freertos][tower-freertos] cabal package.
 
-[fbtower]:http://github.com/GaloisInc/tower/blob/master/ivory-tower/src/Ivory/Tower/Test/FooBarTower.hs
-[fbtower-freertos]: https://github.com/GaloisInc/tower/blob/master/ivory-tower-freertos/examples/Main.hs
+Tower also supports signal handlers, which may be used to implement ISR routines
+in embedded system. The [`Ivory.Tower.Test.FooBarSignals`][fbsimple] example builds
+on the FooBarSimple example, adding channels between `Task`s and `Signal`s.
+
+[fbsimple]:http://github.com/GaloisInc/tower/blob/master/ivory-tower/src/Ivory/Tower/Test/FooBarSimple.hs
+[fbsimple-freertos]: https://github.com/GaloisInc/tower/blob/master/ivory-tower-freertos/examples/Main.hs
+[fbsignals]:http://github.com/GaloisInc/tower/blob/master/ivory-tower/src/Ivory/Tower/Test/FooBarSignals.hs
 
 ### Tower Metadata
 
@@ -42,3 +56,10 @@ vizualization.
 
 ![Graphviz output for the FooBarTower example.](/images/tower-foobar.png)
 
+Graphviz output legend:
+
+* Tasks and Signals are rectangular nodes with fields specifying name, special
+  properties, and all data and event sources and sinks.
+* DataPorts are elliptical nodes specifying the data's Ivory type. Dotted arrows
+  show DataPort reads and writes.
+* Channels are solid arrows specifying the channel's Ivory type.
