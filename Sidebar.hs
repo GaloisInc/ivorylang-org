@@ -13,9 +13,11 @@ data PageTree = Tree { tPath    :: FilePath
                      , tLeaves  :: [PageTree]
                      }
               | Page { pPath :: String
-                     , pDisp :: String
                      , pDesc :: String
                      }
+              | Group { gDesc :: String
+                      , gLeaves :: [PageTree]
+                      }
               deriving (Eq, Show)
 
 
@@ -26,12 +28,14 @@ atDirectory dir t@(Tree p _ ls) =
     False -> msum $ map (recur p) ls 
   where
     prefix :: FilePath -> PageTree -> PageTree
-    prefix x (Tree p d ls)   = (Tree (x </> p) d ls)
-    prefix x (Page p d desc) = (Page (x </> p) d desc)
+    prefix x (Tree p d ls) = (Tree (x </> p) d ls)
+    prefix x (Page p desc) = (Page (x </> p) desc)
+    prefix x (Group d ls)  = (Group d (map (prefix x) ls))
     recur :: FilePath -> PageTree -> Maybe PageTree
     recur p subtree = atDirectory dir (prefix p subtree)
 
-atDirectory _ (Page _ _ _) = Nothing
+atDirectory _ (Page _ _) = Nothing
+atDirectory _ (Group _ _) = Nothing
 
 itemDirectory :: Item a -> FilePath 
 itemDirectory = dropTrailingPathSeparator
@@ -49,15 +53,19 @@ itemFilePath  = (flip addExtension) "html"
 ls :: PageTree -> String
 ls (Tree _ _ ps) = unlines $ map l ps
   where l (Tree p _ _) = p ++ "/"
-        l (Page p _ _) = p
+        l (Page p _) = p
 ls _ = ""
 
 tree :: PageTree -> String
-tree (Tree d _ ps) = unlines $ concatMap (aux d) ps
+tree pt = case pt of
+  Tree d _ ps -> mktree d ps
+  Page p _    -> p
+  Group _ ps  -> mktree "" ps
   where
+  mktree d ps = unlines $ concatMap (aux d) ps
   aux prefix (Tree d _ ps) = concatMap (aux (prefix </> d)) ps
-  aux prefix (Page p _ _) = [ prefix </> p ]
-tree (Page p _ _) = p
+  aux prefix (Page p _)    = [ prefix </> p ]
+  aux prefix (Group _ ps)  = concatMap (aux prefix) ps
 
 
 sidebarHTML :: PageTree -> Item a -> String
@@ -66,30 +74,30 @@ sidebarHTML sitemap item =
   where
   pwd = itemDirectory item
   listing :: PageTree -> String
-  listing (Page _ _ _)  = "" -- Should not be possible (result of atDirectory)
   listing (Tree p d xs) = unlines $
         [ "<div class=\"well sidebar-nav\">"
         , "  <ul class=\"nav nav-list\">"
         , "    <li class=\"nav-header\">" ++ d ++ "</li>"
         ] ++
-        [ listitem x | x <- xs ] ++
+        [ listitem p x | x <- xs ] ++
         [ "  </ul>"
         , "</div><!--/.well -->"
         ]
+  listing _ = "" -- Should not be possible (result of atDirectory)
+  listitem :: String -> PageTree -> String
+  listitem p (Tree p' d _) =
+    "<li><a href=\"" ++ fullpath ++ "\">" ++ d ++ "</a></li>"
+    where fullpath = p </> p' ++ "/"
+  listitem p (Page p' desc) =
+    "<li" ++  emph ++ "><a href=\"" ++ fullpath ++ "\">" ++ desc ++
+    "</a></li>"
     where
-    listitem :: PageTree -> String
-    listitem (Tree p' d _) = let fullpath = p </> p' ++ "/" in
-      "<li><a href=\"" ++ fullpath ++ "\">" ++ d ++ "</a></li>"
-
-    listitem (Page p' _ desc) =
-      "<li" ++  emph ++ "><a href=\"" ++ fullpath ++ "\">" ++ desc ++
-      "</a></li>"
-      where
-      fullpath = p </> p'
-      emph = case (itemFilePath item) == fullpath of
-               True ->  " class=\"active\" "
-               False -> ""
-  
-    
-  
+    fullpath = p </> p'
+    emph = case (itemFilePath item) == fullpath of
+             True ->  " class=\"active\" "
+             False -> ""
+  listitem p (Group d ps) = header ++ contents
+    where
+    header = "    <li class=\"nav-header\">" ++ d ++ "</li>\n"
+    contents = unlines $ map (listitem p) ps
 

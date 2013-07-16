@@ -20,14 +20,14 @@ directory explicitly to the SMACCMPilot build.
 
 ## GCC Compiler
 
-If you are building the [runtime monitoring task][rv-app], you will need a GCC
-compiler built for your own machine to build the GCC-plugin used.  See the
-[README][rv-readme] for more details.  Note that how you invoke the makefile
-depends on whether your GCC compiler is 32-bit or 64-bit.
+To build applications which use the SMACCMPilot runtime monitoring system, such
+as the [runtime monitoring task][rv-app], you will need to build a plugin for
+the GCC cross compiler using a native GCC compiler. See the [runtime
+verification README][rv-readme] for more details.  Note that how you invoke the
+makefile depends on whether your native GCC compiler is 32-bit or 64-bit.
 
-[rv-app]:
-https://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/apps/sample-rtv-task
-[rv-readme]: https://github.com/GaloisInc/ivory-rtverification/blob/master/README.md
+[rv-app]: http://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/apps/sample-rtv-task
+[rv-readme]: http://github.com/GaloisInc/ivory-rtverification/blob/master/README.md
 
 
 ## The GHC Haskell Compiler

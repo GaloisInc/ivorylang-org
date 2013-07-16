@@ -1,6 +1,6 @@
 # Building SMACCMPilot
 
-#### These instructions assume you've completed the instructions for [installing
+*IMPORTANT:* These instructions assume you've completed the instructions for [installing
 prerequisites][prereqs].
 
 [prereqs]: prerequisites.html

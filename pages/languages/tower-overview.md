@@ -1,6 +1,6 @@
-# Tower Framework Overview
+# Tower Language Overview
 
-[Tower][tower] is a framework for composing Ivory programs into real-time tasks.
+[Tower][tower] is a language for composing Ivory programs into real-time tasks.
 
 Tower is both a specification language and a code generator. A Tower progaram
 describes communication channels and tasks, and provides an Ivory

@@ -1,7 +1,7 @@
 # Uploading SMACCMPilot
 
-These instructions assume you've completed the instructions for [building
-SMACCMPilot][building], you have a complete [SMACCMPilot flight
+*IMPORTANT:* These instructions assume you've completed the instructions for
+[building SMACCMPilot][building], you have a complete [SMACCMPilot flight
 platform][hardware].
 
 [building]: build.html

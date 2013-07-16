@@ -57,30 +57,39 @@ main = hakyllWith config $ do
     standardPandocPagesSubdir "languages/"
 
 sitemap :: PageTree
-sitemap = Tree "/" "Home" [ (Page "index.html" "Overview"  "Overview")
+sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
                           , (Tree "languages"  "Languages" langpages)
                           , (Tree "software"   "Software"  softwarepages)
                           , (Tree "hardware"   "Hardware"  hardwarepages)
-                          , (Page "about.html" "About"     "About")
+                          , (Page "about.html" "About")
                           ]
   where
   hardwarepages =
-    [ Page "index.html"            "Overview"                   "Hardware Overview"
-    , Page "shoppinglist.html"     "Shopping List"              "Shopping List"
-    , Page "flightcontroller.html" "Flight Controller"          "Flight Controller"
-    , Page "blackmagic.html"       "Black Magic Probe Debugger" "Debugger"
+    [ Page "index.html"            "Overview"
+    , Page "shoppinglist.html"     "Shopping List"
+    , Page "flightcontroller.html" "Flight Controller"
+    , Page "blackmagic.html"       "Debugger"
     ]
   softwarepages =
-    [ Page "index.html"         "Overview"              "Software Overview"
-    , Page "prerequisites.html" "Prerequisites"         "Prerequisites"
-    , Page "build.html"         "Building SMACCMPilot"  "Building"
-    , Page "loading.html"       "Uploading SMACCMPilot" "Loading"
+    [ Page "index.html"           "Introduction"
+    , Group "Development"
+      [ Page "prerequisites.html"   "Prerequisites"
+      , Page "build.html"           "Building"
+      , Page "loading.html"         "Loading"
+      ]
+    , Group "Flight Software"
+      [ Page "flight-overview.html" "Overview"
+      ]
     ]
   langpages =
-    [ Page "index.html"          "Overview"                 "Languages Overview"
-    , Page "ivory-overview.html" "Ivory Language Overview"  "Ivory Language"
-    , Page "fibwalkthrough.html" "Ivory Language Tutorial"  "Ivory Tutorial"
-    , Page "tower-overview.html" "Tower Framework Overview" "Tower Framework"
+    [ Page "index.html"          "Overview"
+    , Group "Ivory"
+      [ Page "ivory-overview.html" "Language"
+      , Page "fibwalkthrough.html" "Tutorial"
+      ]
+    , Group "Tower"
+      [ Page "tower-overview.html" "Language"
+      ]
     ]
 
 navbar :: FilePath -> String
