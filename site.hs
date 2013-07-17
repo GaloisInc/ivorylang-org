@@ -38,7 +38,8 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
     , Group "Ivory Language"
       [ Page "ivory-introduction.html" "Introduction"
       , Page "ivory-concepts.html"     "Concepts"
-      , Page "ivory-tools.html"        "Tools"
+      , Page "ivory-tools.html"        "Toolchain"
+      , Page "ivory-libs.html"         "Libraries"
       , Page "ivory-fib.html"          "Tutorial"
       ]
     , Group "Tower Language"

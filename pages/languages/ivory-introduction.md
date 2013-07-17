@@ -1,4 +1,6 @@
-# Ivory Language: Intrudiction
+# Ivory Language: Introduction
+
+## Ivory Concepts
 
 #### Ivory is an embedded domain-specific language for safer systems programming.
 
@@ -17,12 +19,32 @@ That's a mouthful. Lets break that down:
 You can consider Ivory to be a lot like a restricted version of the C
 programming language, embedded in Haskell.
 
-For a more detailed treatment of these topics, see the [Ivory
-Concepts](ivory-concepts.html) page.
+[Continue to a more detailed treatment of Ivory's core concepts](ivory-concepts.html).
 
 [haskell]: http://haskell.org
 
-## Examples
+## Learning Ivory
+
+Ivory is embedded in the Haskell language: this means that Ivory reuses the
+syntax and type system of Haskell. It is best if you are comfortable with the
+Haskell language before learning Ivory. In particular, Ivory uses modern
+extensions to the Haskell language, such as DataKinds and TypeOperators.
+
+Once you [understand the goals of the Ivory language](ivory-concepts.html),
+start by reading about the [Ivory Toolchain](ivory-tools.html) and [common libraries](ivory-libs.html).
+
+Additionally, you can learn Ivory by:
+
+* [Following a tutorial](ivory-fib.html)
+* [Reading example programs][ivory-examples]
+* [Reading the SMACCMPilot source code][ivory-smaccmpilot]
+* [Reading the language sources][ivory-lang]
+
+[ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples/examples
+[ivory-smaccmpilot]: http://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/src/flight
+[ivory-lang]: http://github.com/GaloisInc/ivory/tree/master/ivory/src/Ivory
+
+## Example Programs
 
 ### Hello World
 
