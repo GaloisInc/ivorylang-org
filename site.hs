@@ -56,6 +56,7 @@ main = hakyllWith config $ do
     standardPandocPagesSubdir "software/"
     standardPandocPagesSubdir "languages/"
 
+-- Sitemap is used to generate the navbars
 sitemap :: PageTree
 sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
                           , (Tree "languages"  "Languages" langpages)
@@ -83,12 +84,14 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
     ]
   langpages =
     [ Page "index.html"          "Overview"
-    , Group "Ivory"
-      [ Page "ivory-overview.html" "Language"
-      , Page "fibwalkthrough.html" "Tutorial"
+    , Group "Ivory Language"
+      [ Page "ivory-introduction.html" "Introduction"
+      , Page "ivory-concepts.html"     "Concepts"
+      , Page "ivory-tools.html"        "Tools"
+      , Page "ivory-fib.html"          "Tutorial"
       ]
-    , Group "Tower"
-      [ Page "tower-overview.html" "Language"
+    , Group "Tower Language"
+      [ Page "tower-overview.html" "Introduction"
       ]
     ]
 

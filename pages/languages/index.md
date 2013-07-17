@@ -7,8 +7,6 @@ programs are Haskell values.
 
 [haskell]: http://haskell.org
 
-XXX Put DSL diagram here
-
 Embedded Domain Specific Languages (eDSLs) can be more powerful and easier to
 learn than standalone DSLs because the host language (Haskell) also serves as a
 macro language.
@@ -20,8 +18,9 @@ Ivory as a safer C, embedded in Haskell.
 
 Ivory Resources:
 
-* [Language overview](ivory-overview.html)
-* [Tutorial](fibwalkthrough.html)
+* [Language Introduction](ivory-introduction.html)
+* [Language Concepts](ivory-concepts.html)
+* [Sample Program Walkthrough](ivory-fib.html)
 * [Examples][ivory-examples]
 * [Language sources][ivory-github]
 
