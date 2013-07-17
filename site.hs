@@ -7,6 +7,45 @@ import           Hakyll
 import           Sidebar
 --------------------------------------------------------------------------------
 
+-- Sitemap is used to generate the navbars
+sitemap :: PageTree
+sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
+                          , (Tree "languages"  "Languages" langpages)
+                          , (Tree "software"   "Software"  softwarepages)
+                          , (Tree "hardware"   "Hardware"  hardwarepages)
+                          , (Page "about.html" "About")
+                          ]
+  where
+  hardwarepages =
+    [ Page "index.html"            "Overview"
+    , Page "shoppinglist.html"     "Shopping List"
+    , Page "flightcontroller.html" "Flight Controller"
+    , Page "blackmagic.html"       "Debugger"
+    ]
+  softwarepages =
+    [ Page "index.html"           "Introduction"
+    , Group "Development"
+      [ Page "prerequisites.html"   "Prerequisites"
+      , Page "build.html"           "Building"
+      , Page "loading.html"         "Loading"
+      ]
+    , Group "Flight Software"
+      [ Page "flight-overview.html" "Overview"
+      ]
+    ]
+  langpages =
+    [ Page "index.html"          "Overview"
+    , Group "Ivory Language"
+      [ Page "ivory-introduction.html" "Introduction"
+      , Page "ivory-concepts.html"     "Concepts"
+      , Page "ivory-tools.html"        "Tools"
+      , Page "ivory-fib.html"          "Tutorial"
+      ]
+    , Group "Tower Language"
+      [ Page "tower-overview.html" "Introduction"
+      ]
+    ]
+
 standardPandocPagesSubdir d = do
     match (fromGlob ("pages/" ++ d ++ "*.md")) $ do
         route   $ gsubRoute "pages/"  (const "") `composeRoutes`
@@ -56,44 +95,6 @@ main = hakyllWith config $ do
     standardPandocPagesSubdir "software/"
     standardPandocPagesSubdir "languages/"
 
--- Sitemap is used to generate the navbars
-sitemap :: PageTree
-sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
-                          , (Tree "languages"  "Languages" langpages)
-                          , (Tree "software"   "Software"  softwarepages)
-                          , (Tree "hardware"   "Hardware"  hardwarepages)
-                          , (Page "about.html" "About")
-                          ]
-  where
-  hardwarepages =
-    [ Page "index.html"            "Overview"
-    , Page "shoppinglist.html"     "Shopping List"
-    , Page "flightcontroller.html" "Flight Controller"
-    , Page "blackmagic.html"       "Debugger"
-    ]
-  softwarepages =
-    [ Page "index.html"           "Introduction"
-    , Group "Development"
-      [ Page "prerequisites.html"   "Prerequisites"
-      , Page "build.html"           "Building"
-      , Page "loading.html"         "Loading"
-      ]
-    , Group "Flight Software"
-      [ Page "flight-overview.html" "Overview"
-      ]
-    ]
-  langpages =
-    [ Page "index.html"          "Overview"
-    , Group "Ivory Language"
-      [ Page "ivory-introduction.html" "Introduction"
-      , Page "ivory-concepts.html"     "Concepts"
-      , Page "ivory-tools.html"        "Tools"
-      , Page "ivory-fib.html"          "Tutorial"
-      ]
-    , Group "Tower Language"
-      [ Page "tower-overview.html" "Introduction"
-      ]
-    ]
 
 navbar :: FilePath -> String
 navbar currentpath = unlines $
