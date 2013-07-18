@@ -3,6 +3,8 @@
 The SMACCMPilot application and all of the support for the hardware platform are
 found in the [SMACCMPilot-STM32F4][smaccmpilot-stm32f4] repository.
 
+[smaccmpilot-stm32f4]: http://github.com/GaloisInc/smaccmpilot-stm32f4/
+
 ### Components
 
 The majority of the SMACCMPilot application is written in the Ivory programming
