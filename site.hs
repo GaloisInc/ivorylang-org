@@ -30,7 +30,10 @@ sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
       , Page "loading.html"         "Loading"
       ]
     , Group "Flight Software"
-      [ Page "flight-overview.html" "Overview"
+      [ Page "flight-overview.html"   "Overview"
+      , Page "flight-components.html" "Components"
+      , Page "flight-apm.html"        "APM Project"
+      , Page "flight-future.html"     "Future Developments"
       ]
     ]
   langpages =
