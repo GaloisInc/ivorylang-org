@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Applicative ((<$>))
 import           Data.Monoid         (mappend, mconcat)
+import           System.FilePath     (dropFileName)
 import           Hakyll
 
 import           Sidebar
@@ -9,12 +10,13 @@ import           Sidebar
 
 -- Sitemap is used to generate the navbars
 sitemap :: PageTree
-sitemap = Tree "/" "Home" [ (Page "index.html" "Overview")
-                          , (Tree "languages"  "Languages" langpages)
-                          , (Tree "software"   "Software"  softwarepages)
-                          , (Tree "hardware"   "Hardware"  hardwarepages)
-                          , (Page "about.html" "About")
-                          ]
+sitemap = Tree "/" "Home"
+  [ (Page "index.html" "Overview")
+  , (Tree "languages"  "Languages" langpages)
+  , (Tree "software"   "Software"  softwarepages)
+  , (Tree "hardware"   "Hardware"  hardwarepages)
+  , (Page "about.html" "About")
+  ]
   where
   hardwarepages =
     [ Page "index.html"            "Overview"
@@ -114,7 +116,7 @@ navbar currentpath = unlines $
   entry path desc =
     "<li" ++ (emphif path) ++ "><a href=\"" ++ path ++ "\">" ++
     desc ++ "</a></li> "
-  emphif path = case currentpath == path of
+  emphif path = case (dropFileName currentpath) == (dropFileName path) of
     True  -> " class=\"active\" "
     False -> ""
 
