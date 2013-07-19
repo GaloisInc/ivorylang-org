@@ -37,7 +37,7 @@ see the [RC transmitter page][hardware-rc].
 
 The signal from the RC transmitter is sent over the air to an RC receiver, which
 communicates with SMACCMPilot using a [PPM signal][ppm-signal]. The flight
-controller decods the PPM signal in the [`hwf4` library timer
+controller decodes the PPM signal in the [`hwf4` library timer
 driver][hwf4-timer]. The decoded signal is accessed by the APM AP\_HAL library
 and finally bridged into the SMACCMPilot Ivory/Tower application when the [user
 input capture driver][userinput-c] is accessed in

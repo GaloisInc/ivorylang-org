@@ -1,7 +1,7 @@
 # Flight Software: Components
 
 The SMACCMPilot flight software's origin was a demonstration replacing individual
-compnents of the [Ardupilot flight control software][apm] with components written in
+components of the [Ardupilot flight control software][apm] with components written in
 Ivory. It has since evolved to
 
 The system is under active development and the following details are expected to
