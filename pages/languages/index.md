@@ -13,7 +13,7 @@ macro language.
 
 ### Ivory Language
 
-The Ivory Language is an eDSL for safe systems progamming. You can think of
+The Ivory Language is an eDSL for safe systems programming. You can think of
 Ivory as a safer C, embedded in Haskell.
 
 Ivory Resources:
