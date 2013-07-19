@@ -15,55 +15,35 @@ stabilization controller for the [AR Drone quadcopter][hardware].
 
 SMACCMPilot implements a simple quadcopter stabilization controller.
 
+#### Flight Stabilization
+
 * describe what stabilization control means
 * describe where to find the implementation
 
-### Inputs
+#### Onboard Sensors
 
+SMACCMPilot uses the gyroscope, accelerometer, and magnetometer on the
+[PX4FMU][px4fmu], and the [APM project][apm]'s  [`AP_AHRS`][ap-ahrs] library
+for sensor fusion.
 
-#### Radio Control input
-The primary way to control the SMACCMPilot flight controller is using a [radio
-control (RC) transmitter][hardware-rc].
+[apm]: flight-apm.html
+[px4fmu]: ../hardware/flightcontroller.html
+[ap-ahrs]: http://github.com/GaloisInc/ardupilot/tree/master/libraries/AP_AHRS
 
-[hardware-rc]: ../hardware/rc-controller.html
+#### RC Control
 
-When the controller is armed. The four joystick channels on the RC transmitter
-directly control the SMACCMPilot stabilization controller. When disarmed, the
-joysticks have no effect, the stabilization controller set point is all zero,
-and all motor outputs are disabled.
+SMACCMPilot is flown manually with a radio controller. For more info, see the
+[Radio Control hardware page](../hardware/rc-controller.html).
 
-For a complete description of RC transmitter setup, arming, and disarming,
-see the [RC transmitter page][hardware-rc].
+#### Telemetry
 
-The signal from the RC transmitter is sent over the air to an RC receiver, which
-communicates with SMACCMPilot using a [PPM signal][ppm-signal]. The flight
-controller decodes the PPM signal in the [`hwf4` library timer
-driver][hwf4-timer]. The decoded signal is accessed by the APM AP\_HAL library
-and finally bridged into the SMACCMPilot Ivory/Tower application when the [user
-input capture driver][userinput-c] is accessed in
-[`SMACCMPilot.Flight.UserInput.Task`][userinput-ivory].
+SMACCMPilot uses the [MAVLink protocol][mavlink] to communicate with Ground
+Communication Stations (GCSs) such as [MAVProxy][]. For more info, see
+the [Flight Components page](flight-components.html).
 
+At this time, SMACCMPilot implements a small subset of the MAVLink protocol.
+SMACCMPilot does not accept commands from a ground control station, it can only
+send flight controller state to the ground.
 
-[ppm-signal]: http://skymixer.net/electronics/84-rc-receivers/78-rc-ppm-signal
-[hwf4-timer]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/bsp/hwf4/include/hwf4/timer.h
-[userinput-c]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/flight/include/flight-support/userinput_capture.h
-[userinput-ivory]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/flight/SMACCMPilot/Flight/UserInput/Task.hs
-
-#### Telemetry input
-
-telemetry input: mavlink stream control
-
-### Outputs
-
-#### Motor Control
-
-AR drone motor controllers
-
-#### Flight Mode Display
-
-LED relay
-
-#### Telemetry output
-
-telemetry output: mavlink streams provided
-
+[MAVProxy]: http://qgroundcontrol.org/mavlink/mavproxy_startpage
+[mavlink]: http://qgroundcontrol.org/mavlink/start
