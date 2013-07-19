@@ -14,7 +14,7 @@ joystick axes of the RC transmitter. We'll also map the control sequences to arm
 and disarm the flight controller to use a switch on the RC transmitter as a
 safety.
 
-XXX put a diagram here for throttle roll pitch yaw to the sticks
+![RC Radio Control Sticks](../images/radio.png)
 
 ## Compatible RC Transmitter and Receivers
 
@@ -28,16 +28,36 @@ receiver system with the following features:
 
 ### Sample Radio: 9X series w/ FRSKY radio gear
 
-On our [shopping list][] page we recommend the Turnigy 9XR radio.
+On our [shopping list][] page we recommend the [Turnigy 9XR
+radio][9xr-hobbyking]. The 9XR is one of the least expensive radios which can be
+configured with all of the features required for SMACCMPilot. The aesthetics and
+build quality leave something to be desired, but it gets the job done.
 
-- tell about 9xr, regular 9x
-- er9x firmware is recommended
+[shopping list]: shoppinglist.html
 
-- frsky radio gear has proper receivers in a small size
-- frsky transmitter modules plug into 9x (JR sized pocket)
+![*Image: hobbyking.com*](../images/9xr_hobbyking.jpg)
 
+[9xr-hobbyking]: http://hobbyking.com/hobbyking/store/__31544__Turnigy_9XR_Transmitter_Mode_2_No_Module_.html
+
+The 9XR is designed to take interchangable radio transmitter modules for
+interoperation with various radio receivers. We recommend using [FRSKY][] radio
+modules because of low cost and PPM output capability.
+
+The [FRSKY DJT transmitter module][djt] is compatible with the 9XR transmitter.
+The [FRSKY D4R-II receiver][d4r-ii] is small, inexpensive, and offers PPM
+output.
+
+[FRSKY]: http://www.frsky-rc.com
+[djt]: http://www.frsky-rc.com/product/pro.php?pro_id=8
+[d4r-ii]: http://www.frsky-rc.com/product/pro.php?pro_id=24
 
 ## Mixing information
+
+RC transmitters typically require some amount of setup to configure the mapping
+of control inputs to output channels. SMACCMPilot requires a radio with at least
+6 output channels. The 9XR recommended above supports 8 channels.
+
+SMACCMPilot expects radio channels according to the following scheme:
 
 * Channel 1 controls roll.
 * Channel 2 controls pitch.
@@ -57,6 +77,13 @@ means your channel 6 toggle switch is a "kill switch" which can disable all
 motors at any time.
 
 ### Mixing example for 9x series
+
+In the 9XR radio, setting up the following the mixer screen will give correct
+behavior with the 'THR CUT' switch used for arming and the 'AUX.3' switch used
+for mode selection.
+
+![](../images/9x-mixerscreen.jpg)
+
 
 ## More information
 
