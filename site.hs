@@ -23,6 +23,7 @@ sitemap = Tree "/" "Home"
     , Page "shoppinglist.html"     "Shopping List"
     , Page "flightcontroller.html" "Flight Controller"
     , Page "blackmagic.html"       "Debugger"
+    , Page "rc-controller.html"    "Radio Control"
     ]
   softwarepages =
     [ Page "index.html"           "Introduction"

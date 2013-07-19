@@ -87,6 +87,11 @@ for mode selection.
 
 ## More information
 
-PX4 wiki has more info on this sort of thing
+The [PX4 Project wiki][px4-rc] has more information about various RC radio
+systems. Note that the PX4 project software can support more types of radio
+system input than the SMACCMPilot software. SMACCMPilot only supports PPM input
+at this time.
 
+
+[px4-rc]: http://pixhawk.ethz.ch/px4/radio-control/start
 
