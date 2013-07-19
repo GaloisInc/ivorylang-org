@@ -17,6 +17,7 @@ SMACCMPilot implements a simple quadcopter stabilization controller.
 
 #### Flight Stabilization
 
+XXX explain more
 * describe what stabilization control means
 * describe where to find the implementation
 

@@ -93,9 +93,12 @@ Motor control meets the Ivory/Tower implementation of SMACCMPilot in the
 
 #### Flight Mode Display
 
+XXX explain more
 LED relay
 
 #### Telemetry output
+
+XXX explain more
 
 telemetry output: mavlink streams provided
 
@@ -112,6 +115,9 @@ see [`SMACCMPilot.Flight.GCS.Transmit.Task`][tx-task] for implementation.
 SMACCMPilot uses the gyroscope, accelerometer, and magnetometer on the
 [PX4FMU][px4fmu], and the [APM project][apm]'s  [`AP_AHRS`][ap-ahrs] library
 for sensor fusion.
+
+XXX explain more: hwf4 i2c and spi, HAL i2c and spi, APM scheduler takes care
+of periodic process, sensors ivory/tower interface
 
 [ap-ahrs]: http://github.com/GaloisInc/ardupilot/tree/master/libraries/AP_AHRS
 [px4fmu]: ../hardware/flightcontroller.html
