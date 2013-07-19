@@ -14,7 +14,7 @@ joystick axes of the RC transmitter. We'll also map the control sequences to arm
 and disarm the flight controller to use a switch on the RC transmitter as a
 safety.
 
-![RC Radio Control Sticks](../images/radio.png)
+![*RC Transmitter Joystick Functions*](../images/radio.png)
 
 ## Compatible RC Transmitter and Receivers
 
@@ -39,8 +39,8 @@ build quality leave something to be desired, but it gets the job done.
 
 [9xr-hobbyking]: http://hobbyking.com/hobbyking/store/__31544__Turnigy_9XR_Transmitter_Mode_2_No_Module_.html
 
-The 9XR is designed to take interchangable radio transmitter modules for
-interoperation with various radio receivers. We recommend using [FRSKY][] radio
+The 9XR is designed to take interchangeable radio transmitter modules for
+inter-operation with various radio receivers. We recommend using [FRSKY][] radio
 modules because of low cost and PPM output capability.
 
 The [FRSKY DJT transmitter module][djt] is compatible with the 9XR transmitter.
@@ -64,8 +64,8 @@ SMACCMPilot expects radio channels according to the following scheme:
 * Channel 3 controls throttle.
 * Channel 4 controls yaw.
 * Channel 5 selects flight control mode. Flight modes are not yet implemented in
-  the SMACCMPilot flight control software, but eventaully this will allow
-  diffent flight control modes to be toggled from the RC transmitter.
+  the SMACCMPilot flight control software, but eventually this will allow
+  different flight control modes to be toggled from the RC transmitter.
 * Channel 6 enables motors to be armed. Motors are armed when all of the
 following conditions are met:
     1. Channel 6 is high (PWM greater than 1500us) 
