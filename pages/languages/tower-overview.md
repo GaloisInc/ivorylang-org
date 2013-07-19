@@ -2,7 +2,7 @@
 
 [Tower][tower] is a language for composing Ivory programs into real-time tasks.
 
-Tower is both a specification language and a code generator. A Tower progaram
+Tower is both a specification language and a code generator. A Tower program
 describes communication channels and tasks, and provides an Ivory
 implementation of each task. Tower compiles the specification for the program
 and delegates code generation to an operating-system specific backend.
@@ -52,7 +52,7 @@ on the FooBarSimple example, adding channels between `Task`s and `Signal`s.
 
 Tower's specification language is designed to support metadata output. At this
 time, Tower supports output to Graphviz dot files, which can be used for
-vizualization.
+visualization.
 
 ![Graphviz output for the FooBarTower example.](/images/tower-foobar.png)
 
