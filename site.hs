@@ -116,9 +116,10 @@ navbar currentpath = unlines $
   entry path desc =
     "<li" ++ (emphif path) ++ "><a href=\"" ++ path ++ "\">" ++
     desc ++ "</a></li> "
-  emphif path = case (dropFileName currentpath) == (dropFileName path) of
-    True  -> " class=\"active\" "
-    False -> ""
+  emphif path = if under path then " class=\"active\" " else ""
+  under path | rootdir path = path == currentpath
+             | otherwise    = dropFileName path == dropFileName currentpath
+  rootdir path = dropFileName path == "/"
 
 templated :: Identifier -> Item String -> Compiler (Item String)
 templated t input = loadAndApplyTemplate t ctx input >>= relativizeUrls
