@@ -13,13 +13,13 @@ stabilization controller for the [AR Drone quadcopter][hardware].
 
 ### Capabilities
 
-SMACCMPilot implements a simple quadcopter stabilization controller.
-
 #### Flight Stabilization
 
-XXX explain more
-* describe what stabilization control means
-* describe where to find the implementation
+SMACCMPilot implements a simple quadcopter stabilizer for manual piloting.
+Autonomous features are still in progress. For more info see the [Flight
+Components page][flight-components].
+
+[flight-components]: flight-components.html
 
 #### Onboard Sensors
 
@@ -34,13 +34,15 @@ for sensor fusion.
 #### RC Control
 
 SMACCMPilot is flown manually with a radio controller. For more info, see the
-[Radio Control hardware page](../hardware/rc-controller.html).
+[Radio Control hardware page][rc]
+
+[rc]: ../hardware/rc-controller.html
 
 #### Telemetry
 
 SMACCMPilot uses the [MAVLink protocol][mavlink] to communicate with Ground
 Communication Stations (GCSs) such as [MAVProxy][]. For more info, see
-the [Flight Components page](flight-components.html).
+the [Flight Components page][flight-components]
 
 At this time, SMACCMPilot implements a small subset of the MAVLink protocol.
 SMACCMPilot does not accept commands from a ground control station, it can only

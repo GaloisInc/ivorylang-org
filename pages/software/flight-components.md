@@ -93,8 +93,23 @@ Motor control meets the Ivory/Tower implementation of SMACCMPilot in the
 
 #### Flight Mode Display
 
-XXX explain more
-LED relay
+SMACCMPilot has support for the user to select multiple flight modes from the
+radio controller. However, at this time, only a stabilization flight mode is
+available in SMACCMPilot, so regardless of which flight mode is selected, only
+the stabilizer will be active.
+
+In addition to supporting multiple control modes, motor output can be armed or
+disarmed from the radio controller. The arming mode is an important safety
+feature: When motors are armed, they can spin up at any time due to either pilot
+or sensor input. See the [Radio control (RC) transmitter][hardware-rc] page for
+a description of arming and disarming the SMACCMPilot controller.
+
+SMACCMPilot displays the current flight mode by blinking the red LED on the
+PX4FMU, as well as any optional lights connected to the relay port on the
+PX4IOAR board. When the controller is disarmed (motors safe), the blinking
+sequence has a long duty cycle (on for at least 2x the time off). When the
+controller is armed, the blinking sequence has a short duty cycle (time off 2x
+time on).
 
 #### Telemetry output
 
@@ -121,4 +136,20 @@ of periodic process, sensors ivory/tower interface
 
 [ap-ahrs]: http://github.com/GaloisInc/ardupilot/tree/master/libraries/AP_AHRS
 [px4fmu]: ../hardware/flightcontroller.html
+
+### Stabilization
+
+SMACCMPilot's controller stabilizes a quadcopter: it uses inertial sensor
+feedback to control vehicle attitude, so that with no input the vehicle should
+maintain a constant level attitude and a constant heading.
+
+Note that maintaining a constant level attitude is not equivelant to maintaining
+a constant position or a constant zero velocity. Misalignments between the
+flight controller and frame, disturbances such as wind and prop wash, and sensor
+drift will all contribute to vehicle motion even with a perfect stabilization
+controller. So, the pilot must control vehicle position or velocity by adjusting
+the attitude set point.
+
+The SMACCMPilot controller does not control altitude - the pilot controls the
+net throttle directly, and must adjust throttle to maintain or change altitude.
 
