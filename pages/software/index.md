@@ -10,7 +10,7 @@ A complete guide to building and loading the SMACCMPilot software on your
 machine:
 
 * [Installing Prerequisites](prerequisites.html)
-* [Building SMACCMPilot](building.html)
+* [Building SMACCMPilot](build.html)
 * [Uploading SMACCMPilot to hardware](loading.html)
 
 ### Flight Software Guide
