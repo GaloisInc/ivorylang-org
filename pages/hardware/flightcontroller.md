@@ -24,5 +24,4 @@ input, 3DR radio, and relay status light.
 * EEPROM
 * Relay Status LED
 
-We'll get back to expand this page at some point soonish. (if not done by july
-please yell at pat)
+We'll get back to expand this page at some point soonish.

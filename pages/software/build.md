@@ -46,11 +46,11 @@ The first full Haskell build will take some time to fetch and build dependencies
 from Hackage. Subsequent builds will be much faster.
 
 The resulting code generating executables will be found in `./cabal-dev/bin/`.
-For example, you can test to make sure the code generator for SMACCMPilot exists
-and runs with the command
+For example, you can test to make sure the code generator for the SMACCMPilot
+flight code exists and runs with the command
 
 ```
-./cabal-dev/bin/smaccmpilot-gen --help
+./cabal-dev/bin/flight-gen --help
 ```
 
 ### C Build
@@ -82,8 +82,36 @@ Then, you can run the code generators and build the C sources into executables:
 make
 ```
 
-At this point you will have a complete set of SMACCMPilot binaries, including
-the primary flight binary `stabilize`.
+When the build completes, built artifacts will be found in
+`build/px4fmu17_ioar_freertos/img/`. These will include complete executables
+(elf format, no file extension), stripped binaries (.bin extension), linker
+scripts (.lds extension), linker maps (.map extension), and PX4 bootloader
+compatible binaries (.px4 extension).
+
+The `flight` binary is the primary flight application for the SMACCMPilot project.
+Other applications, like `flight-hil` (HIL stands for Hardware In the Loop), are used
+to test subsets of the flight application or individual libraries.
+
+### Troubleshooting
+
+If you get complaints about your *local* gcc toolchain, it is probably related
+to the SMACCMPilot Runtime Verification (RTV) build. The RTV build needs to
+create a 32-bit plugin for GCC 4.7. Common problems when building it include
+using GCC 4.6 or 4.8 (both unsupported, due to changes in the GCC Plugin API),
+not having GCC plugin development headers installed, or not having a 32 bit
+native toolchain installed on a 64 bit system.
+
+Presently, the RTV build is not required for the flight application build.
+You may comment out the `CONFIG_BUILD_RTV` variable your `Config.mk` to disable
+the RTV build:
+
+```sh
+# ------------------------------------------------------------------------------
+# Comment the following line to disable building apps that use runtime
+# verification:
+CONFIG_BUILD_RTV := 1
+
+```
 
 #### More Details
 

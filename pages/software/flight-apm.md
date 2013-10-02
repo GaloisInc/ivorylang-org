@@ -1,9 +1,11 @@
 # Flight Control: APM Software
 
 The SMACCMPilot flight controller uses several components from the [APM
-(ArduPilot Mega) software project][ardupilot-project]. We maintain [a branch of
-the ArduPilot repository][ardupilot-repo] with the code required by the
-SMACCMPilot build.
+(ArduPilot Mega) software project][ardupilot-project]. We maintain [a fork of
+the ArduPilot software][ardupilot-standalone] as part of the SMACCMPilot project.
+The fork contains a subset of the code from the the ArduPilot project, and in
+some cases has been modified for cleaner interaction with the rest of the
+SMACCMPilot software stack.
 
 ArduPilot's hardware and operating system abstraction, called the `AP_HAL`,
 permits us to use ArduPilot libraries as part of our platform.
@@ -12,4 +14,4 @@ implemented in the `AP_HAL_SMACCM` library terms of the `hwf4` library from the
 smaccmpilot-stm32f4 library.
 
 [ardupilot-project]: http://ardupilot.com
-[ardupilot-repo]: http://github.com/galoisinc/ardupilot
+[ardupilot-standalone]: http://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/src/standalone_apahrs

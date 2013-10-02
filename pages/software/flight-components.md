@@ -42,7 +42,7 @@ input capture driver][userinput-c] is accessed in
 
 [ppm-signal]: http://skymixer.net/electronics/84-rc-receivers/78-rc-ppm-signal
 [hwf4-timer]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/bsp/hwf4/include/hwf4/timer.h
-[userinput-c]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/flight/include/flight-support/userinput_capture.h
+[userinput-c]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/apwrapper/include/apwrapper/userinput_capture.h 
 [userinput-ivory]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/flight/SMACCMPilot/Flight/UserInput/Task.hs
 
 #### Telemetry input
@@ -68,28 +68,23 @@ For more details, see the telemetry input source in
 
 #### Motor Control
 
-The AR Drone frame's motors are controlled using a single UART stream from the
-microcontroller and a set of demultiplexing gates on the PX4IOAR. See the [PX4
-Project wiki][px4-ardrone-wiki] and [source code][px4-ardrone-src] for
-more details on the PX4IOAR and AR Drone protocol.
+AR Drone motor control is [implemented in Ivory][ioar-impl] in the
+`ivory-px4-hardware` library.  The AR Drone frame's motors are controlled using
+a single UART stream from the microcontroller and a set of demultiplexing gates
+on the PX4IOAR. See the [PX4 Project wiki][px4-ardrone-wiki] and [source
+code][px4-ardrone-src] for more details on the PX4IOAR and AR Drone protocol.
 
+[ioar-impl]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/ivory-px4-hw/SMACCMPilot/Hardware/PX4IOAR/MotorControl.hs
 [px4-ardrone-src]: http://github.com/PX4/Firmware/blob/master/src/drivers/ardrone_interface/ardrone_motor_control.c 
 [px4-ardrone-wiki]: http://pixhawk.ethz.ch/px4/airframes/ar_drone
 
-AR Drone motor control is implemented in the [`ardrone` module][ardrone] of the
-`hwf4` library.  We use the [APM Project][apm]'s [`AP_Motors` library][ap-motors]
-library for motor mixing. `AP_Motors` is responsible for motor control output
-via the [`AP_HAL_SMACCM::RCOutput`][hal-rcout] interface, which is backed by the
-`hwf4/ardrone` implementation.
+SMACCMPilot also supports PWM motor controllers, which are standard on many
+hobby quadcopter platforms including the [3DR ArduCopter][3dr-arducopter]. PWM
+motor output is also [implemented in Ivory][pwm-impl], and used in the `flight`
+application when building for the `px4fmu17_bare_freertos` target.
 
-[ardrone]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/bsp/hwf4/include/hwf4/ardrone.h
-[ap-motors]: http://github.com/GaloisInc/ardupilot/tree/master/libraries/AP_Motors
-[hal-rcout]: http://github.com/GaloisInc/ardupilot/blob/master/libraries/AP_HAL_SMACCM/RCOutput.cpp
-
-Motor control meets the Ivory/Tower implementation of SMACCMPilot in the
-[`apmotors_wrapper` interface][motorcontrol-if].
-
-[motorcontrol-if]:http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/flight/include/flight-support/apmotors_wrapper.h
+[pwm-impl]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/ivory-px4-hw/SMACCMPilot/Hardware/PX4IOAR/MotorControl.hs]
+[3dr-arducopter]: http://store.3drobotics.com/products/3dr-arducopter-quad-c-frame-kit-1
 
 #### Flight Mode Display
 
