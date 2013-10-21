@@ -18,17 +18,35 @@ directory explicitly to the SMACCMPilot build.
 
 [arm-gcc-embedded]: http://launchpad.net/gcc-arm-embedded
 
-## GCC Compiler
+## GCC Native Compiler
 
-To build applications which use the SMACCMPilot runtime monitoring system, such
-as the [runtime monitoring task][rv-app], you will need to build a plugin for
-the GCC cross compiler using a native GCC compiler. See the [runtime
-verification README][rv-readme] for more details.  Note that how you invoke the
-makefile depends on whether your native GCC compiler is 32-bit or 64-bit.
+You need a native 32 bit GCC compiler of version 4.7.x, and the GCC plugin
+development headers, to build applications which use our experimental runtime
+verification (RTV) system. (The SMACCMPilot flight application does not use the
+runtime verification system, so you may be able to regard this step as
+optional.)
+
+If you don't wish to use the runtime verification system, you can ignore
+building the runtime verificaiton modules by running `make RTV=0` in
+`smaccmpilot-build`, and disable building any apps that depend on RTV by
+out the `CONFIG_BUILD_RTV` declaration in `smaccmpilot-stm32f4/Config.mk`.
+
+The smaccmpilot-build makefile will use your native compiler to build a plugin
+to be used by the gcc-arm-embedded cross compiler. Because the GCC plugin API
+has changed several times in recent GCC releases, a GCC from the 4.7 series is
+required. GCC 4.6 and 4.8 will not work. Additionally, because the
+gcc-arm-embedded toolchain is built as 32-bit binaries, you will need a 32 bit
+GCC to build a compatible plugin.
+
+Your Linux package manager may package the GCC plugin development headers
+separately from the gcc compiler. Fedora users will want to install the
+`gcc-plugin-devel{.i686}` package; Ubuntu users will want to install
+`gcc-4.7-plugin-dev`.
+
+See the [runtime verification README][rv-readme] for more details.
 
 [rv-app]: http://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/apps/sample-rtv-task
 [rv-readme]: http://github.com/GaloisInc/ivory-rtverification/blob/master/README.md
-
 
 ## The GHC Haskell Compiler
 
