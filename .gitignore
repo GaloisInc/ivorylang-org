@@ -1,5 +1,5 @@
 _cache
 _site
-cabal-dev
+.cabal-sandbox
 dist
 site

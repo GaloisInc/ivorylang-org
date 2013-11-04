@@ -1,13 +1,14 @@
-EXEC = cabal-dev/bin/smaccmpilot-org
+EXEC=.cabal-sandbox/bin/smaccmpilot-org
 
 default: build
 
-clean:
-	-./smaccmpilot-org clean
-	-rm -rf cabal-dev
+.cabal-sandbox:
+	@cabal sandbox init
+	@cabal sandbox add-source ./smaccmpilot-org.cabal
 
-smaccmpilot-org: site.hs Sidebar.hs
-	cabal-dev install
+.PHONY: smaccmpilot-org
+smaccmpilot-org: .cabal-sandbox site.hs Sidebar.hs
+	@cabal install
 	./$(EXEC) clean
 
 build: smaccmpilot-org
@@ -18,3 +19,7 @@ preview: build
 
 deploy: build
 	./$(EXEC) deploy
+
+clean:
+	-./smaccmpilot-org clean
+	-rm -rf cabal.sandbox.config .cabal-sandbox
