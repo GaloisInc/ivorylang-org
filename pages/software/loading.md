@@ -27,17 +27,18 @@ The PX4 bootloader uses a special `.px4` format for program binaries. The
 `smaccmpilot-stm32f4` build system will build `.px4` binaries alongside ordinary
 ELF and `.bin` binaries.
 
-Binaries built for the PX4FMU v1.7 are found in the directory:
+Binaries built for the PX4FMU v1.7 and IOAR expansion board are found in the
+directory:
 
 ```
-smaccmpilot-stm32f4/build/px4/fmu_v17/img/
+smaccmpilot-stm32f4/build/px4fmu17_ioar_freertos/img/
 ```
 
-The `stabilize` application implements the SMACCMPilot flight controller. The
+The `flight` application implements the SMACCMPilot flight controller. The
 full path to the PX4 compatible binary is:
 
 ```
-smaccmpilot-stm32f4/build/px4/fmu_v17/img/stabilize.px4
+smaccmpilot-stm32f4/build/px4fmu17_ioar_freertos/img/flight.px4
 ```
 
 #### Bootloader Behavior
@@ -73,7 +74,7 @@ repository, use the following command, filling in `LIST_OF_PORTS` as
 appropriate.
 
 ```
-python boot/px_uploader.py --port LIST_OF_PORTS build/px4/fmu_v17/img/stabilize.px4
+python boot/px_uploader.py --port LIST_OF_PORTS build/px4fmu17_ioar_freertos/img/flight.px4
 ```
 
 Once the uploader has recognized a valid PX4 firmware file, it will give the

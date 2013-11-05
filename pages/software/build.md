@@ -18,7 +18,7 @@ distributed as a pre-built binary.
 
 The [smaccmpilot-build][] repository contains all of the sources you will need
 as git submodules. It also contains the FreeRTOS 7.1.0 release as sources, and a
-build script to create a cabal-dev sandbox for the SMACCMPilot build.
+build script to create a cabal sandbox for the SMACCMPilot build.
 
 [smaccmpilot-build]: http://github.com/galoisinc/smaccmpilot-build
 
@@ -33,32 +33,10 @@ git submodule update
 
 ## Building
 
-### Haskell Build
+### Configuration
 
-From the `smaccmpilot-build` root directory, use the included Makefile to build
-the SMACCMPilot Haskell sources into code generating executables:
-
-```
-make
-```
-
-The first full Haskell build will take some time to fetch and build dependencies
-from Hackage. Subsequent builds will be much faster.
-
-The resulting code generating executables will be found in `./cabal-dev/bin/`.
-For example, you can test to make sure the code generator for the SMACCMPilot
-flight code exists and runs with the command
-
-```
-./cabal-dev/bin/flight-gen --help
-```
-
-### C Build
-
-At this point, all of the Haskell sources, including any components written in
-Ivory, have been built into executables which will generate C code. The
-SMACCMPilot C Build will run these code generators and build the resulting C
-sources, along with static (non-generated) C sources.
+You'll need to do a little bit of manual configuration before building
+for the first time.
 
 Change into the smaccmpilot-stm32f4 subdirectory:
 
@@ -72,27 +50,100 @@ Before your first build, you'll need to create a `Config.mk` file.
 cp Config.mk.example Config.mk
 ```
 
-If you have installed the arm-gcc-embedded toolchain in your PATH, you can now
-build. If not, customize the variable `CONFIG_CORTEX_M4_PREFIX` in your
-`Config.mk`.
+If you have not installed the arm-gcc-embedded toolchain in your PATH, customize
+the variable `CONFIG_CORTEX_M4_PREFIX` in your `Config.mk`.
 
-Then, you can run the code generators and build the C sources into executables:
+You also need to create a `Keys.mk` file containing the secret keys which will
+be used to secure communications between the SMACCMPilot vehicle and ground
+control station. You can start by copying the template key file, and optionally
+replace the default keys them with values you randomly generate yourself.
+
+```
+cp Keys.mk.exmple Keys.mk
+```
+
+When complete, change back to the outer smaccmpilot-build directory:
+
+```
+cd ..
+```
+
+### Top Level Haskell Build
+
+From the `smaccmpilot-build` root directory, use the included Makefile to build
+the project:
 
 ```
 make
 ```
 
-When the build completes, built artifacts will be found in
-`build/px4fmu17_ioar_freertos/img/`. These will include complete executables
-(elf format, no file extension), stripped binaries (.bin extension), linker
-scripts (.lds extension), linker maps (.map extension), and PX4 bootloader
-compatible binaries (.px4 extension).
+The first full Haskell build will take some time to fetch and build dependencies
+from Hackage. Subsequent builds will be much faster.
 
-The `flight` binary is the primary flight application for the SMACCMPilot project.
-Other applications, like `flight-hil` (HIL stands for Hardware In the Loop), are used
-to test subsets of the flight application or individual libraries.
+Make will build the Haskell sources into code generators, and then use the code
+generators to cross-compile the generated C sources into embedded system images.
+
+The resulting code generating executables will be found in `./.cabal-sandbox/bin/`.
+For example, you can test to make sure the code generator for the SMACCMPilot
+flight code exists and runs with the command
+
+```
+./.cabal-sandbox/bin/flight-gen --help
+```
+
+
+### C Build
+
+Developers may want to run the C build separately from the code generation
+build. Since the C build is just a recursive `make` call into the
+`smaccmpilot-stm32f4` subdirectory, you can build the C sources into executables
+with:
+
+```
+cd smaccmpilot-stm32f4
+make
+```
+
+The C build output will be found in
+`./smaccmpilot-stm32f4/build/{platform}_{os}/`
+where `{platform}` is one of:
+
+* `px4fmu17_ioar`: PX4FMU 1.7 with the IOAR expansion board,
+        for the  Drone based copter
+* `px4fmu17_bare`: PX4FMU 1.7 without an IO expansion board,
+        for a radio control ESC based copter like the 3DR ArduCopter Quad
+
+and `{os}` is one of:
+
+* `freertos`: Produces complete images using the FreeRTOS operating system
+* `aadl`: Produces applications as libraries, and system description output in
+  the Architecture Analysis and Design Language (AADL), for use with other
+  operating systems
+
+The default build is for `px4fmu17_ioar_freertos`.
+
+Build artifacts in the `img` subdirectory will include complete executables (elf
+format, no file extension), stripped binaries (.bin extension), linker scripts
+(.lds extension), linker maps (.map extension), and PX4 bootloader compatible
+binaries (.px4 extension).
+
+Generated C code can be found in the `gen` subdirectory.
+
+The `flight` binary is the primary flight application for the SMACCMPilot
+project.  Other applications, like `flight-hil` (HIL stands for Hardware In the
+Loop), are used to test subsets of the flight application or individual
+libraries.
 
 ### Troubleshooting
+
+#### Config.mk issues
+
+If you previously built SMACCMPilot successfully but pulling a new version
+has broken your build, you may need to update your Config.mk. If you have not
+customized Config.mk in the past, you can try `cp Config.mk.example Config.mk`,
+or you can run a diff between `Config.mk.example` and your local `Config.mk`
+
+#### RTV build
 
 If you get complaints about your *local* gcc toolchain, it is probably related
 to the SMACCMPilot Runtime Verification (RTV) build. The RTV build needs to
@@ -101,17 +152,7 @@ using GCC 4.6 or 4.8 (both unsupported, due to changes in the GCC Plugin API),
 not having GCC plugin development headers installed, or not having a 32 bit
 native toolchain installed on a 64 bit system.
 
-Presently, the RTV build is not required for the flight application build.
-You may comment out the `CONFIG_BUILD_RTV` variable your `Config.mk` to disable
-the RTV build:
-
-```sh
-# ------------------------------------------------------------------------------
-# Comment the following line to disable building apps that use runtime
-# verification:
-CONFIG_BUILD_RTV := 1
-
-```
+Presently, the RTV build is disabled by default.
 
 #### More Details
 
