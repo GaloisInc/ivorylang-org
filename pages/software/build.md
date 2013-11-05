@@ -104,6 +104,9 @@ cd smaccmpilot-stm32f4
 make
 ```
 
+Before your first build, you'll need to create both a `Config.mk` and a
+`Keys.mk` file.
+
 The C build output will be found in
 `./smaccmpilot-stm32f4/build/{platform}_{os}/`
 where `{platform}` is one of:
@@ -119,8 +122,14 @@ and `{os}` is one of:
 * `aadl`: Produces applications as libraries, and system description output in
   the Architecture Analysis and Design Language (AADL), for use with other
   operating systems
+```
+cp Keys.mk.example Keys.mk
+```
 
-The default build is for `px4fmu17_ioar_freertos`.
+`Keys.mk` contains the AES symmetric keys and salts that will be used to
+communicate between SMACCMPilot and a ground control station (GCS).  The keys
+and salts will be compiled into the SMACCMPilot and GCS binaries.  See the
+[GCS][gcs] page for more information.
 
 Build artifacts in the `img` subdirectory will include complete executables (elf
 format, no file extension), stripped binaries (.bin extension), linker scripts
@@ -161,6 +170,8 @@ in the git repository][build-doc] explaining the specifics of the project
 Makefiles.
 
 ### Continue to [loading SMACCMPilot on PX4][loading].
+
+[gcs]: ../hardware/gcs.html
 [loading]: loading.html
 [build-doc]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/doc/build-system.md
 

@@ -78,6 +78,18 @@ Appropriate servo extension cable available [from 3D Robotics][servoext_store].
 
 -------------------------------------------------------------------------------
 
+## Joystick Controller (Optional)
+
+Optionally, you may wish to control the vehicle via the ground control station
+(GCS) using a gamepad joystick controller.  We are using the
+[Logitech Gamepad F710 controller][amazon], which is widely available and costs
+approximately US $40.  Many joysticks will work, but you may have to modify the
+GCS source code to calibrate other controllers.
+
+[amazon]: http://www.amazon.com/Logitech-940-000117-Gamepad-F710/dp/B0041RR0TW
+
+-------------------------------------------------------------------------------
+
 ## AR Drone Airframe
 
 The Parrot AR Drone 2.0 is available from many retailers worldwide.

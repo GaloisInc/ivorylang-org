@@ -24,6 +24,7 @@ sitemap = Tree "/" "Home"
     , Page "flightcontroller.html" "Flight Controller"
     , Page "blackmagic.html"       "Debugger"
     , Page "rc-controller.html"    "Radio Control"
+    , Page "gcs.html"              "Ground Control Station"
     ]
   softwarepages =
     [ Page "index.html"           "Introduction"
@@ -67,6 +68,10 @@ main :: IO ()
 main = hakyllWith config $ do
 
     match "images/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "artifacts/*" $ do
         route   idRoute
         compile copyFileCompiler
 
