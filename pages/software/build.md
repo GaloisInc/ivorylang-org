@@ -47,7 +47,7 @@ cd smaccmpilot-stm32f4
 Before your first build, you'll need to create a `Config.mk` file.
 
 ```
-cp Config.mk.example Config.mk
+p Config.mk.example Config.mk
 ```
 
 If you have not installed the arm-gcc-embedded toolchain in your PATH, customize
@@ -104,9 +104,6 @@ cd smaccmpilot-stm32f4
 make
 ```
 
-Before your first build, you'll need to create both a `Config.mk` and a
-`Keys.mk` file.
-
 The C build output will be found in
 `./smaccmpilot-stm32f4/build/{platform}_{os}/`
 where `{platform}` is one of:
@@ -122,14 +119,6 @@ and `{os}` is one of:
 * `aadl`: Produces applications as libraries, and system description output in
   the Architecture Analysis and Design Language (AADL), for use with other
   operating systems
-```
-cp Keys.mk.example Keys.mk
-```
-
-`Keys.mk` contains the AES symmetric keys, salts, and identifiers that will be
-used to communicate between SMACCMPilot and a ground control station (GCS).  The
-keys and salts will be compiled into the SMACCMPilot and GCS binaries.  See the
-[GCS][gcs] page for more information.
 
 Build artifacts in the `img` subdirectory will include complete executables (elf
 format, no file extension), stripped binaries (.bin extension), linker scripts
