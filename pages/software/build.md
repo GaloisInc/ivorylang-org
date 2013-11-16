@@ -47,7 +47,7 @@ cd smaccmpilot-stm32f4
 Before your first build, you'll need to create a `Config.mk` file.
 
 ```
-p Config.mk.example Config.mk
+cp Config.mk.example Config.mk
 ```
 
 If you have not installed the arm-gcc-embedded toolchain in your PATH, customize
