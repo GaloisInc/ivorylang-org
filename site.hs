@@ -24,7 +24,6 @@ sitemap = Tree "/" "Home"
     , Page "flightcontroller.html" "Flight Controller"
     , Page "blackmagic.html"       "Debugger"
     , Page "rc-controller.html"    "Radio Control"
-    , Page "gcs.html"              "Ground Control Station"
     ]
   softwarepages =
     [ Page "index.html"           "Introduction"
@@ -32,6 +31,7 @@ sitemap = Tree "/" "Home"
       [ Page "prerequisites.html"   "Prerequisites"
       , Page "build.html"           "Building"
       , Page "loading.html"         "Loading"
+      , Page "gcs.html"             "Ground Control Station"
       ]
     , Group "Flight Software"
       [ Page "flight-overview.html"   "Overview"

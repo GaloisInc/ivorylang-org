@@ -63,18 +63,20 @@ SMACCMPilot expects radio channels according to the following scheme:
 * Channel 2 controls pitch.
 * Channel 3 controls throttle.
 * Channel 4 controls yaw.
-* Channel 5 enables motors to be armed. Motors are armed when all of the
-following conditions are met:
-    1. Channel 6 is high (PWM greater than 1500us)
-    2. Throttle is at the low limit (PWM lower than 1050us)
-    3. Yaw is at the high limit -fully to the right (pwm greater than 1950us)
+* Channel 5 is the kill switch (On the controllers above, channel 5
+  corresponds to one of the 2-position switches on the top left-hand side).
+  Arming is impossible with the kill is disabled, and arming is possible only
+  when it is enabled.  Disabling the kill switch immediately disarms the
+  vehicle in any flight mode.
+
+  Motors are armed when all of the following conditions are met:
+    1. Channel 5 is high (PPM greater than 1500us)
+    2. Throttle is at the low limit (PPM lower than 1050us)
+    3. Yaw is at the high limit -fully to the right (PPM greater than 1950us)
+
 * Channel 6 selects flight control mode. Flight modes are not yet implemented in
   the SMACCMPilot flight control software, but eventually this will allow
   different flight control modes to be toggled from the RC transmitter.
-
-Motors become disarmed whenever Channel 6 is low (PWM less than 1500us). This
-means your channel 6 toggle switch is a "kill switch" which can disable all
-motors at any time.
 
 ### Mixing example for 9x series
 

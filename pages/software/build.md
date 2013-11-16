@@ -126,9 +126,9 @@ and `{os}` is one of:
 cp Keys.mk.example Keys.mk
 ```
 
-`Keys.mk` contains the AES symmetric keys and salts that will be used to
-communicate between SMACCMPilot and a ground control station (GCS).  The keys
-and salts will be compiled into the SMACCMPilot and GCS binaries.  See the
+`Keys.mk` contains the AES symmetric keys, salts, and identifiers that will be
+used to communicate between SMACCMPilot and a ground control station (GCS).  The
+keys and salts will be compiled into the SMACCMPilot and GCS binaries.  See the
 [GCS][gcs] page for more information.
 
 Build artifacts in the `img` subdirectory will include complete executables (elf
@@ -171,7 +171,7 @@ Makefiles.
 
 ### Continue to [loading SMACCMPilot on PX4][loading].
 
-[gcs]: ../hardware/gcs.html
+[gcs]: gcs.html
 [loading]: loading.html
 [build-doc]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/doc/build-system.md
 
