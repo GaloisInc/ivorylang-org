@@ -33,6 +33,7 @@ sitemap = Tree "/" "Home"
       , Page "build.html"           "Building"
       , Page "loading.html"         "Loading"
       , Page "gcs.html"             "Ground Control Station"
+      , Page "properties.html"      "Properties and Evidence"
       ]
     , Group "Flight Software"
       [ Page "flight-overview.html"   "Overview"
