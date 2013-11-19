@@ -8,8 +8,10 @@
 
 SMACCMPilot is a project by [Galois, Inc](http://corp.galois.com).
 
-The SMACCMPilot team is: [Pat Hickey][], [Lee Pike][], [James Bielman][], and
-[Trevor Elliott][].
+The SMACCMPilot team is: [Pat Hickey][http://corp.galois.com/pat-hickey/],
+[Lee Pike][http://corp.galois.com/lee-pike/],
+[James Bielman][http://corp.galois.com/james-bielman/], and
+[Trevor Elliott][http://corp.galois.com/trevor-elliott/].
 
 [Pat Hickey]: http://corp.galois.com/pat-hickey/
 [Lee Pike]: http://corp.galois.com/lee-pike/
