@@ -65,12 +65,12 @@ Current assertions checks are implemented for
 - division-by-zero
 - floating point infinity/not-a-number results
 
-Compiler warnings.  We of course compile with `-Wall`.  Note that we in effect
-compile with `-Wall` twice: once with our Haskell compiler (since Ivory is an
-*embedded* domain-specific language in Haskell), and once with our C compiler.
+We compile with `-Wall`.  Note that we in effect compile with `-Wall` twice:
+once with our Haskell compiler (since Ivory is an *embedded* domain-specific
+language in Haskell), and once with our C compiler.
 
-Similarly, Tower lifts the level of abstraction in developing
-inter-communicating tasks (including device drivers).  Tower helps to prevent
+Tower lifts the level of abstraction in developing inter-communicating tasks
+(including device drivers).  Tower helps to prevent
 
 - The incorrect use of RTOS system calls.
 - Synchronization and deadlock bugs.
@@ -78,13 +78,12 @@ inter-communicating tasks (including device drivers).  Tower helps to prevent
 
 ### Testing
 During development and internal deployment, we execute code with assertions
-resulting in immediate failure if an assertion is violated.
+turned on always.
 
 We have also implemented a
 [QuickCheck](http://www.cse.chalmers.se/~rjmh/QuickCheck/manual.html) harness
-for Ivory (which will be rewritten in the future).  We use QuickCheck to test
-some portions of SMACCMPilot, easily generating 100s of thousands of calls to C
-functions with random arguments.
+for Ivory.  We use QuickCheck to test some portions of SMACCMPilot, easily
+generating 100s of thousands of calls to C functions with random arguments.
 
 We plan to extend our use of QuickCheck to more of SMACCMPilot in the future.
 
@@ -94,8 +93,8 @@ We have been using the open-source C model-checker
 [CBMC](http://www.cprover.org/cbmc/).  CBMC is an excellent model-checker for
 verifying C source code, and we have found bugs in SMACCMPilot using it.
 
-However, it is unfortunately no longer scaling due to the size of the code-base
-since it performs whole-program analysis.
+However, it no longer scales due to the size of the code-base since it performs
+whole-program analysis.
 
 We are currently in the process of writing a domain-specific model-checker
 customized to Ivory which we hope will scale better.  Until then, there may be
@@ -138,7 +137,7 @@ the overall system.
 - *Build tools*: of course, we rely on compilers like GCC, GHC (Haskell
   compiler), Make and linker scripts, all of which could introduce bugs.  (If
   you are not afraid of compiler bugs, consider how many GCC bugs have been
-  discovered by [Csmith](http://embed.cs.utah.edu/csmith/).
+  discovered by [Csmith](http://embed.cs.utah.edu/csmith/)).
 
 - *MAVLink*: SMACCMPilot currently uses the
    [MAVLink](http://qgroundcontrol.org/mavlink/start) protocol to communicate
