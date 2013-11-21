@@ -68,6 +68,9 @@ We compile with `-Wall`.  Note that we in effect compile with `-Wall` twice:
 once with our Haskell compiler (since Ivory is an *embedded* domain-specific
 language in Haskell), and once with our C compiler.
 
+Additionally, we run the [cppcheck](http://cppcheck.sourceforge.net/) lint tool on our generated (and
+hand-written) C and C++.
+
 Tower lifts the level of abstraction in developing inter-communicating tasks
 (including device drivers).  Tower helps to prevent
 
