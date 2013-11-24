@@ -6,11 +6,6 @@ SMACCMPilot may be flown using a Radio Control (RC) transmitter.  When we say
 "RC" we are talking about the general range of hobbyist radio control systems
 built for flying RC airplanes, helicopters, and the like.
 
-SMACCMPilot uses the RC system primarily for safety. Because SMACCMPilot is
-still experimental and cannot safely fly without human guidance, the RC system
-provides a pilot a way to disable autonomous flight or the helicopter motors
-themselves at any time.
-
 An RC transmitter is a simple and reliable way to manually fly a small
 quadcopter.  In the stabilize flight mode, the SMACCMPilot flight controller
 essentially serves to make a quadcopter system manually controllable - manual
@@ -19,6 +14,15 @@ these inputs to the four joystick axes of the RC transmitter. We'll also map the
 control sequences to arm and disarm the flight controller to use a switch on the
 RC transmitter as a kill switch, which can turn off the quadcopter motors at any
 time. This is a critical safety feature.
+
+![*RC Transmitter Joystick Functions*](../images/radio.png)
+
+## A Safety Controller
+
+SMACCMPilot uses the RC system primarily for safety. Because SMACCMPilot is
+still experimental and cannot safely fly without human guidance, the RC system
+provides a pilot a way to disable autonomous flight or the helicopter motors
+themselves at any time.
 
 We envision that one day, SMACCMPilot will be smart enough to fly & land safety
 without requiring an RC system for safety. However, for now, we recommend that
@@ -31,8 +35,6 @@ keep you safe.* Improper operation of any quadcopter can cause injury, and many
 of the larger ones can send you to the hospital with cuts or worse. Please take
 safe operation seriously, only operate a safe distance away from people, and
 always an operator spotting the vehicle and ready to hit the kill switch.
-
-![*RC Transmitter Joystick Functions*](../images/radio.png)
 
 ## Compatible RC Transmitter and Receivers
 
@@ -48,7 +50,16 @@ receiver system with the following features:
 
 RC transmitters typically require some amount of setup to configure the mapping
 of control inputs to output channels. SMACCMPilot requires a radio with at least
-6 output channels. The 9XR recommended above supports 8 channels.
+6 output channels.
+
+RC transmitters use various schemes to "mix" input sticks and switches to the
+channel outputs. Fundamentally, each channel is sent from the receiver to the
+flight controller as a pulse-width modulated (PWM) wave. (Pulse-position
+modulation, PPM, is a scheme used to multiplex multiple PWM signals serially.)
+Whether modulated as PWM or PPM, each channel has a width in the time domain,
+measured in microseconds. RC transmitters generally output a channel with a
+width ranging from 1000us to 2000us. If your RC transmitter uses a different
+range, it may not work with SMACCMPilot.
 
 SMACCMPilot expects radio channels according to the following scheme:
 
@@ -58,15 +69,13 @@ SMACCMPilot expects radio channels according to the following scheme:
 * Channel 4 controls yaw.
 
 * Channel 5 selects flight control mode. At this time, SMACCMPilot supports
-  two flight control modes: stabilize, and altitude hold, and autonomous.
-
+  three flight control modes: stabilize, and altitude hold, and autonomous.
   The user will typically map channel 5 to a 3-position switch on the right side
   of the controller.
-
   Channel 5 pulse widths correspond to the following modes:
-      * 1000-1250us: autonomous mode
-      * 1250-1750us: altitude hold mode
-      * 1750-2000us: stabilize mode
+    * 1000-1250us: autonomous mode
+    * 1250-1750us: altitude hold mode
+    * 1750-2000us: stabilize mode
 
 * Channel 6 is the arming switch. It is designed for safety: if, at any point, the
   arming switch is released, all of the motors will disarm (no more power will

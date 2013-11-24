@@ -10,7 +10,7 @@ need to get a basic system up and running.
 
 ## Flight Controller
 
-TODO: image of px4fmu1.7 here.
+![](/images/fmu-top.jpg)
 
 The SMACCMPilot project supports the [PX4FMU 1.7][px4fmu] autopilot hardware.
 
@@ -82,7 +82,9 @@ information on what kind of system you need, and how to set it up.
 ### Batteries & Charger
 
 Each flight platform will require appropriate batteries, and a battery charger.
-See the [air vehicle platform page][airvehicle] for more information.
+See the [flight platform pages][flightplatform] for more information.
+
+[flightplatform]: flightplatforms.html
 
 ## Optional Accessories
 
@@ -91,11 +93,11 @@ See the [air vehicle platform page][airvehicle] for more information.
 You can fly SMACCMPilot from the GCS using a USB gamepad. See the [GCS Software
 page][gcs-sw] for more information.
 
-At this time, we support the Logitech XXX and XXX gamepads.
+At this time, we support the Logitech F310 and F710 gamepads.
 
 [gcs-sw]: ../software/gcs.html
 
-### Development: JTAG/SWD Debugger
+### JTAG/SWD Debugger
 
 Developers will want to use a JTAG/SWD debugger for inspecting programs as they
 run on the PX4FMU. We recommend the [Black Magic Probe](blackmagic.html), but

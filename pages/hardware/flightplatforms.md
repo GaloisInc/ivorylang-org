@@ -6,9 +6,11 @@ time, due to restrictions in the [PX4FMU flight controller][px4fmu], we only
 support platforms with 4 motors, but in the future we look forwards to expanding
 the range of supported vehicles.
 
+[px4fmu]: flightcontroller.html
+
 ## Generic Quadcopter
 
-TODO: 3dr quad image here
+![3DR Quadcopter](/images/3drquad.jpg)
 
 SMACCMPilot supports any quadcopter platform that uses standard PWM-based
 motor controllers. There are many commercial and do-it-yourself options for
@@ -18,7 +20,7 @@ which you can purchase as a kit with motors and motor controllers.
 More details on the [Generic Quadcopter Flight Platform][quad-details] page.
 
 [quad-details]: flightplatform-genericquad.html
-[3drquad]: http://3drobotics.com/TODO/FIXME
+[3drquad]: http://store.3drobotics.com/products/3dr-quad-frame-kit-electronics
 
 ## AR Drone
 
