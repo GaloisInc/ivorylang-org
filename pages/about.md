@@ -17,7 +17,7 @@ The SMACCMPilot team is:
 - [John Launchbury](http://corp.galois.com/john-launchbury)
 - [Lee Pike](http://corp.galois.com/lee-pike/)
 
-Alumi are
+Alumi are:
 
 - [Erlend Hamberg](http://hamberg.no/erlend/about.html)
 
