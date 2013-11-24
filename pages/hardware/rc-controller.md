@@ -2,17 +2,35 @@
 
 ## What is an RC transmitter?
 
-SMACCMPilot may be flown using a RC transmitter.  When we say "RC" we are
-talking about the general range of hobbyist radio control systems built for
-flying RC airplanes, helicopters, and the like.
+SMACCMPilot may be flown using a Radio Control (RC) transmitter.  When we say
+"RC" we are talking about the general range of hobbyist radio control systems
+built for flying RC airplanes, helicopters, and the like.
 
-An RC transmitter is a simple and reliable way to manually fly an RC helicopter.
-In its current state, the SMACCMPilot flight controller essentially serves to
-make a quadcopter system manually controllable - manual inputs command throttle,
-pitch angle, roll angle, and yaw rate. We will map these inputs to the four
-joystick axes of the RC transmitter. We'll also map the control sequences to arm
-and disarm the flight controller to use a switch on the RC transmitter as a
-safety.
+SMACCMPilot uses the RC system primarily for safety. Because SMACCMPilot is
+still experimental and cannot safely fly without human guidance, the RC system
+provides a pilot a way to disable autonomous flight or the helicopter motors
+themselves at any time.
+
+An RC transmitter is a simple and reliable way to manually fly a small
+quadcopter.  In the stabilize flight mode, the SMACCMPilot flight controller
+essentially serves to make a quadcopter system manually controllable - manual
+inputs command throttle, pitch angle, roll angle, and yaw rate. We will map
+these inputs to the four joystick axes of the RC transmitter. We'll also map the
+control sequences to arm and disarm the flight controller to use a switch on the
+RC transmitter as a kill switch, which can turn off the quadcopter motors at any
+time. This is a critical safety feature.
+
+We envision that one day, SMACCMPilot will be smart enough to fly & land safety
+without requiring an RC system for safety. However, for now, we recommend that
+SMACCMPilot users get comfortable flying the vehicle under stabilize mode, and
+always have a safety pilot holding the RC transmitter when flying in autonomous
+mode.
+
+*Real talk: quadcopters are dangerous, and proper use of the RC transmitter will
+keep you safe.* Improper operation of any quadcopter can cause injury, and many
+of the larger ones can send you to the hospital with cuts or worse. Please take
+safe operation seriously, only operate a safe distance away from people, and
+always an operator spotting the vehicle and ready to hit the kill switch.
 
 ![*RC Transmitter Joystick Functions*](../images/radio.png)
 
@@ -26,31 +44,6 @@ receiver system with the following features:
 * Transmitter offers at least 6 channels of control
 * Receiver offers PPM output
 
-### Sample Radio: 9X series w/ FRSKY radio gear
-
-On our [shopping list][] page we recommend the [Turnigy 9XR
-radio][9xr-hobbyking]. The 9XR is one of the least expensive radios which can be
-configured with all of the features required for SMACCMPilot. The aesthetics and
-build quality leave something to be desired, but it gets the job done.
-
-[shopping list]: shoppinglist.html
-
-![*Image: hobbyking.com*](../images/9xr_hobbyking.jpg)
-
-[9xr-hobbyking]: http://hobbyking.com/hobbyking/store/__31544__Turnigy_9XR_Transmitter_Mode_2_No_Module_.html
-
-The 9XR is designed to take interchangeable radio transmitter modules for
-inter-operation with various radio receivers. We recommend using [FRSKY][] radio
-modules because of low cost and PPM output capability.
-
-The [FRSKY DJT transmitter module][djt] is compatible with the 9XR transmitter.
-The [FRSKY D4R-II receiver][d4r-ii] is small, inexpensive, and offers PPM
-output.
-
-[FRSKY]: http://www.frsky-rc.com
-[djt]: http://www.frsky-rc.com/product/pro.php?pro_id=8
-[d4r-ii]: http://www.frsky-rc.com/product/pro.php?pro_id=24
-
 ## Mixing information
 
 RC transmitters typically require some amount of setup to configure the mapping
@@ -63,37 +56,47 @@ SMACCMPilot expects radio channels according to the following scheme:
 * Channel 2 controls pitch.
 * Channel 3 controls throttle.
 * Channel 4 controls yaw.
-* Channel 5 is the kill switch (On the controllers above, channel 5
-  corresponds to one of the 2-position switches on the top left-hand side).
-  Arming is impossible with the kill is disabled, and arming is possible only
-  when it is enabled.  Disabling the kill switch immediately disarms the
-  vehicle in any flight mode.
 
-  Motors are armed when all of the following conditions are met:
-    1. Channel 5 is high (PPM greater than 1500us)
-    2. Throttle is at the low limit (PPM lower than 1050us)
-    3. Yaw is at the high limit -fully to the right (PPM greater than 1950us)
+* Channel 5 selects flight control mode. At this time, SMACCMPilot supports
+  two flight control modes: stabilize, and altitude hold, and autonomous.
 
-* Channel 6 selects flight control mode. Flight modes are not yet implemented in
-  the SMACCMPilot flight control software, but eventually this will allow
-  different flight control modes to be toggled from the RC transmitter.
+  The user will typically map channel 5 to a 3-position switch on the right side
+  of the controller.
 
-### Mixing example for 9x series
+  Channel 5 pulse widths correspond to the following modes:
+      * 1000-1250us: autonomous mode
+      * 1250-1750us: altitude hold mode
+      * 1750-2000us: stabilize mode
 
-In the 9XR radio, setting up the following the mixer screen will give correct
-behavior with the 'THR CUT' switch used for arming and the 'AUX.3' switch used
-for mode selection.
+* Channel 6 is the arming switch. It is designed for safety: if, at any point, the
+  arming switch is released, all of the motors will disarm (no more power will
+  be applied) instantly. The arming switch must be set before the motors are
+  armed via either the RC controller or via a telemetry command.
 
-![](../images/9x-mixerscreen.jpg)
+  The user will typically map channel 6 to a 2-position switch on the top left
+  of the controller.
 
+  The user can arm the motors from the RC controller with the following
+  sequence:
+    1. Channel 6 is set (pulse width greater than 1500us)
+    2. Channel 5 set to stabilize mode (pulse width greater than 1750us)
+    2. Throttle stick is at the low limit (pulse width lower than 1050us)
+    3. Yaw stick is at the high limit - fully to the right (pulse width greater than 1950us)
+
+  After this sequence is complete, the motors are armed, and will begin
+  spinning at idle throttle. When the throttle stick is raised, motor power will
+  increase, and the vehicle will take off.
 
 ## More information
+
+See our [examples page][] for recommendations and setup instructions for some
+radio systems we have used.
+
+[examples page]: rc-controller-examples.html
 
 The [PX4 Project wiki][px4-rc] has more information about various RC radio
 systems. Note that the PX4 project software can support more types of radio
 system input than the SMACCMPilot software. SMACCMPilot only supports PPM input
 at this time.
 
-
 [px4-rc]: http://pixhawk.ethz.ch/px4/radio-control/start
-
