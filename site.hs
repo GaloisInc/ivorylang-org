@@ -21,25 +21,40 @@ sitemap = Tree "/" "Home"
   where
   hardwarepages =
     [ Page "index.html"            "Overview"
-    , Page "shoppinglist.html"     "Shopping List"
-    , Page "flightcontroller.html" "Flight Controller"
-    , Page "blackmagic.html"       "Debugger"
-    , Page "rc-controller.html"    "Radio Control"
+    , Group "Flight Platforms"
+      [ Page "flightplatforms.html" "Overview"
+      , Page "flightplatform-genericquad.html" "Generic Quadcopter"
+      , Page "flightplatform-ardrone.html" "AR Drone"
+      ]
+    , Group "Electronics"
+      [ Page "flightcontroller.html" "Flight Controller"
+      , Page "blackmagic.html"       "Debugger"
+      , Page "rc-controller.html"    "Radio Control"
+      ]
+    , Group "Guides"
+      [ Page "shoppinglist.html"     "Shopping List"
+      ]
     ]
   softwarepages =
     [ Page "index.html"           "Introduction"
+    , Page "properties.html"      "Properties and Evidence"
     , Group "Development"
       [ Page "prerequisites.html"   "Prerequisites"
       , Page "build.html"           "Building"
       , Page "loading.html"         "Loading"
-      , Page "gcs.html"             "Ground Control Station"
-      , Page "properties.html"      "Properties and Evidence"
+      , Page "preflight.html"       "Preflight Checklist"
       ]
     , Group "Flight Software"
       [ Page "flight-overview.html"   "Overview"
       , Page "flight-components.html" "Components"
       , Page "flight-apm.html"        "APM Project"
       , Page "flight-future.html"     "Future Developments"
+      ]
+    , Group "Ground Control Software"
+      [ Page "gcs-overview.html"      "Overview"
+      , Page "gcs-commsec.html"       "Communication Security"
+      , Page "gcs-mavproxy.html"      "MAVProxy"
+      , Page "gcs-gamepad.html"       "Gamepad"
       ]
     ]
   langpages =
