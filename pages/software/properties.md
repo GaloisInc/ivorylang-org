@@ -10,8 +10,9 @@ have that those requirements are met.
 ## Philosophy and Approach
 
 As of November 2013, SMACCMPilot is some 50k LOCs of C code and growing.
-(Because the C code is generated, the code is about twice of hand-written code.)
-Nonetheless, SMACCMPilot (or any fully-featured autopilot) will be 10s of
+(Because the C code is generated, this code is perhaps twice the length of
+comparable hand-written code.)
+Nonetheless, SMACCMPilot (or any fully-featured autopilot) will be tens of
 thousands or more of lines of code.
 
 Our goal is to build an autopilot from-scratch quickly: our (end of) 2013
@@ -194,7 +195,9 @@ following should hold:
 ## Miscellaneous Vulnerabilities
 
 - We do not address against sensor spoofing attacks (and GPS spoofing in
-  particular).  We do not currently validate GPS input streams.
+  particular).  We do not currently validate GPS input streams. These
+  unvalidated streams affect the inertial navigation system, so, we expect a
+  GPS spoofing attack could compromise the ability to fly.
 - We do not address radio-link bandwidth saturation.
 - We do not address hardware/sensor vulnerabilities or faults.
 - We do not validate user input to ensure a pilot's behavior is safe.  If you
