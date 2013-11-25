@@ -53,8 +53,9 @@ sitemap = Tree "/" "Home"
     , Group "Ground Control Software"
       [ Page "gcs-overview.html"      "Overview"
       , Page "gcs-commsec.html"       "Communication Security"
+      , Page "gcs-smaccm-sik.html"    "SMACCM-SiK Radio"
       , Page "gcs-mavproxy.html"      "MAVProxy"
-      , Page "gcs-gamepad.html"       "Gamepad"
+      , Page "gcs-gamepad.html"       "Gamepad Control"
       ]
     ]
   langpages =

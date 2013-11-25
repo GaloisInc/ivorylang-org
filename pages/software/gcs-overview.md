@@ -4,14 +4,13 @@ This page describes interacting with SMACCMPilot from a ground control station
 (GCS).  The GCS has only been tested on Linux distributions and particularly
 Fedora.
 
-### GCS Setup and Operation
+## GCS Setup and Operation
 
-Communication is with the GCS currently uses the
-[MAVLink][] message protocol.  In
-addition, SMACCMPilot uses an encryption and authentication protocol, based on
-[AES in Galois/Counter mode.][aesgcm-wiki] specialized for low bandwidth radios.
-Thus, the user is responsible for setting private keys and encryption salts, as
-described in the software [build][build] document.
+Communication is with the GCS currently uses the [MAVLink][] message protocol.
+In addition, SMACCMPilot uses an encryption and authentication protocol, based
+on [AES in Galois/Counter mode.][aesgcm-wiki] specialized for low bandwidth
+radios.  Thus, the user is responsible for setting private keys and encryption
+salts, as described in the software [build][build] document.
 
 [MAVLink]: http://qgroundcontrol.org/mavlink/start
 
@@ -69,131 +68,3 @@ messages sent to the vehicle only, one can execute
 [aesgcm-wiki]: http://en.wikipedia.org/wiki/Galois/Counter_Mode
 [build]: build.html
 
-### Supported Commands
-
-The MAVProxy commands supported by SMACCMPilot include the following, but these
-are subject to change:
-
-
-* `alt`      : Show altitude
-* `arm`      : Arm motors, assuming kill switch on the hobby radio controller is
-               enabled
-* `disarm`   : Disarm motors
-* `joystick` : Enable joystick flight
-* `mode`     : Set SMACCMPilot flight mode
-* `param`    : Manage SMACCMPilot parameters
-* `status`   : Show flight data
-* `stream`   : Set streaming rate
-* `watch`    : Watch a MAVLink pattern
-
-Run `help` in the the MAVProxy window for more information.
-
-With respect to arming, the hobby radio controller is considered a safety backup
-controller.  See the instructions on
-[arming from the radio controller](../hardware/rc-controller.html#mixing-information)
-for more information.
-
-### Joystick Control
-
-To use a joystick, you will need the driver/kernel support for it.  On a Fedora
-machine, execute
-
-```
-sudo yum install kernel-modules-extra
-sudo yum install joystick
-```
-
-There is a guide available
-[here](https://www.blakerohde.com/blog/2012/06/gamepads-joysticks-on-fedora-17/)
-that may help.
-
-To test your setup, you can follow instructions
-[here](http://pingus.seul.org/~grumbel/jstest-gtk/) using `jtest`:
-
-```
-jstest --event /dev/input/js0
-```
-You may wish to test/calibrate with a graphical interface; you can use [jstest-gtk](http://pingus.seul.org/~grumbel/jstest-gtk/).
-
-Once your joystick is properly configured, to enable joystick control, enter
-`joystick` into the MAVProxy terminal.  As described
-[here](../hardware/shoppinglist.html#joystick-controller-optional), we are using
-a Logitech Gamepad F710 controller and have not calibrated other controllers.
-
-**Warning** many gaming joysticks "snap" to the center position, which is 50%
-throttle.  It is your responsibility to hold the throttle low before enabling
-joystick flight.
-
-We have programmed a joystick kill switch which must be depressed for
-SMACCMPilot to accept joystick inputs.  on the Logitech F710, the highlighted
-button is the kill switch.
-
-![](../images/joystick.png)
-
-In addition, control is course-grained with the joystick and since it is over
-encrypted MAVLink, may drop out.  Make sure to have a separate pilot using the
-hobby radio controller.  The joystick is mainly intended for use with auto
-flight modes.
-
-### Communication Protocol and Security
-
-The overall motivation and design of our AES/GCM-inspired communications
-security (commsec) design is captured in a Galois [technical note][aes-gcm].
-The protocol supports multiple ground stations and a single UAV.  Each entity
-(GCS or UAV) has a unique identifier and a unique encryption key which is
-specified at build time kin `Keys.mk` (see the [build][build]
-for details).
-
-Commsec packets are sent over the air (or alternatively, serial connection)
-between SMACCMPilot and the GCS.  Encrypted messages (or a "package") is an
-instance of Galois/Counter mode.  A commsec packet contains a header, consisting
-of an identifier (4 bytes) and a message counter (4 bytes), the encrypted
-message itself, and an authentication tag (8 bytes):
-
-              -------------------------
-              | id | cntr | msg | tag |
-              -------------------------
-
-In our case, messages are one or more encrypted MAVLink packets.  Messages have
-a fixed size of 80 bytes.  Thus, commsec payloads are 80+16 bytes.
-
-Independent of our crypto implementation, we use a simple framing protocol for
-marking framing between the radio and the ground station and between radio and
-the autopilot, respectively (or if you are testing over serial on the bench,
-between the autopilot and GCS).  The purpose of using the framing protocol is to
-provide a framing protocol at the link-level independent of MAVLink or a
-particular crypto algorithm.
-
-The protocol marks frame boundaries and does no error detection or correction.
-Thus, the protocol should only be used in transmissions that can be reasonably
-assumed to have zero loss rates.
-
-In the framing protocol, the special byte (0x7e) marks the beginning of the
-frame, and a frame includes all bytes until a new begin-frame marker is
-encountered.  The first byte of a frame is the frame tag.  Our current tags are
-0 to mark air-data messages (messages between the autopilot and the GCS) and 1
-to mark radio messages (unencrypted messages to be parsed by the radio).
-
-              ---------------------------------------------
-              | 0x7e | tag | frame0 | 0x7e | tag | frame1 |
-              ---------------------------------------------
-
-[aes-gcm]: ../artifacts/Galois-commsec.pdf
-
-
-### Future Work
-
-* New radio firmware supporting the commsec implementation (to be delivered
-  soon).
-
-* Key management: we have not implemented any.
-
-* Denial of service: of course, we aren't addressing the problem of radio
-  interference.  We have not yet implemented a recovery task/algorithm if
-  message fail commsec checks too frequently/for too long.  We plan to use our
-  runtime-monitoring framework to do this.  (It is a stretch goal for the demo.)
-  The radio firmware/protocol should be considered out-of-scope.
-
-* Epoch numbers.  As a convenience, we intend to implement epoch numbers as a
-  convenience.  Epoch numbers stored in non-volatile memory extend the
-  "lifespan" of sequence numbers.

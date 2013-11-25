@@ -69,7 +69,7 @@ See the [3DR Radio setup][3drradio-setup] page for information on how to setup
 and configure 3DR Radios for use with SMACCMPilot.
 
 [3drradio]: http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz 
-[3drradio-setup]: TODO
+[3drradio-setup]: ../software/gcs-smaccm-sik.html
 
 ### RC Controller
 

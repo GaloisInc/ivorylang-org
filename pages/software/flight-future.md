@@ -2,27 +2,26 @@
 
 Informally and roughly, here are our plans for the future:
 
-We'll eventually use ivory-bsp-stm32f4 to replace all hardware support.  This
-means eliminating hwf4, the AP\_HAL and other APM project code under the hood.
+We will eventually use ivory-bsp-stm32f4, our pure Ivory driver suite, to
+replace all hardware support. That work will allow us to eliminate the untrusted
+hwf4, the AP\_HAL and APM provided gyro, accel, magnetometer, and barometer
+drivers.
 
-We may have to make this change in stages since the APM project project provides
-some important algorithms. But eventually we'll have to either come up with our
-own sensor fusion and motor mixing, or port the AP\_AHRS and AP\_Motor
-algorithms to Ivory.
+We will also reimplement both the APM project's calibration, sensor fusion and
+inertial navigation algorithms in Ivory.
 
-We'll expand the MAVLink implementation:
+We'll expand the flight code with more features for autonomous flight:
 
-* to support parameters, which will be integrated with Ivory/Tower. (There is a
-  C/Ivory implementation right now but Pat let it bit rot.)
-* to support flying via a game pad on your PC so you don't need the RC transmitter anymore.
+* Position hold (loiter) using GPS & PX4FLOW sensors.
+* Navigation: design and implement a waypoint and path planning system
 
-Additionally, encryption for MAVLink and a better packet mode for 3DR Radios is
-in the pipes.
+We will expand the capabilities of Tower to support more operating systems,
+including POSIX threading and messaging primitives.
 
-We'll expand the flight code with more features:
+We will improve open-source tools for model checking Ivory programs, and expand
+the SMACCMPilot test suite.
 
-* Altitude hold: barometer, sonar
-* Position hold (loiter): GPS, PX4FLOW 
-* Navigation: we still need to design some sort of waypoint and path planning system
+We will add a networking layer to Tower, which will generate appropriate code to
+distribute tasks between different processors & systems, and manage
+inter-processor communication on the CAN bus.
 
-More info to come soon.
