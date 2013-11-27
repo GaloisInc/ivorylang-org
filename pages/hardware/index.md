@@ -40,16 +40,14 @@ internationally through a [network of distributors][3drdisty].
 
 ### Quadcopter
 
-TODO image here.
+![3DR Quadcopter](/images/3drquad_400.jpg)
 
 SMACCMPilot supports a wide variety of quadcopters that use simple PWM motor
 controllers. See the [flight platforms][] page for more details.
 
 ### AR Drone
 
-![PX4 Autopilot on AR Drone][ardrone_px4]
-
-[ardrone_px4]: ../images/ardrone_px4_600.jpg
+![PX4 Autopilot on AR Drone](/images/ardrone_px4_600.jpg)
 
 You can fly SMACCMPilot on a modified AR Drone. See the [flight platforms][]
 page for more details.

@@ -7,18 +7,18 @@ long ranges (>1mi line of sight). They are available in two frequency bands
 (433MHz and 915MHz), making them suitable for unlicensed operation in most
 countries.
 
-TODO: 3DR Radio image here
+![3DR Radio](/images/3dr_radio.jpg)
 
 SMACCMPilot uses a custom firmware on the 3DR Radio called [SMACCM-SiK][]. This
 firmware is not backwards compatible with existing 3DR Radio firmware. You will
 need to flash the SMACCM-SiK firmware to your 3DR Radios after receiving them
 from the factory. It is possible to restore your radios to the standard SiK
 firmware using the [standard 3DR Radio firmware & configuration
-utility][3dr-upload].
+utility][3dr-upload], which runs on Windows.
 
 [smaccm-sik]: https://github.com/GaloisInc/smaccmpilot-SiK
 [3DR Radio]: http://store.3drobotics.com/products/3dr-radio-telemetry-kit-915-mhz
-[3dr-upload]: http://TODO/FIXME
+[3dr-upload]: http://ardupilot.com/downloads/?did=89
 
 The SMACCM-SiK firmware for the 3DR Radios is a fork of the SiK project,
 authored by Michael Smith and Andrew Tridgell. We are grateful to those authors
@@ -26,8 +26,35 @@ for their open source contributions, and for assistance with our modifications.
 
 ## Installing SMACCM-SiK on your radios
 
-TODO: package up the upload python script and a binary in a zip file, should be
-download, plug, & run.
+<a class="btn btn-primary"
+ href="/artifacts/smaccm-sik-1.6-3drradio.ihx">Download SMACCM-SiK 1.6 Binary</a>
+
+<a class="btn btn-primary"
+ href="/artifacts/sik_uploader.py">Download SiK upload script</a>
+
+The latest SMACCM-SiK firmware for the 3DR Radio is provided as a binary for
+your convenience. If you would like to build your own from source, see the
+development section below.
+
+You should upload the SMACCM-SiK firmware on both radios used for the
+SMACCMPilot telemetry link. Using a SMACCM-SiK radio with a standard SiK radio
+is not supported and will result in improper operation.
+
+We've also [provided](/artifacts/sik_uploader.py) the firmware upload python
+script, also [found in the SiK repository][sik-upload-py], for convenience. To
+upload firmware to a 3DR radio, attach it to your computer via a USB to serial
+converter, and run:
+
+```
+python sik_uploader.py --port ENTER_SERIAL_PORT_HERE smaccm-sik-1.6-3drradio.ihx
+```
+
+You will need Python 2.6 and the [pyserial][] package to use the upload script.
+
+[sik-upload-py]: https://github.com/tridge/SiK/blob/master/Firmware/tools/uploader.py
+[pyserial]: http://pyserial.sourceforge.net/
+
+## Configuring SMACCM-SiK firmware
 
 You may need to change parameters in the radio firmware to select a channel,
 frequency range, and other parameters. SMACCM-SiK is compatible with parameters
@@ -78,8 +105,8 @@ follow the [README file][sik-readme] and find resources on the [Ardupilot
 wiki][sik-wiki].
 
 
-[SDCC compiler]: http://TODO/FIXME
+[SDCC compiler]: http://sdcc.sourceforge.net/
 [sik]: https://github.com/tridge/SiK
-[sik-readme]: https://github.com/tridge/SiK/TODO/FIXME
+[sik-readme]: https://github.com/tridge/SiK
 [sik-wiki]: http://code.google.com/p/ardupilot-mega/wiki/3DRadio
 
