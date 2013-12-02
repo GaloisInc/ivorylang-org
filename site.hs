@@ -80,7 +80,15 @@ standardPandocPagesSubdir d = do
 
 config :: Configuration
 config = defaultConfiguration { deployCommand = deploy }
-  where deploy = "scp -r _site/* cerf.galois.com:/srv/www/smaccmpilot.org/public_html/"
+  where
+  path = "/srv/www/smaccmpilot.org/public_html/"
+  server = "cerf.galois.com"
+  deploy = "scp -r _site/* " ++ server ++  ":" ++ path
+    -- scp sets the group wrong, we need to change all of the items
+    -- we own to group smaccm, supressing errors for the items we do not own
+    ++ " && ssh " ++ server ++  " chgrp -R -f smaccm "  ++  path
+    ++ " ;  ssh " ++ server ++  " chmod -R -f g+w "  ++  path
+    ++ " ;  exit 0"
 
 main :: IO ()
 main = hakyllWith config $ do
