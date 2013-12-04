@@ -42,7 +42,7 @@ sitemap = Tree "/" "Home"
       [ Page "prerequisites.html"   "Prerequisites"
       , Page "build.html"           "Building"
       , Page "loading.html"         "Loading"
-      , Page "preflight.html"       "Preflight Checklist"
+      , Page "flight.html"          "Flight Checklists"
       ]
     , Group "Flight Software"
       [ Page "flight-overview.html"   "Overview"

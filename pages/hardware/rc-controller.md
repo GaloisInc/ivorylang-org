@@ -81,20 +81,23 @@ SMACCMPilot expects radio channels according to the following scheme:
   arming switch is released, all of the motors will disarm (no more power will
   be applied) instantly. The arming switch must be set before the motors are
   armed via either the RC controller or via a telemetry command.
-
   The user will typically map channel 6 to a 2-position switch on the top left
   of the controller.
 
-  The user can arm the motors from the RC controller with the following
-  sequence:
-    1. Channel 6 is set (pulse width greater than 1500us)
-    2. Channel 5 set to stabilize mode (pulse width greater than 1750us)
-    2. Throttle stick is at the low limit (pulse width lower than 1050us)
-    3. Yaw stick is at the high limit - fully to the right (pulse width greater than 1950us)
+## Arming via RC controller
 
-  After this sequence is complete, the motors are armed, and will begin
-  spinning at idle throttle. When the throttle stick is raised, motor power will
-  increase, and the vehicle will take off.
+The user can arm the motors from the RC controller with the following
+sequence:
+
+  1. Channel 6 is set (pulse width greater than 1500us)
+  2. Channel 5 set to stabilize mode (pulse width greater than 1750us)
+  2. Throttle stick is at the low limit (pulse width lower than 1050us)
+  3. Yaw stick is at the high limit - fully to the right (pulse width greater than 1950us)
+
+After this sequence is complete, the motors are armed.  When the throttle stick
+is raised, motors will start spinning.
+
+The vehicle is disarmed at any time by resetting the channel 6 switch.
 
 ## More information
 
