@@ -1,14 +1,15 @@
 # Flight Software: Components
 
-The SMACCMPilot flight software's origin was a demonstration replacing individual
-components of the [Ardupilot flight control software][apm] with components written in
-Ivory. It has since evolved to
+The SMACCMPilot flight software is an evolving research project. This page will
+attempt to give a high level overview of the various flight software components,
+but you may need to dig down into the source code to understand the details. If
+you have any questions, please [send the development mailing list an
+email!](/about.html)
 
 The system is under active development and the following details are expected to
 change. See [future developments][] to get an idea where the flight software is
 going.
 
-[apm]: flight-apm.html
 [future developments]: flight-future.html
 
 ## Components
@@ -47,21 +48,32 @@ input capture driver][userinput-c] is accessed in
 
 #### Telemetry input
 
-The SMACCMPilot flight controller accepts [MAVLink protocol][mavlink] input.
+The SMACCMPilot flight controller accepts [MAVLink protocol][mavlink] input over
+a [secure communication link][commsec].
 MAVLink is a common protocol for communication between flight controllers and
 ground control stations (GCSs).
 
-Presently, the MAVLink protocol implementation only supports input for setting
-telemetry output stream rates.
+Presently, the MAVLink protocol implementation only supports:
+
+* Setting telemetry output stream rates
+* Writing MAVLink parameters
+* Arming and disarming the motors
+* User control input for override of RC Transmitter
 
 You can connect to the SMACCMPilot flight controller with mavlink using an [FTDI
 cable][ftdi-cable] (or equivalent) on USART1 (broken out to the  6-pin 0.1"
 pitch connector on the PX4IOAR) at 57600 baud. We've tested SMACCMPilot's
 telemetry interface with [MAVProxy][], a command line MAVLink client.
 
-For more details, see the telemetry input source in
+In flight, you should use the [SMACCM-SiK radio firmware][smaccm-sik] for
+the [3DR Radio][].
+
+For more details, see the telemetry MAVLink input handler source code in
 [`SMACCMPilot.Flight.GCS.Receive.Handlers`][rx-handlers]
 
+[smaccm-sik]: gcs-smaccm-sik.html
+[commsec]: gcs-commsec.html
+[3DR Radio]: gcs-commsec.html
 [rx-handlers]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/flight/SMACCMPilot/Flight/GCS/Receive/Handlers.hs
 
 ### Outputs
@@ -86,12 +98,21 @@ application when building for the `px4fmu17_bare_freertos` target.
 [pwm-impl]: http://github.com/GaloisInc/smaccmpilot-stm32f4/blob/master/src/ivory-px4-hw/SMACCMPilot/Hardware/PX4IOAR/MotorControl.hs]
 [3dr-arducopter]: http://store.3drobotics.com/products/3dr-arducopter-quad-c-frame-kit-1
 
-#### Flight Mode Display
+#### Flight Mode
 
 SMACCMPilot has support for the user to select multiple flight modes from the
-radio controller. However, at this time, only a stabilization flight mode is
-available in SMACCMPilot, so regardless of which flight mode is selected, only
-the stabilizer will be active.
+radio controller. These flight modes are:
+
+* *Stabilize*: RC transmitter provides manual roll, pitch, yaw, and throttle
+  control
+* *Altitude Hold*: RC transmitter provides manual roll, pitch, and yaw control.
+  Throttle is controlled automatically based on the barometer sensor, using the
+  RC transmitter's throttle stick to control climb rate
+* *Auto*: Control is the same as Altitude Hold mode, except that the user can
+  override the RC transmitter through inputs on a [gamepad][] over the secure
+  MAVLink radio link.
+
+[gamepad]: gcs-gamepad.html
 
 In addition to supporting multiple control modes, motor output can be armed or
 disarmed from the radio controller. The arming mode is an important safety
@@ -101,10 +122,9 @@ a description of arming and disarming the SMACCMPilot controller.
 
 SMACCMPilot displays the current flight mode by blinking the red LED on the
 PX4FMU, as well as any optional lights connected to the relay port on the
-PX4IOAR board. When the controller is disarmed (motors safe), the blinking
-sequence has a long duty cycle (on for at least 2x the time off). When the
-controller is armed, the blinking sequence has a short duty cycle (time off 2x
-time on).
+PX4IOAR board.
+
+TODO: Table mapping mode, armed status to blinking
 
 #### Telemetry output
 
@@ -122,15 +142,27 @@ see [`SMACCMPilot.Flight.GCS.Transmit.Task`][tx-task] for implementation.
 
 ### Sensors
 
-SMACCMPilot uses the gyroscope, accelerometer, and magnetometer on the
-[PX4FMU][px4fmu], and the [APM project][apm]'s  [`AP_AHRS`][ap-ahrs] library
-for sensor fusion.
+The SMACCMPilot flight controller uses several components from the [APM
+(ArduPilot Mega) software project][ardupilot-project]. We maintain [a fork of
+the ArduPilot software][ardupilot-standalone] as part of the SMACCMPilot project.
+The fork contains a subset of the code from the the ArduPilot project, and in
+some cases has been modified for cleaner interaction with the rest of the
+SMACCMPilot software stack.
 
-XXX explain more: hwf4 i2c and spi, HAL i2c and spi, APM scheduler takes care
-of periodic process, sensors ivory/tower interface
+ArduPilot's hardware and operating system abstraction, called the `AP_HAL`,
+permits us to use ArduPilot libraries as part of our platform.
+ArduPilot support for the STM32F4 hardware and FreeRTOS operating system is
+implemented in the `AP_HAL_SMACCM` library terms of the `hwf4` library from the
+smaccmpilot-stm32f4 library.
 
-[ap-ahrs]: http://github.com/GaloisInc/ardupilot/tree/master/libraries/AP_AHRS
-[px4fmu]: ../hardware/flightcontroller.html
+We use ArduPilot's `AP_AHRS` library to perform sensor fusion of the barometer,
+magnetometer, accelerometer, and gyroscope sensors on the PX4FMU flight
+controller. The result of this sensor fusion is delivered to the rest of the
+flight application through the `apwrapper` library, which wraps the C++
+ArduPilot library interfaces into C code which can be imported by Ivory.
+
+[ardupilot-project]: http://ardupilot.com
+[ardupilot-standalone]: http://github.com/GaloisInc/smaccmpilot-stm32f4/tree/master/src/standalone_apahrs
 
 ### Stabilization
 

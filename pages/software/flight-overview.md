@@ -21,38 +21,28 @@ SMACCMPilot build.
 
 #### Flight Stabilization
 
-SMACCMPilot implements a simple quadcopter stabilizer for manual piloting.
-Autonomous features are still in progress. For more info see the [Flight
-Components page][flight-components].
+SMACCMPilot implements a simple quadcopter stabilizer for manual piloting,
+and an altitude hold controller based on the barometer sensor.
+Autonomous features, such as position hold, are still in progress. For more info
+see the [flight software components page][flight-components].
 
 [flight-components]: flight-components.html
-
-#### Onboard Sensors
-
-SMACCMPilot uses the gyroscope, accelerometer, and magnetometer on the
-[PX4FMU][px4fmu], and the [APM project][apm]'s  [`AP_AHRS`][ap-ahrs] library
-for sensor fusion.
-
-[apm]: flight-apm.html
-[px4fmu]: ../hardware/flightcontroller.html
-[ap-ahrs]: http://github.com/GaloisInc/ardupilot/tree/master/libraries/AP_AHRS
 
 #### RC Control
 
 SMACCMPilot is flown manually with a radio controller. For more info, see the
-[Radio Control hardware page][rc]
+[Radio Control hardware page][rc].
 
 [rc]: ../hardware/rc-controller.html
 
 #### Telemetry
 
 SMACCMPilot uses the [MAVLink protocol][mavlink] to communicate with Ground
-Communication Stations (GCSs) such as [MAVProxy][]. For more info, see
-the [Flight Components page][flight-components]
-
-At this time, SMACCMPilot implements a small subset of the MAVLink protocol.
-SMACCMPilot does not accept commands from a ground control station, it can only
-send flight controller state to the ground.
+Control Stations (GCSs) such as [MAVProxy][]. The air vehicle implementation of
+the MAVLink protocol is described further on the [flight components
+page][flight-components]. GCS Software is described further on the [gcs software
+page][].
 
 [MAVProxy]: http://qgroundcontrol.org/mavlink/mavproxy_startpage
 [mavlink]: http://qgroundcontrol.org/mavlink/start
+[gcs software page]: gcs-overview.html
