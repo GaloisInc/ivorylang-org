@@ -128,7 +128,7 @@ TODO: Table mapping mode, armed status to blinking
 
 #### Telemetry output
 
-XXX explain more
+TODO explain more
 
 telemetry output: mavlink streams provided
 
@@ -177,6 +177,8 @@ drift will all contribute to vehicle motion even with a perfect stabilization
 controller. So, the pilot must control vehicle position or velocity by adjusting
 the attitude set point.
 
-The SMACCMPilot controller does not control altitude - the pilot controls the
-net throttle directly, and must adjust throttle to maintain or change altitude.
+### Altitude Hold
+
+TODO Explain
+
 

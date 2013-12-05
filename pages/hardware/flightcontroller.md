@@ -1,28 +1,21 @@
 # Flight Controller
 
-The goal of this page is to outline the features of the PX4 hardware that we
-care about in the context of SMACCMPilot.
+![](/images/fmu-top.jpg)
 
-### Hardware Components
 
-The [PX4FMU v1.7][] is the heart of the SMACCMPilot platform. It contains
+
+The [PX4FMU v1.7][fmu] is the heart of the SMACCMPilot platform. It contains
 all of the sensors required for basic flight stabilization and the
-STM32F4 microcontroller which runs the whole platform.
+STM32F4 microcontroller which runs the whole platform. [More info on the PX4
+project wiki][fmu].
 
-The [PX4IOAR][] is used as an adapter board to interface with the AR Drone
-motors. It also provides connectors for the PPM radio input, 3DR radio, and
-an optional status light.
+The [PX4IOAR][] is required as an interface board when using the [AR Drone][]
+as an air vehicle. It provides the interface required to talk to the AR Drone
+motors, as well as a power regulator and connectors for the PPM radio input and
+3DR radio. [More info on the PX4 project wiki][PX4IOAR].
 
-[PX4FMU v1.7]: http://pixhawk.ethz.ch/px4/modules/px4fmu
-[PX4IOAR]:     http://pixhawk.ethz.ch/px4/modules/px4ioar
+[fmu]: http://pixhawk.ethz.ch/px4/modules/px4fmu
+[PX4IOAR]: http://pixhawk.ethz.ch/px4/modules/px4ioar
+[AR Drone]: airvehicle-ardrone.html
 
-### TODO: Discuss the following hardware interfaces
 
-* Sensor IO: accel/gyro, compass, barometer
-* Motor IO: serial + select lines
-* PPM Input
-* 3DR Radio
-* EEPROM
-* Relay Status LED
-
-We'll get back to expand this page at some point soonish.
