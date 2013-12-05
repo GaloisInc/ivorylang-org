@@ -43,16 +43,18 @@ internationally through a [network of distributors][3drdisty].
 ![3DR Quadcopter](/images/3drquad_400.jpg)
 
 SMACCMPilot supports a wide variety of quadcopters that use simple PWM motor
-controllers. See the [flight platforms][] page for more details.
+controllers. See the [generic quadcopter air vehicle][q] page for more details.
+
+[q]: airvehicle-genericquad.html
 
 ### AR Drone
 
 ![PX4 Autopilot on AR Drone](/images/ardrone_px4_600.jpg)
 
-You can fly SMACCMPilot on a modified AR Drone. See the [flight platforms][]
-page for more details.
+You can fly SMACCMPilot on a modified AR Drone. See the [AR Drone air
+vehicle][ar] page for more details.
 
-[flight platforms]: flightplatforms.html
+[ar]: airvehicle-ardrone.html
 
 ## Required Accessories
 
@@ -79,10 +81,8 @@ information on what kind of system you need, and how to set it up.
 
 ### Batteries & Charger
 
-Each flight platform will require appropriate batteries, and a battery charger.
-See the [flight platform pages][flightplatform] for more information.
-
-[flightplatform]: flightplatforms.html
+Each air vehicle will require appropriate batteries, and a battery charger.
+Recommendations are made on the individual vehicle pages.
 
 ## Optional Accessories
 

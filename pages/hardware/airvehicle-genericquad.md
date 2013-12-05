@@ -1,7 +1,5 @@
 
-# Flight Platforms
-
-## Generic Quadcopter
+# Air Vehicles: Generic Quadcopter
 
 SMACCMPilot supports any quadcopter platform that uses standard PWM-based
 motor controllers. There are many commercial and do-it-yourself options for
@@ -35,15 +33,34 @@ connector][fmu-breakout] breakout.
 
 ### Accessories
 
+#### Vibration Damper
+
+We recommend using a vibration damping mount, such as [this one from
+RangeVideo][mount], to attach the PX4FMU flight controller to the quadcopter
+frame.
+
+[mount]: http://www.rangevideo.com/index.php/accessories/vibration-mount.html
+
+#### Power Regulator
+
+You'll need to provide regulated 5V power to the PX4FMU autopilot. We recommend
+purchasing a switching voltage regulator rated for at least 1.5A dedicated to
+powering the autopilot.
+
+The [APM Power Module][apm-pm] provides a stable regulated 5V power supply. We
+do not yet support using the battery voltage and current monitoring features it
+offers.
+
+[apm-pm]: https://store.3drobotics.com/products/apm-power-module-with-xt60-connectors
+
+#### Battery
+
 You'll need lithium polymer batteries and a battery charger with any of these
 quadcopter kits.
 
-
 * [An example Lithium Polymer battery
   charger](http://www3.towerhobbies.com/cgi-bin/wti0001p?&I=LXAZZS&P=ML)
-* [A small Lithium Polymer battery appropriate for the AR Drone and other small
-  quadcopters](http://www3.towerhobbies.com/cgi-bin/wti0001p?&I=LXXMP1&P=ML)
-* [A larger Lithium Polymer battery appropriate for the 3DR
+* [3 cell 3600mAh Lithium Polymer battery appropriate for the 3DR
   Quad](http://www3.towerhobbies.com/cgi-bin/wti0001p?&I=LXAJGY&P=0)
 
 

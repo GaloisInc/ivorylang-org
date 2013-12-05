@@ -1,7 +1,5 @@
 
-# Flight Platforms
-
-## AR Drone
+# Air Vehicles: AR Drone
 
 ![PX4 Autopilot on AR Drone][ardrone_px4]
 
@@ -38,4 +36,25 @@ controllers as well.
 electronics installed"
 [ardrone]: http://ardrone2.parrot.com
 [px4wiki_ardroneassembly]: http://pixhawk.ethz.ch/px4/airframes/ar_drone#assembly
+
+### Accessories
+
+You'll need lithium polymer batteries and a battery charger for the AR Drone.
+Although the AR Drone comes with a battery and charger from the factory, we have
+found that the following batteries were less expensive (at 10 minutes of flight
+time per charge, you'll likely want spares) and could be charged rapidly with a
+higher current charger.
+
+* [High current Lithium Polymer battery charger](http://www3.towerhobbies.com/cgi-bin/wti0001p?&I=LXAZZS&P=ML)
+* [3 cell 1300mAh Lithium Polymer battery](http://www3.towerhobbies.com/cgi-bin/wti0001p?&I=LXXMP1&P=ML)
+
+*Real talk: lithium polymer batteries are dangerous.* Please be careful when
+charging and using lithium polymer batteries. Overcharging, overheating,
+impacts, punctures, or shorts can cause the batteries to [ignite][]. We recommend
+charging batteries in a [fire retardant bag][firebag], and [safely disposing
+of damaged batteries][dispose].
+
+[ignite]: http://www.youtube.com/watch?v=EseOhC8n7ro
+[firebag]: http://www3.towerhobbies.com/cgi-bin/wti0001p?&I=LXZKA2&P=7
+[dispose]: https://sites.google.com/site/tjinguytech/charging-how-tos/lipo-disposal 
 

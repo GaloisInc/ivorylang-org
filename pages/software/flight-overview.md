@@ -6,10 +6,16 @@ real-world validation of the project's new software techniques and [languages][]
 [quadcopter]: http://en.wikipedia.org/wiki/Quadcopter
 [languages]: ../languages/
 
-At this time, the SMACCMPilot flight controller implements a simple
-stabilization controller for the [AR Drone quadcopter][hardware].
+### Platforms
 
-[hardware]: ../hardware/
+The SMACCMPilot flight controller supports several [air vehicles][] and has
+operating systems. SMACCMPilot may be built for multiple platforms, which
+specify the air vehicle and operating system at compile time. See the [flight
+platforms page][] for more info on supported platforms and configuring the
+SMACCMPilot build.
+
+[air vehicles]: ../hardware/airvehicle-overview.html
+[flight platforms page]: flight-platforms.html
 
 ### Capabilities
 
