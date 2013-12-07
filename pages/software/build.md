@@ -59,7 +59,7 @@ control station. You can start by copying the template key file, and optionally
 replace the default keys them with values you randomly generate yourself.
 
 ```
-cp Keys.mk.exmple Keys.mk
+cp Keys.mk.example Keys.mk
 ```
 
 When complete, change back to the outer smaccmpilot-build directory:
