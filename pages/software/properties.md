@@ -185,12 +185,15 @@ attacker gains access to the firmware binaries or discovers a memory safety
 vulnerability that allows her to read/overwrite arbitrary addresses, she can
 read/write the private keys.
 
-However, assuming a task cannot read data not in its "address space" the
-following should hold:
+However, assuming the following should hold of SMACCMPilot:
 
 - All data sent to the GCS by SMACCMPilot is encrypted.
 - All data received from the GCS is decrypted and authenticated, and if either
   fails, the message is ignored by the system.
+- Only MAVLink messages that SMACCMPilot is configured to process and that are
+  well-formed can affect SMACCMPilot's behavior.
+- Furthermore, a MAVLink message can only affect the portion of SMACCMPilot's
+  behavior it is defined for.
 
 ## Miscellaneous Vulnerabilities
 
