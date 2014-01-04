@@ -9,17 +9,18 @@ can initially be zero.
 
 ## Design Concepts
 
-AES GCM is a NIST-approved, but indepdently developed, authenticating encryption
-algorithm.  Given a unique (96 bit) initialization vector and secret AES Key,
-AES GCM provides confidentiallity and integrity.  By careful construction of
-IVs, commsec leverages also provides replay protection, communications security
-that can withstand power-cycles, flexible in key-distribution, and reduced
-overhead (when compared with most other transportation security protocols).
+AES GCM is a NIST-approved, but independently developed, authenticating
+encryption algorithm.  Given a unique (96 bit) initialization vector and secret
+AES Key, AES GCM provides confidentiallity and integrity.  By careful
+construction of IVs commsec also provides replay protection, communications
+security that can withstand power-cycles, flexible in key-distribution, and
+reduced overhead (when compared with most other transportation security
+protocols).
 
 As stated, most the properties are due to the data used to construct IVs and
 its interpretation.  The IV is a concatenation of the bits from the salt,
-message counter, epoch counter, and system identifier (ID).  Each value fills the
-following purpose:
+message counter, epoch counter, and system identifier (ID).  These values fill the
+following purposes:
 
 * The message counter serves both to ensure the IV is unique and as a sequence
   number with which the receiver can eliminate duplicate or old messages.
@@ -83,5 +84,3 @@ standpoint, that there is additional data computed and stored in RAM as an
 optimization (a time-memory trade-off).  This data balloons the total memory to
 ~5KB per key (the number of unique keys vary based on the key agreement used
 and number of systems).
-
-
