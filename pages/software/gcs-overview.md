@@ -40,6 +40,8 @@ Executing the script opens two terminal windows:
     sent/received as well as warnings/errors; see the script `gcs.sh` for
     options.
 
+![](/images/gcsdiagram.png)
+
 By default, the gateway server speaks to MAVProxy on TCP port `127.0.0.1:6000`,
 and the gateway talks to the serial port `/dev/ttyUSB0` at 57600 baud.  The
 radio (or serial-to-USB adaptor) is expected to be on the serial port.
