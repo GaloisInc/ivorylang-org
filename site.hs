@@ -57,6 +57,11 @@ sitemap = Tree "/" "Home"
       , Page "gcs-mavproxy.html"      "MAVProxy"
       , Page "gcs-gamepad.html"       "Gamepad Control"
       ]
+    , Group "Communications Security"
+      [ Page "commsec-overview.html" "Overview"
+      , Page "commsec-encapsulation.html" "Encapsulation"
+      , Page "commsec-keyexchange.html" "Key Exchange"
+      ]
     ]
   langpages =
     [ Page "index.html"          "Overview"
