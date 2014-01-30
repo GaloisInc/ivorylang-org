@@ -1,6 +1,6 @@
 # Ivory Tutorial
 
-This is an informal tutorial on the [Ivory Language](ivory-overview.html).
+This is an informal tutorial on the [Ivory Language](ivory-introduction.html).
 
 We will present an Ivory program for computing Fibonacci numbers, and walk
 through it line-by-line as a way of discussing some of the basics of the Ivory
@@ -23,7 +23,7 @@ at least be familar:
 [spb]: http://github.com/galoisinc/smaccmpilot-build
 
 * Installing GHC and cabal without the Haskell Platform. You'll need GHC
-  7.6.2. [See the prerequisites page for more on the topic](prerequisites.html).
+  7.6.2. [See the prerequisites page for more on the topic](../software/prerequisites.md).
 * Navigating Haskell source files. You can [clone the smaccmpilot-build][spb]
   repository and open up the file defining the `Ivory.Language` module.
   (You'll likely need to, since the best way to deeply understand the Ivory
@@ -356,7 +356,7 @@ on your computer and go through the contents of the
 [`ivory-examples`][ivory-examples] package to see some more examples and examine
 some of the generated C sources.
 
-[install]: software/build.html
+[install]: ../software/build.html
 
 [ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples
 

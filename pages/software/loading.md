@@ -5,7 +5,7 @@
 platform][hardware].
 
 [building]: build.html
-[hardware]: ../hardware/overview.html
+[hardware]: ../hardware/airvehicle-overview.html
 
 ## PX4 USB Bootloader
 
