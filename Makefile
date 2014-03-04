@@ -8,7 +8,7 @@ default: build
 
 .PHONY: smaccmpilot-org
 smaccmpilot-org: .cabal-sandbox site.hs Sidebar.hs
-	@cabal install
+	@cabal -j1 install
 	./$(EXEC) clean
 
 build: smaccmpilot-org
