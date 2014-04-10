@@ -1,4 +1,4 @@
-# [SMACCMPilot Web][smaccmpilotweb]
+# [SMACCMPilot-org][smaccmpilotorg]
 
 Sources for the [smaccmpilot.org][] website.
 
@@ -39,7 +39,7 @@ top navigation bar, side navigation tree, or subdirectory structure in
 Sources from the jquery and bootstrap projects are distributed in this
 repository, they retain their original copyright and license.
 
-[smaccmpilotweb]: http://github.com/GaloisInc/smaccmpilot-web
+[smaccmpilotorg]: http://github.com/GaloisInc/smaccmpilot-org
 [smaccmpilot.org]: http://smaccmpilot.org
 
 [hakyll]: http://jaspervdj.be/hakyll/
