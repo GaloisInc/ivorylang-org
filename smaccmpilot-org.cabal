@@ -1,19 +1,19 @@
 name:                smaccmpilot-org
 version:             0.1.0.0
 synopsis:            smaccmpilot.org website
--- description:
+description:         static site generator based on hakyll, with some custom
+                     site nav features that are really a bad hack
 license:             BSD3
 license-file:        LICENSE
 author:              Pat Hickey
 maintainer:          pat@galois.com
-copyright:           2013 (c) Galois, Inc.
--- category:
+copyright:           2014 (c) Galois, Inc.
 build-type:          Simple
 cabal-version:       >=1.8
 
 executable smaccmpilot-org
   main-is: site.hs
-  -- other-modules:
+  other-modules: Sidebar
   build-depends:       base,
                        filepath,
                        hakyll,
