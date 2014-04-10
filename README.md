@@ -34,6 +34,11 @@ The site generator executable only needs to be rebuilt when editing the
 top navigation bar, side navigation tree, or subdirectory structure in
 `/pages/`. These are all described in `site.hs`.
 
+## Other Sources
+
+Sources from the jquery and bootstrap projects are distributed in this
+repository, they retain their original copyright and license.
+
 [smaccmpilotweb]: http://github.com/GaloisInc/smaccmpilot-web
 [smaccmpilot.org]: http://smaccmpilot.org
 
