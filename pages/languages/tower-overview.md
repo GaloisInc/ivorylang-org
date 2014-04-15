@@ -11,7 +11,7 @@ We have prepared a [user guide to the Tower language][tower-userguide], as well
 as [code documentation][tower-haddock].
 
 [tower-userguide]: tower-userguide.html
-[tower-haddock]: tower-haddock.html
+[tower-haddock]: http://smaccmpilot.org/haddock/tower/Ivory-Tower.html
 
 ### Code Generation Backends
 
@@ -34,7 +34,7 @@ STM32F4 microcontroller][tower-tutorial].
 ### Tower Examples
 
 Simple examples and tests of the Tower framework are found in
-[`tower-examples`][examples]. The [`Simple`][] example contains a number of
+[`tower-examples`][examples]. The [Simple][] example contains a number of
 trivial tasks demonstrating each type of communication primitive.
 
 [examples]: https://github.com/GaloisInc/tower/tree/master/tower-examples
