@@ -1,6 +1,18 @@
 # SMACCMPilot News and Press
 
-* January 2014: Lee Pike will give a key note at Programming Languages meets
+* September 2014: Pat Hickey presents our paper, Building Embedded Systems with
+  Embedded DSLs, at the Intl. Conference on Functional Programming ([ICFP'14]).
+
+[ICFP'14]: http://icfpconference.org/icfp2014/
+
+* May 2014: Galois demos SMACCMPilot at the Pentagon.
+
+* May 2014: Lee Pike gives a talk at High Confidence Software Systems ([HCSS][])
+  about SMACCMPilot.
+
+[HCSS]: http://cps-vo.org/group/hcss_conference/program
+
+* January 2014: Lee Pike gives a key note at Programming Languages meets
   Program Verification ([PLPV'13][]) about building SMACCMPilot.
 
 [PLPV'13]: http://www.cse.chalmers.se/~nad/plpv-2014/

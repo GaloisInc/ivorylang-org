@@ -14,7 +14,7 @@ cabal-version:       >=1.8
 executable smaccmpilot-org
   main-is: site.hs
   other-modules: Sidebar
-  build-depends:       base,
-                       filepath,
-                       hakyll,
-                       MissingH
+  build-depends: base,
+                 MissingH,
+                 filepath,
+                 hakyll
