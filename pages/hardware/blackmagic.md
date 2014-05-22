@@ -27,19 +27,22 @@ Copy the following to a `.gdbinit` script in the root directory of your
 `smaccmpilot-stm32f4` repository:
 
 ```
-target extended NAME_OF_SERIAL_PORT_GOES_HERE
+target extended SERIAL_PORT
 monitor swdp_scan
 attach 1
 ```
+
+where `SERIAL_PORT` is the path of the first serial device enumerated by the
+Black Magic probe.
 
 ### Using GDB
 
 From the root of the `smaccmpilot-stm32f4` repository, after successfully
 [building the SMACCMPilot executable](../software/build.html),
-start your ARM toolchain gdb with the `stabilize` executable.
+start your ARM toolchain gdb with the `flight` executable.
 
 ```
-arm-none-eabi-gdb build/px4/fmu_v17/img/stabilize
+arm-none-eabi-gdb build/px4/px4fmu17_ioar_freertos/img/flight
 
 ```
 
