@@ -90,9 +90,16 @@ generating 100s of thousands of calls to C functions with random arguments.
 
 We plan to extend our use of QuickCheck to more of SMACCMPilot in the future.
 
-### Model-Checking
+### Static Analysis
 
-We have been using the open-source C model-checker
+SMACCMPilot is analyzed by [Coverity](https://scan.coverity.com/projects/1420).
+
+<a href="https://scan.coverity.com/projects/1420">
+  <img alt="Coverity Scan Build Status"
+           src="https://scan.coverity.com/projects/1420/badge.svg"/>
+		            </a>
+
+In addition, we have been used the open-source C model-checker
 [CBMC](http://www.cprover.org/cbmc/).  CBMC is an excellent model-checker for
 verifying C source code, and we have found bugs in SMACCMPilot using it.
 

@@ -1,7 +1,8 @@
 # Flight Software: Overview
 
 The SMACCMPilot project has produced [quadcopter][] flight control software as a
-real-world validation of the project's new software techniques and [languages][].
+real-world validation of the project's new software techniques and
+[languages][].
 
 [quadcopter]: http://en.wikipedia.org/wiki/Quadcopter
 [languages]: ../languages/
