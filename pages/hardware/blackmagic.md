@@ -42,7 +42,7 @@ From the root of the `smaccmpilot-stm32f4` repository, after successfully
 start your ARM toolchain gdb with the `flight` executable.
 
 ```
-arm-none-eabi-gdb build/px4/px4fmu17_ioar_freertos/img/flight
+arm-none-eabi-gdb build/px4fmu17_ioar_freertos/img/flight
 
 ```
 
