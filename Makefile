@@ -4,7 +4,6 @@ default: build
 
 .cabal-sandbox:
 	@cabal sandbox init
-	@cabal sandbox add-source ./smaccmpilot-org.cabal
 
 .PHONY: smaccmpilot-org
 smaccmpilot-org: .cabal-sandbox site.hs Sidebar.hs
