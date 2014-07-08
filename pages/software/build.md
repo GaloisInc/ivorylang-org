@@ -68,6 +68,44 @@ When complete, change back to the outer smaccmpilot-build directory:
 cd ..
 ```
 
+### Install Python dependencies
+
+The `mavproxy` tool that is used at the ground station to communicate with the
+autopilot is written in Python and requires some Python packages to be
+installed.
+
+Before you start, we recommend configuring `pip` to cache the downloaded
+packages. To do so, create `~/.pip/pip.conf` with these contents:
+
+```
+[global]
+download-cache = ~/.pip/cache
+```
+
+We also recommend using [virtualenv][] to ensure that the packages you install
+for this project do not interfere with any other Python software on your system.
+Also, [virtualenvwrapper][] is a very convenient way to work with
+virtualenvs which integrates with your shell and manages multiple
+environments.
+
+If you are using [virtualenvwrapper][], run:
+
+```
+mkvirtualenv mavlink
+```
+
+In future sessions, you can run `workon mavlink` to load this virtual
+environment again.
+
+Now you can install mavlink's dependencies. Run:
+
+```
+pip install --no-use-wheel -r mavlink/requirements.txt
+```
+
+[virtualenv]: http://virtualenv.readthedocs.org/
+[virtualenvwrapper]: http://virtualenvwrapper.readthedocs.org/
+
 ### Top Level Haskell Build
 
 From the `smaccmpilot-build` root directory, use the included Makefile to build
