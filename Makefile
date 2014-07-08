@@ -16,7 +16,7 @@ build: smaccmpilot-org
 preview: build
 	./$(EXEC) preview
 
-deploy: build
+deploy:
 	./$(EXEC) deploy
 
 clean:
