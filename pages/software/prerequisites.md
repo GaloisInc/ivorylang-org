@@ -7,6 +7,9 @@ compatible (if you do not have Linux natively installed, running Linux in a
 
 [vbox]: https://www.virtualbox.org/
 
+If you are using MacOS X, these instructions will mostly work, but we have some
+specific [MacOS X tips](osx.html) for you.
+
 ## GCC Cross Compiler
 
 Building the SMACCMPilot C sources require a GCC toolchain for the ARM Cortex-M4
