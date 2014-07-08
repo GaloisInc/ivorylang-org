@@ -50,6 +50,11 @@ Before your first build, you'll need to create a `Config.mk` file.
 cp Config.mk.example Config.mk
 ```
 
+If you have a JTAG programmer, and want to use it instead of the PX4 bootloader
+for loading your firmware onto your quadcopter, make sure to comment out the
+line that says `CONFIG_PX4FMU_BOOTLOADER := 1`. Otherwise, you will get runtime
+errors like null-pointer dereferences.
+
 If you have not installed the arm-gcc-embedded toolchain in your PATH, customize
 the variable `CONFIG_CORTEX_M4_PREFIX` in your `Config.mk`.
 

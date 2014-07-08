@@ -4,6 +4,10 @@
 [building SMACCMPilot][building], you have a complete [SMACCMPilot flight
 platform][hardware].
 
+Before you begin, determine whether you want to use the PX4 USB Bootloader, or
+whether you prefer to use a JTAG programmer such as the Black Magic Probe.
+Instructions for both cases are below.
+
 [building]: build.html
 [hardware]: ../hardware/airvehicle-overview.html
 
