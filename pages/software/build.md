@@ -31,6 +31,19 @@ git submodule init
 git submodule update
 ```
 
+### Switching to the Development Branch
+
+Your `smaccmpilot-build` repository will initially be on the `master` branch,
+which is the stable release branch. If you want a recent development tree
+instead, you can switch using these commands:
+
+```
+git checkout -b development origin/development
+git submodule init
+git submodule update
+make sandbox-clean
+```
+
 ## Building
 
 ### Configuration
