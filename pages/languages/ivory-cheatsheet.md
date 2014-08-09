@@ -1,8 +1,8 @@
 # Ivory Cheatsheet
 
 This cheatsheet is to get you started with the most common constructs in Ivory.
-Many constructs are not covered here; see the Ivory Haddock documentation as
-well as the (Ivory standard library) for the full language definition.
+Many constructs are not covered here; see the Ivory Haddock documentation (as
+well as the Ivory standard library) for the full language definition.
 
 ## Types
 
@@ -127,8 +127,8 @@ Note: there are no union types in Ivory.
 - Division: `/`: only defined for `IFloat` and `IDouble`
 - Equality: `==?`, `/=?` (not equals)
 - Numeric comparisons: `>?`, `>=?`, `<?`, `<=?`
-- Quotient: `iDiv`: like C's `\` (truncation towards 0).
-    - Example: iDiv (-3) 2 .== (-1)
+- Quotient: `iDiv`: like C's `/` (truncation towards 0).
+    - Example: `iDiv (-3) 2 .== (-1)`
 - Remainder: `.%`: like C's `%`.
     - Example: `(-3) .% (-2) .== -1`
 - Boolean: `true`, `false`, `.&&`, `.||`, `iNot`
@@ -308,7 +308,7 @@ Ivory programs are encapsulated in functions.
 
 ### Function Types
 
-A function type has the form ``Def ('[ArgsTypes] :-> RetType)` where `ArgTypes`
+A function type has the form ``Def ('[ArgsTypes] :-> RetType)`` where `ArgTypes`
 are the types of the arguments and `RetType` is the return type.
 
 Examples:
@@ -394,7 +394,7 @@ aModule = package "MyPackage" $ do
 The Ivory compiler is called by calling `compile [m0, m1, ... mn]`, where `m_i`
 are [modules][moduledefs].
 
-Assuming you are using GHCI (GHC interpreter), you can set arguments to the
+Assuming you are using GHCi (GHC interpreter), you can set arguments to the
 compiler by running
 ```
 > :set args ... args ...
