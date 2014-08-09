@@ -407,7 +407,7 @@ To get the list of arguments accepted, run
 ```
 To run the compiler on module `myModule` with division-by-zero and
 integer-overflow checking, run
-p```
+```
 > :set args --div-zero --overflow
 > compile [myModule]
 ```
