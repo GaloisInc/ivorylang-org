@@ -4,6 +4,8 @@ This cheatsheet is to get you started with the most common constructs in Ivory.
 Many constructs are not covered here; see the Ivory Haddock documentation (as
 well as the Ivory standard library) for the full language definition.
 
+** This cheatsheet is incomplete! **
+
 ## Types
 
 ### Values Types
@@ -351,7 +353,7 @@ uint32_t func1(void) {
 
 ```haskell
 func2 :: Def ('[Ref s (Stored Uint32), Uint32] :-> ())
-func2 = proc "func0" $ \ref val -> body $ do
+func2 = proc "func2" $ \ref val -> body $ do
   store ref val
   retVoid
 ```
@@ -359,22 +361,9 @@ compiles to
 ```c
 uint32_t func2(uint32_t *ref, uint32_t val) {
   *ref = val;
+  return;
 }
 ```
-
-### Function Properties
-
-Pre- and post-conditions can be attached to properties.  Pre-conditions are
-assumptions about the inputs and post-conditions are properties that should hold
-on return values.
-
-
-```haskell
-func0 :: Def ('[Uint32] :-> Uint32)
-func0 = proc "func0" $ \arg0 -> body $ do
-  ret (arg0 + 2)
-```
-
 
 ## Modules
 
