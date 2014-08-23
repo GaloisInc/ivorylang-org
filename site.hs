@@ -13,56 +13,9 @@ sitemap :: PageTree
 sitemap = Tree "/" "Home"
   [ (Page "index.html" "Overview")
   , (Tree "languages"  "Languages" langpages)
-  , (Tree "software"   "Software"  softwarepages)
-  , (Tree "hardware"   "Hardware"  hardwarepages)
   , (Page "about.html" "About")
-  , (Page "news.html"  "News")
   ]
   where
-  hardwarepages =
-    [ Page "index.html"            "Overview"
-    , Group "Air Vehicles"
-      [ Page "airvehicle-overview.html" "Overview"
-      , Page "airvehicle-genericquad.html" "Generic Quadcopter"
-      , Page "airvehicle-ardrone.html" "AR Drone"
-      ]
-    , Group "Electronics"
-      [ Page "flightcontroller.html" "Flight Controller"
-      , Page "blackmagic.html"       "Debugger"
-      , Page "rc-controller.html"    "Radio Control"
-      ]
-    , Group "Guides"
-      [ Page "shoppinglist.html"     "Shopping List"
-      ]
-    ]
-  softwarepages =
-    [ Page "index.html"           "Introduction"
-    , Page "properties.html"      "Properties and Evidence"
-    , Group "Development"
-      [ Page "prerequisites.html"     "Prerequisites"
-      , Page "build.html"             "Building"
-      , Page "loading.html"           "Loading"
-      ]
-    , Group "Flight Software"
-      [ Page "flight-overview.html"   "Overview"
-      , Page "flight-checklists.html" "Flight Checklists"
-      , Page "flight-platforms.html"  "Platform Support"
-      , Page "flight-components.html" "Software Components"
-      , Page "flight-future.html"     "Future Developments"
-      ]
-    , Group "Ground Control Software"
-      [ Page "gcs-overview.html"      "Overview"
-      , Page "gcs-commsec.html"       "Communication Security"
-      , Page "gcs-smaccm-sik.html"    "SMACCM-SiK Radio"
-      , Page "gcs-mavproxy.html"      "MAVProxy"
-      , Page "gcs-gamepad.html"       "Gamepad Control"
-      ]
-    , Group "Communications Security"
-      [ Page "commsec-overview.html" "Overview"
-      , Page "commsec-encapsulation.html" "Encapsulation"
-      , Page "commsec-keyexchange.html" "Key Exchange"
-      ]
-    ]
   langpages =
     [ Page "index.html"          "Overview"
     , Group "Ivory Language"
@@ -135,20 +88,13 @@ main = hakyllWith config $ do
     match "templates/*" $ compile templateCompiler
 
     standardPandocPagesSubdir ""
-    standardPandocPagesSubdir "hardware/"
-    standardPandocPagesSubdir "software/"
-    standardPandocPagesSubdir "languages/"
 
 
 navbar :: FilePath -> String
 navbar currentpath = unlines $
   [ "<ul class=\"nav\"> "
   , entry "/index.html"           "Home"
-  , entry "/languages/index.html" "Languages"
-  , entry "/software/index.html"  "Software"
-  , entry "/hardware/index.html"  "Hardware"
   , entry "/about.html"           "About"
-  , entry "/news.html"            "News"
   , "</ul>"
   ]
   where
@@ -169,7 +115,7 @@ templated t input = loadAndApplyTemplate t ctx input >>= relativizeUrls
     , field "sidebar"   $ \item -> return (sidebarHTML sitemap item)
     , field "directory" $ \item -> return (itemDirectory item)
     , field "filepath"  $ \item -> return (itemFilePath item)
-    , constField "copyright" "<p>&copy; Galois Inc. 2013</p>"
+    , constField "copyright" "<p>&copy; Galois Inc. 2014</p>"
     , defaultContext
     ]
 

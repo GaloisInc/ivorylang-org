@@ -416,11 +416,11 @@ the following:
 ```
 
 
-[exp]: /languages/ivory-cheatsheet.html#expressions
-[init]: /languages/ivory-cheatsheet.html#initializers
-[ix]: /languages/ivory-cheatsheet.html#index-types
-[ref]: /languages/ivory-cheatsheet.html#pointer-types
-[fn]: /languages/ivory-cheatsheet.html#function-definitions
-[memtypes]: /languages/ivory-cheatsheet.html#memory-area-types
-[structs]: /languages/ivory-cheatsheet.html#stuct-definitions
-[moduledefs]: /languages/ivory-cheatsheet.html#modules
+[exp]: ivory-cheatsheet.html#expressions
+[init]: ivory-cheatsheet.html#initializers
+[ix]: ivory-cheatsheet.html#index-types
+[ref]: ivory-cheatsheet.html#pointer-types
+[fn]: ivory-cheatsheet.html#function-definitions
+[memtypes]: ivory-cheatsheet.html#memory-area-types
+[structs]: ivory-cheatsheet.html#stuct-definitions
+[moduledefs]: ivory-cheatsheet.html#modules
