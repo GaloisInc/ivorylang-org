@@ -22,12 +22,7 @@ at least be familar:
 [rwh]: http://book.realworldhaskell.org
 [spb]: http://github.com/galoisinc/smaccmpilot-build
 
-* Installing GHC and cabal without the Haskell Platform. You'll need GHC
-  7.6.2. [See the prerequisites page for more on the topic](../software/prerequisites.md).
-* Navigating Haskell source files. You can [clone the smaccmpilot-build][spb]
-  repository and open up the file defining the `Ivory.Language` module.
-  (You'll likely need to, since the best way to deeply understand the Ivory
-  Language is to read the source.)
+* Installing GHC and cabal. Ivory supports GHC 7.6.3 and the 7.8 series.
 * Good understanding of the type system. You are comfortable defining your
   own typeclasses, and perhaps you've dealt with existential quantification.
 * Monad concepts and syntax; Imperative style in Haskell. You understand how to
@@ -351,12 +346,12 @@ compilation flags for the Ivory compiler. Try running the executable with the
 
 ### What's Next?
 
-One good next step to learning the Ivory Language is to [install Ivory][install]
-on your computer and go through the contents of the
-[`ivory-examples`][ivory-examples] package to see some more examples and examine
-some of the generated C sources.
+One good next step to learning the Ivory Language is to go through the contents
+of the [`ivory-examples`][ivory-examples] package to see some more examples and
+examine some of the generated C sources.
 
-[install]: ../software/build.html
+You can also take a look at the [SMACCMPilot project](http://smaccmpilot.org),
+a large software project built using the Ivory and Tower languages.
 
 [ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples
 

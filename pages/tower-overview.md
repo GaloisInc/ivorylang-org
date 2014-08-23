@@ -1,6 +1,10 @@
 # Tower Language Overview
 
-[Tower][tower] is a language for composing Ivory programs into real-time tasks.
+The Tower Language is an eDSL for composing Ivory programs into real-time
+systems.  Tower programs specify communication channels, tasks, and signal
+handlers, and generate Ivory code which implements scheduling and communication
+for real-time operating systems.
+
 
 Tower is both a specification language and a code generator. A Tower program
 describes communication channels and tasks, and provides an Ivory implementation

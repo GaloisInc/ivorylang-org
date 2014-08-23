@@ -11,12 +11,6 @@ import           Sidebar
 -- Sitemap is used to generate the navbars
 sitemap :: PageTree
 sitemap = Tree "/" "Home"
-  [ (Page "index.html" "Overview")
-  , (Tree "languages"  "Languages" langpages)
-  , (Page "about.html" "About")
-  ]
-  where
-  langpages =
     [ Page "index.html"          "Overview"
     , Group "Ivory Language"
       [ Page "ivory-introduction.html" "Introduction"
@@ -79,11 +73,6 @@ main = hakyllWith config $ do
     match "bootstrap/img/*" $ do
         route   $ gsubRoute "bootstrap/" (const "")
         compile copyFileCompiler
-
-    match "pages/index.md" $ do
-        route   $ gsubRoute "pages/"  (const "") `composeRoutes`
-                  setExtension "html"
-        compile $ pandocCompiler >>= (templated "templates/frontpage.html")
 
     match "templates/*" $ compile templateCompiler
 
