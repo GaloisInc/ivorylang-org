@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Applicative ((<$>))
 import           Data.Monoid         (mappend, mconcat)
-import           System.FilePath     (dropFileName)
+import           System.FilePath     (dropFileName, dropExtension, (<.>), (</>))
 import           Hakyll
 
 import           Sidebar
@@ -105,6 +105,10 @@ templated t input = loadAndApplyTemplate t ctx input >>= relativizeUrls
     , field "directory" $ \item -> return (itemDirectory item)
     , field "filepath"  $ \item -> return (itemFilePath item)
     , constField "copyright" "<p>&copy; Galois Inc. 2014</p>"
+    , field "markdownfile"  $ \item -> return (markdownFile item)
     , defaultContext
     ]
+
+markdownFile :: Item a -> String
+markdownFile item = (dropExtension (itemFilePath item)) <.> "md"
 
