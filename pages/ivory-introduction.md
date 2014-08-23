@@ -1,4 +1,3 @@
-# Ivory Language: Introduction
 
 ## Ivory Concepts
 

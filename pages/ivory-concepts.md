@@ -1,5 +1,4 @@
-# Ivory Language: Concepts
-
+# Ivory Language Concepts
 
 ## An Embedded Language
 

@@ -1,10 +1,8 @@
 # Ivory Tutorial
 
-This is an informal tutorial on the [Ivory Language](ivory-introduction.html).
-
-We will present an Ivory program for computing Fibonacci numbers, and walk
-through it line-by-line as a way of discussing some of the basics of the Ivory
-language.
+This is an informal tutorial on the Ivory Language. We will present an Ivory
+program for computing Fibonacci numbers, and walk through it line-by-line as a
+way of discussing some of the basics of the Ivory language.
 
 Ivory is embedded in the Haskell language: this means that Ivory reuses the
 syntax and type system of Haskell. It is best if you are comfortable with the
