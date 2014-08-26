@@ -1,6 +1,6 @@
-# [SMACCMPilot-org][smaccmpilotorg]
+# [ivorylang-org][ivorylangorg-repo]
 
-Sources for the [smaccmpilot.org][] website.
+Sources for the [ivorylang.org][ivorylangorg] website.
 
 ## Bugs and Pull Requests
 
@@ -8,19 +8,18 @@ We encourage users to file bugs or pull requests regarding any problems with the
 site - anything from incorrect, confusing, or missing documentation to dead
 links and spelling mistakes is a tremendous help.
 
-Thank you! - Pat and the SMACCMPilot team.
+Thank you! - Pat and the Ivory Language team.
 
 ## Contents
 
-Each page of smaccmpilot.org is rendered from a [Markdown][] document. Page
+Each page of ivorylang.org is rendered from a [Markdown][] document. Page
 sources are found under the `/pages/` directory.
 
-The rendering template for standard pages is found in `/templates/standard.html`,
-and the `/index.html` landing page is rendered from `/templates/frontpage.html`.
+The rendering template for all pages is found at `/templates/standard.html`.
 
 ## Building
 
-smaccmpilot.org is a static web site generated using the excellent [`hakyll`][]
+ivorylang.org is a static web site generated using the excellent [`hakyll`][]
 package. The included `Makefile` will do a complete build of the site in a cabal
 sandbox. You will need ghc 7.4 or higher, and cabal 1.18 or higher.
 
@@ -39,8 +38,13 @@ top navigation bar, side navigation tree, or subdirectory structure in
 Sources from the jquery and bootstrap projects are distributed in this
 repository, they retain their original copyright and license.
 
-[smaccmpilotorg]: http://github.com/GaloisInc/smaccmpilot-org
-[smaccmpilot.org]: http://smaccmpilot.org
+## See Also
+
+ivorylang.org contains pages that were formerly part of [smaccmpilot.org][smaccmpilotorg-repo].
+
+[ivorylangorg-repo]: http://github.com/GaloisInc/ivorylang-org
+[smaccmpilotorg-repo]: http://github.com/GaloisInc/smaccmpilot-org
+[ivorylangorg]: http://ivorylang.org
 
 [hakyll]: http://jaspervdj.be/hakyll/
 [Markdown]: http://daringfireball.net/projects/markdown/syntax
