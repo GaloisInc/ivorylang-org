@@ -1,6 +1,6 @@
-name:                smaccmpilot-org
+name:		     ivorylang-org
 version:             0.1.0.0
-synopsis:            smaccmpilot.org website
+synopsis:            ivorylang.org website
 description:         static site generator based on hakyll, with some custom
                      site nav features that are really a bad hack
 license:             BSD3
@@ -11,7 +11,7 @@ copyright:           2014 (c) Galois, Inc.
 build-type:          Simple
 cabal-version:       >=1.8
 
-executable smaccmpilot-org
+executable ivorylang-org
   main-is: site.hs
   other-modules: Sidebar
   build-depends: base,

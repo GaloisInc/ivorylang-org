@@ -1,16 +1,16 @@
-EXEC=.cabal-sandbox/bin/smaccmpilot-org
+EXEC=.cabal-sandbox/bin/ivorylang-org
 
 default: build
 
 .cabal-sandbox:
 	@cabal sandbox init
 
-.PHONY: smaccmpilot-org
-smaccmpilot-org: .cabal-sandbox site.hs Sidebar.hs
+.PHONY: ivorylang-org
+ivorylang-org: .cabal-sandbox site.hs Sidebar.hs
 	@cabal -j1 install
 	./$(EXEC) clean
 
-build: smaccmpilot-org
+build: ivorylang-org
 	./$(EXEC) build
 
 preview: build
@@ -20,5 +20,5 @@ deploy:
 	./$(EXEC) deploy
 
 clean:
-	-./smaccmpilot-org clean
+	-./ivorylang-org clean
 	-rm -rf cabal.sandbox.config .cabal-sandbox
