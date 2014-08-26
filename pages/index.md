@@ -14,4 +14,4 @@ The Ivory Language compiler is open source software. It is available on [github]
 
 [ivory-examples]: http://github.com/GaloisInc/ivory/tree/master/ivory-examples/examples
 [ivory-github]: http://github.com/GaloisInc/ivory
-[hackage]: http://FIXME
+[hackage]: https://hackage.haskell.org/package/ivory
