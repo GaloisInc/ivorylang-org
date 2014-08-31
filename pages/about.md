@@ -20,11 +20,19 @@ The Ivory Language team is:
 All Ivory Language project software is released under an open-source BSD License.
 See License files [in the source repositories][github] for more information.
 
+### Contributing
+
+Ivory is open source software. We encourage users to ask questions and report
+issues using the [github issue tracker][issues] and to [use pull requests][pr]
+to contribute changes.
+
 [github]: http://github.com/galoisinc/ivory
+[issues]: https://github.com/galoisinc/ivory/issues
+[pr]: https://github.com/galoisinc/ivory/pulls
 
 ### About this site
 
-The contents of [ivorylang.org][org] are Copyright 2013, Galois Inc. All Rights
+The contents of [ivorylang.org][org] are Copyright 2014, Galois Inc. All Rights
 Reserved.
 
 [org]: http://ivorylang.org
