@@ -189,7 +189,7 @@ promise.
 
 ```haskell
    a <- local (ival 0)
-   b <- local (ival 0)
+   b <- local (ival 1)
 ```
 
 These are the first lines in the `Ivory eff` monad introduced above.
