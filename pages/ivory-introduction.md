@@ -76,7 +76,7 @@ procedure to exit.
 fib_loop :: Def ('[Ix 1000] :-> Uint32)
 fib_loop  = proc "fib_loop" $ \ n -> body $ do
   a <- local (ival 0)
-  b <- local (ival 0)
+  b <- local (ival 1)
 
   n `times` \ _ -> do
     a' <- deref a
