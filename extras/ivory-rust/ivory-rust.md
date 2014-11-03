@@ -93,6 +93,10 @@ and to use C-based cross-compilers.
 
 # Comparing Rust and Ivory
 
+Rust is one of the most advanced, safe C languages being developed, both in
+terms of its technology but also in terms of its community and openness. Rust is
+a measuring stick against which to compare other safe C languages.
+
 In the following we compare Rust and Ivory along a few dimensions that are
 important to embedded programming. The comparisons are with respect to the
 implementations of the respective languages as of October 2014.
