@@ -2,8 +2,6 @@
 % Lee Pike, Galois Inc.
 % October 2014
 
-**XXX DRAFT! (comments welcome) XXX**
-
 Synopsis: We compare and contrast two recently-developed "Safe-C" programming
 languages, *Ivory* and *Rust*.
 
@@ -39,11 +37,11 @@ So why are C/C++ still used? There are four reasons:
    Moreover, predicting the space usage of a compiled high-level language is
    difficult and is dependent on the behavior of the runtime system.
 
-3. *Time*. Timing concerns cover both predictability and speed. Well-written C
-   is still the golden-standard for speed. For real-time systems, predictability
-   is also important; the runtime system may unpredictably pause the user
-   program to perform garbage collection, for example, causing jitter in the
-   program.
+3. *Time*. Timing concerns cover both predictability and speed. Efficiently
+   written C is still the golden-standard for speed. For real-time systems,
+   predictability is also important; the runtime system may unpredictably pause
+   the user program to perform garbage collection, for example, causing jitter
+   in the program.
 
 4. *Low-level programming*. Finally, without enforced restrictions on pointer
    use and type-casting, C/C++ can simplify interactions with hardware say, when
@@ -52,14 +50,16 @@ So why are C/C++ still used? There are four reasons:
 
 # "Safe C" Languages
 
+By *safe C* languages, we mean languages that are advertised to be safer than C,
+that are not dependent on a tiny---if any---runtime, and that are designed to
+replace C for some subset of applications commonly written in C because of C's
+advantages mentioned above.
+
 A handful of languages have been created that provide many of the benefits of C
 while providing better safety. Most approaches have been academic, so while the
 ideas live on and are incorporated in other languages and compilers, the
 implementations have mostly bit-rotted. Li compares some safe C implementations
 (the document is a decade old but useful for historical context.[^li]
-
-Other notable Safe~C languages in production are Go[^go], Swift[^swift], and
-SPARK/Ada[^spark].
 
 **Rust**: Rust began as a personal project of a Mozilla employee and was officially
 sponsored by the company starting in 2009. The language was influenced by a
@@ -95,7 +95,7 @@ and to use C-based cross-compilers.
 
 Rust is one of the most advanced, safe C languages being developed, both in
 terms of its technology but also in terms of its community and openness. Rust is
-a measuring stick against which to compare other safe C languages.
+currently a measuring stick against which to compare other safe C languages.
 
 In the following we compare Rust and Ivory along a few dimensions that are
 important to embedded programming. The comparisons are with respect to the
@@ -117,7 +117,7 @@ maturity, and legacy.
 writing fast, long-running server applications). The concurrency model is
 similar to Erlang's model. Lightweight tasks use message passing over
 channels. Channels are statically typed. Tasks are spawned at runtime and
-error-handling is provided.
+error-handling is provided. Rust provides both lightweight and OS threads.
 
 Rust's concurrency framework is provided as a library, and the developers even
 envision other concurrency libraries, with specialized semantics, might be
@@ -144,8 +144,9 @@ caller(s) schedules.
 the programmer to write expressive heap-based data structures without requiring
 significant runtime support.
 
-Rust uses reference counting to garbage collect heap memory. However, it is
-still possible to have memory leaks.
+Rust provides reference counting for garbage collection as a library that can be
+optionally used. Other garbage collecting libraries may be developed in the
+future.
 
 Rust contains an affine type system that guarantees that memory cannot be
 manipulated through more than one reference at a time. This prevents aliasing
@@ -157,11 +158,12 @@ pattern-matching facilities.
 
 **Ivory**: Ivory currently disallows heap-based data structures, as is often
 encouraged for safety-critical embedded systems.[^jpl] Thus, Ivory is unsuitable
-for some programs with dynamic memory requirements (e.g., servers). All
-dynamic allocation in Ivory is on the stack. In the future, allocation regions
-may be added.
+for some programs with dynamic memory requirements (e.g., servers). All dynamic
+allocation in Ivory is on the stack. In the future, memory region memory
+management may be added.
 
-There is no reference aliasing in Ivory, and references are mutable by default.
+The only reference aliasing in Ivory is implicit, e.g., when two function
+arguments are the same parameter.
 
 Ivory also does not have sum types, although they can be approximated to some
 extent using macros.
@@ -219,7 +221,7 @@ bit-width (e.g., `uint64`, `int8`, etc.).
 
 ## Programming paradigms
 
-**Rust**: Rust supports both object-oriented and functional programming models,
+**Rust**: Rust supports object-oriented and functional programming models,
 including closures and generics (i.e., parametric polymorphism), algebraic
 datatypes, and pattern matching.
 
@@ -233,7 +235,7 @@ section).
 
 ## Macro programming
 
-**Rust**: Rust supports macro programming. Macros are type-safe and hygenic.
+**Rust**: Rust supports macro programming. Macros are hygienic.
 
 **Ivory**: As an EDSL, Ivory macros (i.e., regular Haskell) are in some ways the
  primary way to program. Most of the standard library is written as
@@ -243,18 +245,18 @@ section).
 
 **Rust**: Currently, Rust provides a "test" attribute for writing and running
 tests in the source code. More sophisticated testing frameworks are
-planned. Rust currently has no built-in verification tools.
+planned. Rust currently has no built-in verification tools. A QuickCheck port to
+Rust is fairly mature.[^qc]
 
 **Ivory**: Ivory allows the user to write inline assertions, and functions can
 be decorated with pre and post conditions. The compiler can optionally insert
 assertions that are verification conditions for ensuring the lack of undefined
 behavior.
 
-Ivory comes with a version of QuickCheck[^qc] for random test-case
-generation. Ivory currently has two experimental verification back-ends,
-including a symbolic simulator that generates CVC4[^cvc4] (an SMT solver)
-assertions, and one that generates ACL2[^acl2] (an automated theorem prover)
-assertions.
+Ivory comes with a version of QuickCheck for random test-case generation. Ivory
+currently has two experimental verification back-ends, including a symbolic
+simulator that generates CVC4[^cvc4] (an SMT solver) assertions, and one that
+generates ACL2[^acl2] (an automated theorem prover) assertions.
 
 Because Ivory generates simple conforming C99, C analysis tools perform well on
 generated Ivory code. We have used Coverity[^coverity] to analyze the
@@ -269,9 +271,8 @@ tools.
  lines of code. The backend is LLVM.[^llvm]
 
 **Ivory**: Ivory's compiler is written in Haskell. The current Ivory compiler,
-verification tools, and standard libraries are just over 20k lines of
-code. The current backend is C (as well as some languages for formal analysis,
-such as the ACL2 theorem-prover[^acl2] and CVC4,[^cvc4], and SMT solver.
+verification tools, and standard libraries are just over 20k lines of code. The
+current backend is.
 
 ## Adoption
 
@@ -330,6 +331,11 @@ and of course, its community momentum.
 Ivory's strengths are its embedding in a popular functional language, the
 simplicity of the compiler, and formal methods tools integration.
 
+## Acknowledgements
+
+Trevor Elliott, Pat Hickey, Eric Seidel, Jamey Sharp, Getty Ritter, Jon
+Sterling, and Darin Morrison provided helpful feedback on this document. Errors
+are mine alone.
 
 
 [^ardupilot]: https://code.google.com/p/ardupilot-mega/wiki/ProgrammingArduino
