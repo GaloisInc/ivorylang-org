@@ -94,7 +94,12 @@ The C language backend supports rendering Ivory assertions for static checking
 with the [CBMC model checker][cbmc]. The SMACCMPilot project build system
 includes integration for CBMC verification of the SMACCMPilot source code.
 
+We also provide our own [symbolic simulator][mc] for verifying Ivory assertions using
+[CVC4][cvc4].
+
 Further documentation on Ivory's verification support is forthcoming.
 
 [embedded]:http://wikipedia.com/wiki/Domain-specific_language#Domain-specific_language_topics
 [cbmc]: http://www.cprover.org/cbmc/
+[mc]: https://github.com/GaloisInc/ivory/tree/master/ivory-model-check
+[cvc4]: http://cvc4.cs.nyu.edu/web/

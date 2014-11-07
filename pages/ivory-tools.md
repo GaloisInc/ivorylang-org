@@ -1,9 +1,10 @@
 # Ivory Language: Toolchain
 
-The Ivory toolchain is made up of 3 packages found in the [Ivory repository][ivory-repo]:
+The Ivory toolchain is made up of 4 packages found in the [Ivory repository][ivory-repo]:
 
 * [`ivory`][ivory]
 * [`ivory-backend-c`][ivory-backend-c]
+* [`ivory-model-check`][ivory-model-check]
 * [`ivory-opts`][ivory-opts]
 
 ## Language Definition
@@ -51,6 +52,11 @@ module [`Ivory.HW.SearchDir`][ivory-hw-searchdir].
 The command line arguments expected by `Ivory.Compile.C.CmdlineFrontend.compile`
 can be found by running a compile program with the --help flag.
 
+## Assertion Verification
+
+Support for verifying user- and compiler- inserted assertions in Ivory programs
+is provided by the [`ivory-model-check`][ivory-model-check] package.
+
 ## Optimization Passes
 
 Ivory optimization passes are implemented in the
@@ -60,6 +66,24 @@ Optimization passes are used by default by the
 `Ivory.Compile.C.CmdlineFrontend.compile` compiler. Command line flags are
 available to disable passes individually.
 
+## Helpful Error Reporting
+
+One of the downsides of embedded DSLs like Ivory is that tools like the above
+generally do not have access to the original source information for error
+reporting. To address this issue, we have implemented a plugin for GHC (>= 7.8)
+that adds references to the original Haskell source in the Ivory code. The
+granularity is only at the level of individual Ivory statements, but nonetheless
+very helpful in discovering the source of an error.
+
+The source location plugin can be enabled by compiling your Ivory program with
+`-fplugin=Ivory.Language.Plugin`. You also need to tell GHC to retain the source
+locations for our plugin to see, which can be done in three ways:
+
+1. compile your Ivory program with `-fhpc`,
+2. compile your Ivory program with `-prof` (and preferably `-fprof-auto-calls` for
+   maximum granularity), or
+3. load your Ivory program into GHCi and run the compiler/analyses there.
+
 [ivory-repo]: http://github.com/GaloisInc/ivory/
 
 [ivory]: http://github.com/GaloisInc/ivory/tree/master/ivory
@@ -68,6 +92,8 @@ available to disable passes individually.
 
 [ivory-backend-c]: http://github.com/GaloisInc/ivory/tree/master/ivory-backend-c
 [ivory-backend-c-package]: http://github.com/GaloisInc/ivory/blob/master/ivory-backend-c/ivory-backend-c.cabal
+
+[ivory-model-check]: http://github.com/GaloisInc/ivory/tree/master/ivory-model-check
 
 [ivory-opts]: http://github.com/GaloisInc/ivory/tree/master/ivory-opts
 [ivory-opts-package]: http://github.com/GaloisInc/ivory/blob/master/ivory-opts/ivory-opts.cabal
