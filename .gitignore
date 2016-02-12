@@ -4,3 +4,4 @@ _site
 cabal.sandbox.config
 dist
 site
+.stack-work

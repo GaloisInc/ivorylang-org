@@ -1,24 +1,18 @@
-IVORYLANG_ORG_EXEC?=./.cabal-sandbox/bin/ivorylang-org
+STACK_FLAGS ?=
+
+IVORYLANG_ORG_EXEC = stack build $(STACK_FLAGS) --exec 'ivorylang-org $(1)'
 
 default: build
 
-.cabal-sandbox:
-	@cabal sandbox init
-
-.PHONY: ivorylang-org
-ivorylang-org: .cabal-sandbox site.hs Sidebar.hs
-	@cabal install
-	$(IVORYLANG_ORG_EXEC) clean
-
-build: ivorylang-org
-	$(IVORYLANG_ORG_EXEC) build
+.PHONY: build preview deploy clean
+build:
+	$(call IVORYLANG_ORG_EXEC,build)
 
 preview: build
-	$(IVORYLANG_ORG_EXEC) watch
+	$(call IVORYLANG_ORG_EXEC,preview)
 
 deploy:
-	$(IVORYLANG_ORG_EXEC) deploy
+	$(call IVORYLANG_ORG_EXEC,deploy)
 
 clean:
-	-$(IVORYLANG_ORG_EXEC) clean
-	-rm -rf cabal.sandbox.config .cabal-sandbox
+	$(call IVORYLANG_ORG_EXEC,clean)
