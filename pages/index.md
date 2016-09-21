@@ -19,12 +19,11 @@ The Ivory Language compiler is open source software. It is available on [github]
 </div>
 <div id="row-fluid">
 
-We are presenting an experience report on using Ivory to build [SMACCMPilot][] at ICFP 2014:
-
-[SMACCMPilot]: http://smaccmpilot.org
+We have two technical papers about Ivory, one covering the language itself and one describing our experiences in building a high-assurance autopilot using Ivory:
 
 </div>
 <div id="row-fluid">
+<a class="btn btn-large btn-primary" href="https://github.com/GaloisInc/ivory/blob/master/ivory-paper/ivory.pdf?raw=true" type="button">Ivory Language</a>
 <a class="btn btn-large btn-primary" href="https://github.com/GaloisInc/smaccmpilot-experiencereport/blob/master/embedded-experience.pdf?raw=true" type="button">Experience Report</a>
 <br />
 <br />
