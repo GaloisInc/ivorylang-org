@@ -32,7 +32,7 @@ to contribute changes.
 
 ### About this site
 
-The contents of [ivorylang.org][org] are Copyright 2014, Galois Inc. All Rights
+The contents of [ivorylang.org][org] are Copyright 2014-2017, Galois Inc. All Rights
 Reserved.
 
 [org]: http://ivorylang.org

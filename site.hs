@@ -16,6 +16,7 @@ sitemap = Tree "/" "Home"
       [ Page "ivory-introduction.html" "Introduction"
       , Page "ivory-concepts.html"     "Concepts"
       , Page "ivory-cheatsheet.html"   "Cheatsheet"
+      , Page "ivory-reference.html"    "Reference"
       , Page "ivory-tools.html"        "Toolchain"
       , Page "ivory-libs.html"         "Libraries"
       , Page "ivory-fib.html"          "Tutorial"
@@ -36,7 +37,9 @@ config = defaultConfiguration { deployCommand = deploy }
   where
   path = "/srv/www/ivorylang.org/public_html/"
   server = "alfred.galois.com"
-  deploy = "scp -r _site/* " ++ server ++  ":" ++ path
+  -- TODO: we should remove the old files just in case
+  deploy = -- "rm -rf " ++ path ++ "/*" ++ "; " ++
+    "scp -r _site/* " ++ server ++  ":" ++ path
     -- scp sets the group wrong, we need to change all of the items
     -- we own to group smaccm, supressing errors for the items we do not own
     ++ " && ssh " ++ server ++  " chgrp -R -f smaccm "  ++  path
@@ -104,7 +107,7 @@ templated t input = loadAndApplyTemplate t ctx input >>= relativizeUrls
     , field "sidebar"   $ \item -> return (sidebarHTML sitemap item)
     , field "directory" $ \item -> return (itemDirectory item)
     , field "filepath"  $ \item -> return (itemFilePath item)
-    , constField "copyright" "<p>&copy; Galois Inc. 2014</p>"
+    , constField "copyright" "<p>&copy; Galois Inc. 2014-2017</p>"
     , field "markdownfile"  $ \item -> return (markdownFile item)
     , defaultContext
     ]
