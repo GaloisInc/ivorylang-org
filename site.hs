@@ -37,10 +37,8 @@ config = defaultConfiguration { deployCommand = deploy }
   where
   path = "/srv/www/ivorylang.org/public_html/"
   server = "alfred.galois.com"
-  -- TODO: we should remove the old files just in case
-  deploy = -- "rm -rf " ++ path ++ "/*" ++ "; " ++
-    "scp -r _site/* " ++ server ++  ":" ++ path
-    -- scp sets the group wrong, we need to change all of the items
+  deploy = "rsync -crlOe ssh --delete _site/* " ++ server ++ ":" ++ path
+    -- rsync might set the group wrong, we need to change all of the items
     -- we own to group smaccm, supressing errors for the items we do not own
     ++ " && ssh " ++ server ++  " chgrp -R -f smaccm "  ++  path
     ++ " ;  ssh " ++ server ++  " chmod -R -f g+w "  ++  path
