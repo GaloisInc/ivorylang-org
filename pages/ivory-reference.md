@@ -238,23 +238,25 @@ void f() {}
 Here is a more interesting function with pre- and post-conditions:
 
 ```
-uint32_t g(uint32_t a, * struct Foo f, * struct Foo g) {
+uint32_t g(uint32_t a) {
   return a;
 }
 { pre(a < 4);
   pre(a > 0);
   post(return > 5);
-  pre(* f . aFoo && * g . aFoo);
 }
 ```
 
 ### types
 
+#### Values Types
+Ivory has many of the same basic types you would expect in C:
+
+  * void
   * bool
   * char
   * float
   * double
-  * void
   * int8_t
   * int16_t
   * int32_t
@@ -263,24 +265,6 @@ uint32_t g(uint32_t a, * struct Foo f, * struct Foo g) {
   * uint16_t
   * uint32_t
   * uint64_t
-  * S
-  * G
-  * ix_t
-
--- start, borrow from cheatsheet, REWRITEME
-
-#### Values Types
-
-- Boolean: `IBool`
-- Char: `IChar`
-- Int types:
-    - Signed: `SX`, where `X` is `int8`, `int16`, `int32`, `int64`
-        - Example: `Sint32`
-    - Unsigned: `UX`, where `X` is `int8`, `int16`, `int32`, `int64`
-        - Example: `Uint8`
-- Float: `IFloat`
-- Double: `IDouble`
-- Void: `()`.  In practice, void is only used as a return type for functions.
 
 Note: there are no machine-dependent types in Ivory, like `int`, `short int`,
 `long int`.
@@ -320,75 +304,68 @@ uint32_t deref_global(G*uint32_t i) {
 } 
 ```
 
-If the area qualifier is
-missing in the type, then that pointer is allowed to point to any area. If the 
-
-A memory area is allocated that has a type.
-
-- Allocated value: `Stored X`, where `X` is a value type.
-    - Example: `Stored Uint32`.
-
-- Arrays: `Array n X`, where `n` is a number and `X` is a memory area type
-    - Example: `Array 10 (Stored Sint32)`: array of 10 signed 32-bit integers.
-
-- Structs: `Struct "name"`, where `name` is the string associated with the defined
-  struct.
-    - Example: `Struct "foo"`
-
-#### Pointer Types
-
-Scope type is the scope of a pointer.  A scope is either `Local` if the memory
-  area is allocated on the stack, `Global` if its allocated in global memory, or
-  a type variable if you don't care.
-
-References are non-null pointers.  You almost exclusively use references in
-ivory.
-
-Examples:
-
-- `Ref Local
-  (Stored Sint32)`: reference to a locally-allocated signed 32-bit int.
-- `Ref Global
-  (Struct "foo")`: reference to a globally-allocated struct named `"foo"`.
-
-- `Ref s
-  (Array 5 (Stored IBool)`: indeterminate allocation scope of an array of 5 Booleans.
+If the area qualifier is missing in the type, then that reference is allowed to
+point to any area.
 
 #### Index Types
 
-Indexes are used to index into an array and for loop counters.  They have a
-special type, `Ix n`, where `n` is a natural number.  An index type of `Ix n`
-supports the values `0` through `n-1`.
-
-- Example: `Ix 3`.
-
-#### Initializer Types
-
--- end borrowed from cheatsheet
+Indexes are used to index into an array and for loop counters.  They have the
+special type, `ix_t n`, where `n` is a natural number. An index type of `ix_t
+n` supports the values `0` through `n-1`. Any values manually assigned to the
+index will be taken modulo `n`, so that they are in the correct range.
 
 #### bitdata
 
 These are basically enumerations where the total size can be specified in bits
 and the size of each enumerated value can be specified along with its value.
 
+-- TODO: actually, they are more than that. They work more like ADTs of the
+above.
+
 ### struct
 
+Structs come in three varieties in Ivory:
+
+  * C-style structs: create a C-style aggregations of types. 
+  * string
+  * abstract
+
+  * Declaration syntax:
+```
+<structDef> ::= 'struct' <identifier> '{' [ <type> <identifier> ';']* '}'
+                  | 'string' 'struct' <identifier> <integer>
+                  | 'abstract' 'struct' <identifier> <string>
+```
   * Initialization syntax:
-  {} means struct, as in `alloc s0{} = $stringInit("foo");`
+```
+<allocRef>  ::= 'alloc' <identifier> ';'
+                  | 'alloc' <identifier> '=' <structInit> ';'
+<structInit> ::= '$' <identifier> [ '(' [<exp> ',']* ')' ] // macro initialized
+                   | '{' [ <identifier> '=' <exp> ',' ]* '}'
+```
+
+#### string structs
+
+The string variant of structs is for creating fixed size arrays with two
+fields. The first field for tracking the current length of the string and the
+other field that holds the elements up to the declared maximum size. Ivory
+provides a standard library of functions for working with strings,
+`stblibStringModule`.
+
+  * Ex initialization:
+  `alloc s{} = $stringInit("foo");`
+
+#### abstract structs
+
+Abstract structs are used as pointers to structs that exist external to the
+Ivory program, such as those declared in C. The last parameter to declare an
+abstract struct is the filename of the C declaration for linkage purposes.
 
 ### const
 
 ### alloc
 
 ### extern
-
-### Pointer syntax
-
-  - `(G|S|ε|c)*`, where `c` is a user defined identifier
-  - `G` means global
-  - `S` means stack
-  - nothing means anything
-  - giving it a name allows you to match it up elsewhere (not usually needed)
 
 ### Includes
 
