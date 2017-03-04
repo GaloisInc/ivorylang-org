@@ -336,13 +336,6 @@ Structs come in three varieties in Ivory:
                   | 'string' 'struct' <identifier> <integer>
                   | 'abstract' 'struct' <identifier> <string>
 ```
-  * Initialization syntax:
-```
-<allocRef>  ::= 'alloc' <identifier> ';'
-                  | 'alloc' <identifier> '=' <structInit> ';'
-<structInit> ::= '$' <identifier> [ '(' [<exp> ',']* ')' ] // macro initialized
-                   | '{' [ <identifier> '=' <exp> ',' ]* '}'
-```
 
 #### string structs
 
@@ -361,15 +354,50 @@ Abstract structs are used as pointers to structs that exist external to the
 Ivory program, such as those declared in C. The last parameter to declare an
 abstract struct is the filename of the C declaration for linkage purposes.
 
-### const
+### Constants
+
+Constant definitions may only appear at the toplevel of an Ivory program and
+defines a value that is in scope for the rest of the Ivory program. Constants
+have the following syntax:
+
+```
+<constDef> ::= [ <type> ] <identifier> '=' <exp> ';'
+```
 
 ### alloc
 
-### extern
+Ivory supports allocation syntax for references, arrays, and structs.
 
-### Includes
+```
+<allocRef> ::= 'alloc' '*' <identifier> [ '=' <exp> ] ';'
+             | 'alloc' <identifier> '[' ']' [ '=' <arrInit> ] ';'
+             | 'alloc' <identifier> [ '=' <structInit> ] ';'
+<arrInit> ::= '{' [ <exp> ',' ]* '}'
+<structInit> ::= '$' <identifier> [ '(' [<exp> ',']* ')' ] // macro initialized
+               | '{' [ <identifier> '=' <exp> ',' ]* '}'
+```
 
-  * bring other ivory modules/defs into scope
+### Includes, imports, and externs
+
+Definitions from other Ivory modules are brought into scope using `include`.
+
+```
+<includeDef>  ::= 'include' <identifier>
+```
+
+Ivory provides two ways to bring definitions from C into scope depending on the
+type of definition.  Use `extern` to bring variables into scope from external C
+sources and use `import` to bring functions into scope. The arguments to
+`extern` include the (relative) path to the C definition, the type of the
+definition, and the name. The arguments to `import` include the (relative) path
+to the C definition, the C name, the Ivory type, and the Ivory name.
+
+```
+<includeProc> ::= 'import' '(' <header> ',' <identifier> ')' <type> <identifier> '(' <args> ')'
+<args> ::= [ <type> <identifier> ',' ]*
+<externImport> ::= 'extern' <header> <type> <identifier>
+<header> ::= [ <identifier> / ]* <identifier> '.' <identifier> // file paths
+```
 
 ## Memory Areas
 
