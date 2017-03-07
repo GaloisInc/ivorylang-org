@@ -399,12 +399,6 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 <header> ::= [ <identifier> / ]* <identifier> '.' <identifier> // file paths
 ```
 
-## Memory Areas
-
-  * C's idea of automatic stack variables doesn't really exist.
-    * instead you explicitly alloc on the stack and get a reference
-    * then you can store to that reference if you want
-
 ### Pointer syntax explained
 
 ### `let` vs. `Stored` and `store`
