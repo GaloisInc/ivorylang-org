@@ -337,6 +337,13 @@ Structs come in three varieties in Ivory:
                   | 'abstract' 'struct' <identifier> <string>
 ```
 
+Note: Even though Ivory has structs similar to C-style structs, there is an
+important difference to be ware of. The fields of a struct must be explicit
+about how the value is stored. If the value is stored directly in the struct,
+the type of the field needs to begin with a `&` character. For the basic types,
+such as `int8_t`, Ivory can infer that the struct will need to store the value
+and hence the `&` may be omitted.
+
 #### string structs
 
 The string variant of structs is for creating fixed size arrays with two
