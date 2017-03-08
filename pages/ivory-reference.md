@@ -403,7 +403,7 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 <includeProc> ::= 'import' '(' <header> ',' <identifier> ')' <type> <identifier> '(' <args> ')'
 <args> ::= [ <type> <identifier> ',' ]*
 <externImport> ::= 'extern' <header> <type> <identifier>
-<header> ::= [ <identifier> / ]* <identifier> '.' <identifier> // file paths
+<header> ::= [ <identifier> '/' ]* <identifier> '.' <identifier> // file paths
 ```
 
 ### Pointer syntax explained
