@@ -412,9 +412,75 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 
 ### iterators
 
-  * forever is a `while(1)` loop
-  * map is built in array/index iterator
-  * Go through fizzbuzz examples and to see what is available
+Instead of providing traditional looping constructs, Ivory supports loops
+through the use of iterators. All of the forms of the iterator syntax, except
+`forever`, take the name of iterator, which will be created and brought into
+scope, as a parameter. The difference between the different iterator forms
+gives the programmer control over the range or order of the iteration.
+
+* The simplest iterator is the `forever` iterator that creates the equivalent
+of a C `while(1)` loop. It simply iterates without stopping and without a loop
+counter. Ex:
+```
+-- loop forever calling foo
+forever {
+  foo();
+}
+```
+
+* The next simplest iterator is the `map` iterator that iterates over the
+full range of the indices into an array, which must appear in the body of the
+`map`. Ex:
+```
+-- copy array 'other' into 'my_array'
+void copy_array4(const *uint32_t[4] other) {
+  alloc my_array[] = {0,0,0,0};
+  map iter {
+        store my_array@iter as other[iter];
+  }
+}
+```
+
+* `upTo` and `downFrom`: These iterators take an expression for the bound on
+the largest iterator value (here, `top`). `upTo` will iterate on the range `0`
+to `top` (inclusive) and `downFrom` iterates from `top` to `0` (decreasing and
+also inclusive). Ex:
+```
+void copy_array_upTo(const *uint32_t[4] other, ix_t 4 top) {
+  alloc my_array[] = {0,0,0,0};
+  upTo top iter {
+        store my_array@iter as other[iter];
+  }
+}
+void copy_array_downFrom(const *uint32_t[4] other, ix_t 4 bottom) {
+  alloc my_array[] = {0,0,0,0};
+  downFrom bottom iter {
+        store my_array@iter as other[iter];
+  }
+}
+```
+Note: The example above also demonstrates the two different form of array
+indexing. The `@` syntax which returns a reference and the `[]` syntax which is
+like the `@` but with a dereference.
+
+* `upFromTo` and `downFromTo`: Similar to the above iterator syntax, these
+two variants take an additional bound, the value to stop on (again, inclusive
+range). The order is `(start, stop)` and the difference between these two is
+the order (increasing or decreasing) of the iteration. Ex:
+```
+void copy_array_upFromTo(const *uint32_t[4] other, ix_t 4 start, ix_t 4 stop) {
+  alloc my_array[] = {0,0,0,0};
+  upFromTo (start, stop) iter {
+        store my_array@iter as other[iter];
+  }
+}
+void copy_array_downFromTo(const *uint32_t[4] other, ix_t 4 start, ix_t 4 stop) {
+  alloc my_array[] = {0,0,0,0};
+  downFromTo (start, stop) iter {
+        store my_array@iter as other[iter];
+  }
+}
+```
 
 ## functions
 
