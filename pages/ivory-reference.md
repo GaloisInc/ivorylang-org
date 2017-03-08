@@ -4,120 +4,29 @@
 
 ### Keywords
 
-  * `if`
-  * `else`
-  * `assert`
-  * `assume`
-  * `pre`
-  * `post`
-  * `let`
-  * `return`
-  * `alloc`
-  * `store`
-  * `break`
-  * `const`
-  * `struct`
-  * `abstract`
-  * `type`
-  * `include`
-  * `import`
-  * `extern`
-  * `bitdata`
-  * `as`
-  * Reserved identifiers used in the Ivory standard library (always in scope):
-    * `string`
-    * `memcpy`
-    * `abs`
-    * `signum`
-    * `exp`
-    * `sqrt`
-    * `log`
-    * `pow`
-    * `div`
-    * `sin`
-    * `cos`
-    * `tan`
-    * `asin`
-    * `acos`
-    * `atan`
-    * `atan2`
-    * `sinh`
-    * `cosh`
-    * `tanh`
-    * `asinh`
-    * `acosh`
-    * `atanh`
-    * `isnan`
-    * `isinf`
-    * `round`
-    * `ceil`
-    * `floor`
-    * `fromIx`
-    * `ixSize`
-    * `toIx`
-    * `toCArray`
-    * `arrayLen`
-    * `sizeOf`
-    * `nullPtr`
-    * `refToPtr`
-    * casting
-        * `safeCast`
-        * `bitCast`
-        * `castWith`
-        * `twosCompCast`
-        * `twosCompRep`
-    * Iterator related
-        * `map`
-        * `upTo`
-        * `upFromTo`
-        * `downFrom`
-        * `downFromTo`
-        * `forever`
+* keywords: `if`, `else`, `assert`, `assume`, `pre`, `post`, `let`, `return`,
+`alloc`, `store`, `break`, `const`, `struct`, `abstract`, `type`, `include`,
+`import`, `extern`, `bitdata`, `as`
+  
+* Reserved identifiers used in the Ivory standard library (always in scope):
+`string`, `memcpy`, `abs`, `signum`, `exp`, `sqrt`, `log`, `pow`, `div`, `sin`,
+`cos`, `tan`, `asin`, `acos`, `atan`, `atan2`, `sinh`, `cosh`, `tanh`, `asinh`,
+`acosh`, `atanh`, `isnan`, `isinf`, `round`, `ceil`, `floor`, `fromIx`,
+`ixSize`, `toIx`, `toCArray`, `arrayLen`, `sizeOf`, `nullPtr`, `refToPtr`
+
+* casting operations:
+`safeCast`, `bitCast`, `castWith`, `twosCompCast`, `twosCompRep`
+
+* Iterators:
+`map`, `upTo`, `upFromTo`, `downFrom`, `downFromTo`, `forever`
 
 ## Reserved Symbols
 
 The follow symbols are reserved in Ivory, most of which will have a familiar meaning for
 C programmers:
-
-  * `$`
-  * `::`
-  * `?`
-  * `:`
-  * `.`
-  * `->`
-  * `==`
-  * `!=`
-  * `*`
-  * `/`
-  * `+`
-  * `-`
-  * `%`
-  * `=`
-  * `<`
-  * `<=`
-  * `>=`
-  * `>`
-  * `|`
-  * `&`
-  * `^`
-  * `~`
-  * `!`
-  * `&&`
-  * `||`
-  * `<<`
-  * `>>`
-  * `(`
-  * `)`
-  * `}`
-  * `{`
-  * `[`
-  * `]`
-  * `;`
-  * `,`
-  * `@`
-  * `<-`
-  * `_`
-  * `#`
+`$`, `::`, `?`, `:`, `.`, `->`, `==`, `!=`, `*`, `/`, `+`, `-`, `%`, `=`, `<`,
+`<=`, `>=`, `>`, `|`, `&`, `^`, `~`, `!`, `&&`, `||`, `<<`, `>>`, `(`, `)`,
+`}`, `{`, `[`, `]`, `;`, `,`, `@`, `<-`, `_`, `#`
 
 Definitions in Ivory programs needs to appear at the top-level. These include:
 function definitions, include and import statements, struct, type, and bitdata
@@ -251,20 +160,8 @@ uint32_t g(uint32_t a) {
 
 #### Values Types
 Ivory has many of the same basic types you would expect in C:
-
-  * void
-  * bool
-  * char
-  * float
-  * double
-  * int8_t
-  * int16_t
-  * int32_t
-  * int64_t
-  * uint8_t
-  * uint16_t
-  * uint32_t
-  * uint64_t
+`void`, `bool`, `char`, `float`, `double`, `int8_t`, `int16_t`, `int32_t`,
+`int64_t`, `uint8_t`, `uint16_t`, `uint32_t`, `uint64_t`
 
 Note: there are no machine-dependent types in Ivory, like `int`, `short int`,
 `long int`.
@@ -275,9 +172,9 @@ All allocated data in Ivory is associated with an area.
 
 The first area is the Global area. The Global area is always in scope and exists
 for the whole lifetime of the Ivory program. The Global area is abbreviated to
-'G' when it appears in a reference's type.
+`G` when it appears in a reference's type.
 
-The second area is the Stack area (abbreviate 'S'). Each function gets its own
+The second area is the Stack area (abbreviate `S`). Each function gets its own
 Stack area and this area refers to the stack space of the C stack for the
 function.
 
@@ -285,8 +182,8 @@ All references in Ivory are associated with an area. The area qualifier for
 references must fit the following rules:
 
   * No area specified: This reference may point to memory in any area.
-  * 'G': This reference always points to memory in the Global area.
-  * 'S': This reference always points to memory in the Stack area.
+  * `G`: This reference always points to memory in the Global area.
+  * `S`: This reference always points to memory in the Stack area.
   * user specified name: The area the reference points to is given a name, which
     can be used elsewhere if two references need to refer to the same area.
 
@@ -487,47 +384,46 @@ void copy_array_downFromTo(const *uint32_t[4] other, ix_t 4 start, ix_t 4 stop) 
 }
 ```
 
-## functions
-
-  * similar to C functions
-  * we support `void` return types and empty argument lists
-  * also support returning values (stored?)
-
 ## Macros
 
-  * Prefix the Haskell function name with `$`.
-  * macros can be used where either an expression or a statement is expected
-  * back arrow syntax for getting a value out of a macro
-
-### Calling into Haskell
-
-### back arrow
-
-## Modules
+Ivory uses Haskell as a macro language. The main use for macros is code
+generation or statically computing a value. When a macro is invoked, the name
+must be prefixed with a `$` sigil. Macros may appear where either a statement
+or expression is expected, depending on the macro. When a macro computes a
+value, the `<-` syntax is used to give that value a name in the Ivory program.
 
 ## FFI with C
-
-### Imports
-
-  * take a path and a function
-  * For FFI with C
-  * can also be used with memory areas
-  * Syntax seems different. Parens vs. non-parens.
 
 ## Translation to C
 
 ## Safety, casting, and conversion
 
-  * safeCast is part of ivory. It considers overflow.
+* safeCast is part of ivory. It considers overflow.
 
 ## Assertions, Preconditions, and Postconditions
 
 ## Ivory Standard Library
 
-  * memcpy is C's memcpy, but it's built in to the syntax
-  * lookup in the happy grammar the set of builtins
-  * can't use parens for refCopy's and lee says that's bad
+* memcpy is C's memcpy, but it's built in to the syntax
+* lookup in the happy grammar the set of builtins
+* can't use parens for refCopy's and lee says that's bad
 
 ### Strings
-  * stdlibStringModule
-  * generates `ivory_string_FooStr` as a type
+
+The standard library module `stdlibStringModule` can be used for working with
+string types. To fully understand the usage of this module requires reading the
+Haskell code, but here we cover some of the basics.
+
+Declaring a string:
+```
+include stdlibStringModule -- Bring the stdlibStringModlue into scope
+string struct MyString 4
+```
+
+This will create a type named `ivory_string_MyString`.
+
+* stdlibStringModule
+* generates `ivory_string_FooStr` as a type
+
+List of functions in the stdLibStringModule:
+* 
