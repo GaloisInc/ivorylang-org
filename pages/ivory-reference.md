@@ -2,6 +2,15 @@
 
 ## Syntax
 
+### Comments
+
+Ivory supports single line comments that start with `--` and go to the end of
+the line. Ex:
+```
+-- This is a trivial function:
+void f () {}
+```
+
 ### Keywords
 
 * keywords: `if`, `else`, `assert`, `assume`, `pre`, `post`, `let`, `return`,
