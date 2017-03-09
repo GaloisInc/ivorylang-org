@@ -252,6 +252,33 @@ provides a standard library of functions for working with strings,
   * Ex initialization:
   `alloc s{} = $stringInit("foo");`
 
+Fully understand the usage of the string module requires reading the Haskell
+code, but here we cover some of the basics.
+
+Declaring a string:
+```
+include stdlibStringModule -- Bring the stdlibStringModlue into scope
+string struct MyString 4
+```
+
+This will create a type named `ivory_string_MyString`. For example, a function
+that takes `MyString` value as a parameter would look like this:
+```
+void str_example(* struct ivory_string_MyString s)
+{
+ -- do something with the string
+}
+```
+
+The macro `string_lit_store` can be used to store a string into a string
+variable.
+
+Example macros in the stdLibStringModule:
+
+* `stringInit`: allocates a new string
+* `string_lit_store`: stores a string literal into a string variable
+* `string_lit_array`: stores a string literal into an array of `uint8_t`
+
 #### abstract structs
 
 Abstract structs are used as pointers to structs that exist external to the
@@ -302,10 +329,6 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 <externImport> ::= 'extern' <header> <type> <identifier>
 <header> ::= [ <identifier> '/' ]* <identifier> '.' <identifier> // file paths
 ```
-
-### Pointer syntax explained
-
-### `let` vs. `Stored` and `store`
 
 ### iterators
 
@@ -392,38 +415,55 @@ must be prefixed with a `$` sigil. Macros may appear where either a statement
 or expression is expected, depending on the macro. When a macro computes a
 value, the `<-` syntax is used to give that value a name in the Ivory program.
 
-## FFI with C
+## Interfacing with C
+
+There are two main ways to interface with C, calling a function that is defined
+in C or relying on values defined in C code.  Before a C function can be called
+from Ivory, first it must be imported and before a C variable can be used it
+must be declared `extern` in the Ivory module.
+
+Ex:
+```
+extern someheader.h G* uint8_t myptr -- brings myptr into scope as a global reference
+import (someheader.h, some_C_fn_name) int ivory_fn_name ()
+```
+
+Note: The function import requires both the name of the function in C and the name that will
+be used in Ivory, in that order.
+
+Note: Ivory does not support C's notion of varargs. As such it is common to
+import varargs functions, such as `printf`, multiple times under different
+names, once for each set of arguments. Ex:
+
+```
+import (stdio.h, printf) int32_t printf_int8_t(string s, int8_t n)
+import (stdio.h, printf) int32_t printf_int32_t(string s, int32_t n)
+```
 
 ## Translation to C
 
+-- TODO: I'd like to cut this section or replace it with advice on how to see
+the translation so people can inspect it when they want to know what it is.
+
 ## Safety, casting, and conversion
 
-* safeCast is part of ivory. It considers overflow.
+Ivory programs are not allow to have undefined behavior and in turn this
+requires special support for casting operations. The following casting operations are builtin:
+
+-- TODO: where are these defined so I can talk about the differences?
+
+* `safeCast`, `bitCast`, `castWith`, `twosCompCast`, `twosCompRep`
 
 ## Assertions, Preconditions, and Postconditions
 
+-- TODO: This is a deep topic. How much to cover here?
+
 ## Ivory Standard Library
+
+-- TODO: documenting this is more work than I had realized. There's a lot I
+don't understand.
 
 * memcpy is C's memcpy, but it's built in to the syntax
 * lookup in the happy grammar the set of builtins
 * can't use parens for refCopy's and lee says that's bad
 
-### Strings
-
-The standard library module `stdlibStringModule` can be used for working with
-string types. To fully understand the usage of this module requires reading the
-Haskell code, but here we cover some of the basics.
-
-Declaring a string:
-```
-include stdlibStringModule -- Bring the stdlibStringModlue into scope
-string struct MyString 4
-```
-
-This will create a type named `ivory_string_MyString`.
-
-* stdlibStringModule
-* generates `ivory_string_FooStr` as a type
-
-List of functions in the stdLibStringModule:
-* 
