@@ -52,14 +52,14 @@ followed by the address of (`&`) operator. Ivory references are never null.
 An example, of a C-style dereference for an area, would be:
 
 ```
-myArray[i] // returns the value stored in the array at position i
-myStruct->f // returns the value stored in field f of the struct
+myArray[i] -- returns the value stored in the array at position i
+myStruct->f -- returns the value stored in field f of the struct
 ```
 
 Examples of Ivory dereferences that return references would be:
 ```
-myArray@i // returns a reference to the ith position of the array
-myStruct.f // returns a reference to the field f of the struct
+myArray@i -- returns a reference to the ith position of the array
+myStruct.f -- returns a reference to the field f of the struct
 ```
 
 The full grammar for Ivory expressions follows:
@@ -69,20 +69,20 @@ The full grammar for Ivory expressions follows:
         | <string>
         | <identifier>
         | '(' <exp> ')'
-        // areas
-        | '*' <exp>             // deref
-        | <exp> '@' <exp>       // array indexing, arr@ix (returns reference)
-        | <exp> '[' <exp> ']'   // array index and derference
-        | <exp> '.' <exp>       // struct field access (returns reference)
-        | <exp> '->' <exp>      // struct field access and dereference
-        | '&' <identifier>      // address of operator
-        // macros
+        -- areas
+        | '*' <exp>             -- deref
+        | <exp> '@' <exp>       -- array indexing, arr@ix (returns reference)
+        | <exp> '[' <exp> ']'   -- array index and derference
+        | <exp> '.' <exp>       -- struct field access (returns reference)
+        | <exp> '->' <exp>      -- struct field access and dereference
+        | '&' <identifier>      -- address of operator
+        -- macros
         | '$' <identifier> [ '(' [<exp> ',']* ')' ]
-        // function calls
+        -- function calls
         | <identifier> '(' [<exp> ',']* ')'
-        // Unary ops
+        -- Unary ops
         | <unaryop> <exp>
-        // Binary ops
+        -- Binary ops
         | <exp> <binop> <exp>
         | <exp> '?' <exp> ':' <exp>
 
@@ -125,10 +125,10 @@ either an iterator usage (`map`, `upTo`, `forever`, etc) or an if-statement.
                | 'memcpy' <identifier> <identifier> ';'
                | <allocRef> -- see the `alloc` section
                | 'store' <exp> 'as' <exp> ';'
-               // function calls
+               -- function calls
                | <identifier> ['(' [<exp> ',']*')']
                | '$' <identifier> ['(' [<exp> ',']*')']
-               // binding the value returned from a macro invocation
+               -- binding the value returned from a macro invocation
                | <identifier> '<-' '$' <identifier> ['(' [<exp> ',']* ')']
                | 'break' ';'
 
@@ -313,7 +313,7 @@ Ivory supports allocation syntax for references, arrays, and structs.
              | 'alloc' <identifier> '[' ']' [ '=' <arrInit> ] ';'
              | 'alloc' <identifier> [ '=' <structInit> ] ';'
 <arrInit> ::= '{' [ <exp> ',' ]* '}'
-<structInit> ::= '$' <identifier> [ '(' [<exp> ',']* ')' ] // macro initialized
+<structInit> ::= '$' <identifier> [ '(' [<exp> ',']* ')' ] -- macro initialized
                | '{' [ <identifier> '=' <exp> ',' ]* '}'
 ```
 
@@ -336,7 +336,7 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 <includeProc> ::= 'import' '(' <header> ',' <identifier> ')' <type> <identifier> '(' <args> ')'
 <args> ::= [ <type> <identifier> ',' ]*
 <externImport> ::= 'extern' <header> <type> <identifier>
-<header> ::= [ <identifier> '/' ]* <identifier> '.' <identifier> // file paths
+<header> ::= [ <identifier> '/' ]* <identifier> '.' <identifier> -- file paths
 ```
 
 ### iterators
