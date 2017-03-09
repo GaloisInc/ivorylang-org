@@ -114,7 +114,7 @@ either an iterator usage (`map`, `upTo`, `forever`, etc) or an if-statement.
                | 'let' [<type>] <identifier> '=' <exp> ';'
                | 'return' [<exp>] ';'
                | 'memcpy' <identifier> <identifier> ';'
-               | <allocRef> -- TODO: unpack this
+               | <allocRef> -- see the `alloc` section
                | 'store' <exp> 'as' <exp> ';'
                // function calls
                | <identifier> ['(' [<exp> ',']*')']
