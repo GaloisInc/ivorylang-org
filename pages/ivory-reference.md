@@ -449,19 +449,57 @@ import (stdio.h, printf) int32_t printf_int8_t(string s, int8_t n)
 import (stdio.h, printf) int32_t printf_int32_t(string s, int32_t n)
 ```
 
-## Translation to C
+## Casting and conversion
 
--- TODO: I'd like to cut this section or replace it with advice on how to see
-the translation so people can inspect it when they want to know what it is.
+Ivory is designed so that programs are not allowed to have undefined behavior
+and in turn this requires special support for casting operations. The C standard
+makes conversion from unsigned to signed well-defined as long as the value can
+be preserved. But if the unsigned value is bigger than the largest representable
+value of the signed type, as is the case for a value we want to treat as
+negative, the behavior is implementation-specific, and may trap.
 
-## Safety, casting, and conversion
+* `safeCast`
 
-Ivory programs are not allow to have undefined behavior and in turn this
-requires special support for casting operations. The following casting operations are builtin:
+    Only defined for conversions that are statically known to be safe. Here safety
+    means that there is no undefined behavior in terms of C.
 
--- TODO: where are these defined so I can talk about the differences?
+* `castWith`
 
-* `safeCast`, `bitCast`, `castWith`, `twosCompCast`, `twosCompRep`
+    This will cast between any two types, but if the cast is not safe according to
+    the rules of `safeCast` it evaluates to a user supplied default value.
+
+* `twosCompCast`
+
+    This algorithm checks the most significant bit, which is the sign
+    bit. If it is clear, then the value is representable in the target
+    type (assuming they're the same bit-width) and we can just cast.
+
+    One way to define two's complement is that `-x = ~x + 1`. Negating
+    both sides gives `x = -~x - 1`, and that is the identity we use when
+    the sign bit is set.
+
+    If the sign bit was set, then if we flip every bit we will have a
+    value that is representable and we can cast it to the target type.
+    So we insert the cast after complementing the value but before
+    negating and subtracting 1.
+
+    On machines that natively use two's complement for signed numbers,
+    this should optimize away to use zero instructions. However, the C
+    standard also permits implementations that use one's complement or
+    sign-magnitude representations, and this algorithm is expected to
+    work in those implementations as well.
+
+* `twosCompRep`
+
+    Takes a signed value interpreted as a two's complement, and returns an
+    unsigned value with the identity bit pattern. This is only defined for cases
+    where it is statically guaranteed not to overflow.
+
+* `bitCast`
+
+    A narrowing cast from one bit type to another.  This explicitly discards
+    the upper bits of the input value to return a smaller type, and is only defined
+    for unsigned integers.
 
 ## Assertions, Preconditions, and Postconditions
 
