@@ -528,10 +528,6 @@ negative, the behavior is implementation-specific, and may trap.
     the upper bits of the input value to return a smaller type, and is only defined
     for unsigned integers.
 
-## Assertions, Preconditions, and Postconditions
-
--- TODO: This is a deep topic. How much to cover here?
-
 ## Ivory Standard Library
 
 -- TODO: documenting this is more work than I had realized. There's a lot I
@@ -541,3 +537,6 @@ don't understand.
 * lookup in the happy grammar the set of builtins
 * can't use parens for refCopy's and lee says that's bad
 
+## Translating to C
+
+-- TODO: Example minimal Haskell+ivory file through to generated C
