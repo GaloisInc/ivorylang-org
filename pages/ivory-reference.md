@@ -157,13 +157,41 @@ Here is a more interesting function with pre- and post-conditions:
 
 ```
 uint32_t g(uint32_t a) {
-  return a;
+  return a + 4;
 }
 { pre(a < 4);
   pre(a > 0);
   post(return > 5);
 }
 ```
+
+The syntax for functions is as follows:
+
+```
+<procDef>    ::= <type> <identifier> '(' <args> ')' '{' <stmts> '}' <prePostBlk>
+<args>       ::= [ <type> <identifier> ',' ]*
+<prePostBlk> ::= [ '{' <prePosts> '}' ]
+<prePosts>   ::= [ <prePost> ';' ]*
+<prePost>    ::= 'pre'  '(' <exp> ')'
+               | 'post' '(' <exp> ')'
+```
+
+#### Pre and post conditions
+
+Function definitions in Ivory may be followed by optional pre and post
+conditions on the function. These conditions are written as Ivory expressions
+and may mention the parameters to the function or the return value of the
+function. In a post-condition, the `return` keyword has a special meaning and
+represents the value returned by the function. In the example above, the
+post-condition `post(return > 5)` states that the value returned by the
+function will be greater than `5`.  In addition to expressions on values, the
+conditions can also use Ivory references.
+
+Multiple pre or post conditions may be provided for a function, in which case
+they must all hold.
+
+Ivory supports using an external SMT solver to automatically check pre and post
+conditions, but this topic is not covered here.
 
 ### types
 
@@ -334,7 +362,6 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 
 ```
 <includeProc>  ::= 'import' '(' <header> ',' <identifier> ')' <type> <identifier> '(' <args> ')'
-<args>         ::= [ <type> <identifier> ',' ]*
 <externImport> ::= 'extern' <header> <type> <identifier>
 <header>       ::= [ <identifier> '/' ]* <identifier> '.' <identifier> -- file paths
 ```
