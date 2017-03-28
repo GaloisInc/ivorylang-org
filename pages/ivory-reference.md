@@ -203,6 +203,7 @@ Ivory has many of the same basic types you would expect in C:
 Note: there are no machine-dependent types in Ivory, like `int`, `short int`,
 `long int`.
 
+
 #### Memory area types
 
 All allocated data in Ivory is associated with an area.
@@ -250,11 +251,49 @@ index will be taken modulo `n`, so that they are in the correct range.
 
 #### bitdata
 
-These are basically enumerations where the total size can be specified in bits
-and the size of each enumerated value can be specified along with its value.
+At a first approximation, bitdata are a powerful form of enumerations where the
+programmer has precise control over the bit width and representation. The full
+power of bitdata is beyond the scope of this reference. We recommend the reader
+look at this [document for background on
+bitdata](http://yav.github.io/publications/bitdata.pdf).
 
--- TODO: actually, they are more than that. They work more like ADTs of the
-above.
+Here is the Ivory syntax for defining bitdata:
+
+```
+-- Bitdata definition
+<bdDef> ::= 'bitdata' <tyident> '::' <bitType> '=' <bdConstrs>
+
+-- One or more bitdata constructors, separated by '|'
+<bdConstrs> ::= <bdConstrs> '|' <bdConstr>
+              | <bdConstr>
+
+<bdConstr> ::= <identifier> <bdRecord> <bdLayout>
+
+-- Zero or more fields.
+<bdRecord> ::= [ '{' <bdFields> '}' ]
+
+<bdFields> ::= <bdFields> ',' <bdField>
+             | <bdField>
+
+<bdField> ::= <identifier> '::' <bitType>
+            | '_'   '::' <bitType>
+
+<bdLayout> ::= [ 'as' <bdItems> ]
+
+-- One or more items, separated by #
+<bdItems> ::= <bdItems> '#' <bdItem>
+            | <bdItem>
+
+<bdItem> ::= <identifier>
+           | <integer>
+           | <bitLiteral>
+
+<bitLiteral> ::= <digit>+ 'b' [0 1]+
+
+<tyident> ::= <tyidentifier>
+            | <tyidentifier> '.' <tyidentifier>
+<tyidentifier> ::= <capital letter>   [<alpha> <digit> [_ \']]*
+```
 
 ### struct
 
@@ -530,12 +569,13 @@ negative, the behavior is implementation-specific, and may trap.
 
 ## Ivory Standard Library
 
--- TODO: documenting this is more work than I had realized. There's a lot I
-don't understand.
+The Ivory standard library is beyond the scope of this document and we
+recommend the reader to examine the Haskell code directly. The source of the
+standard library can be found
+[here](https://github.com/GaloisInc/ivory/tree/master/ivory-stdlib/src/Ivory).
 
-* memcpy is C's memcpy, but it's built in to the syntax
-* lookup in the happy grammar the set of builtins
-* can't use parens for refCopy's and lee says that's bad
+As a reminder, Haskell functions can be invoked from Ivory using the macro
+syntax (`$`).
 
 ## Translating to C
 
