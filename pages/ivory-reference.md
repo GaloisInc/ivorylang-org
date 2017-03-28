@@ -539,4 +539,80 @@ don't understand.
 
 ## Translating to C
 
--- TODO: Example minimal Haskell+ivory file through to generated C
+Below is a complete set of example files to get an simple Ivory environment
+going. We assume you have a Haskell development toolchain already installed and
+setup. If not, we recommend [Haskell Platform
+Core](https://www.haskell.org/platform/).
+
+First, your project will need a cabal description file so that it can be built
+as a Haskell project.
+
+* First, your project will need a cabal description file so that it can be
+built as a Haskell Project. The most important detail for this file is the
+`build-depends` field. This tells cabal that we need the `ivory`,
+`ivory-stdlib`, and `ivory-backend-c` packages. For this example, the file is
+named: `minimal-ivory-example.cabal`
+
+    ```
+    name:                minimal-ivory-example
+    version:             0.1.0.0
+    license:             BSD3
+    license-file:        LICENSE
+    author:              Your Name
+    maintainer:          you@example.com
+    build-type:          Simple
+    extra-source-files:  ChangeLog.md
+    cabal-version:       >=1.10
+    
+    executable minimal-ivory-example
+      main-is:             Main.hs
+      -- other-modules:
+      -- other-extensions:
+      build-depends:       base >=4.8 && <4.10
+                         , ivory
+                         , ivory-stdlib
+                         , ivory-backend-c
+      hs-source-dirs:      src
+      default-language:    Haskell2010
+    ```
+
+* Cabal requires an additional file. This file is not important for this simple
+project and we use the default: `Setup.hs`
+
+    ```
+    import Distribution.Simple
+    main = defaultMain
+    ```
+
+* The `main` function for the project is in `src/Main.hs`. This file calls the
+Ivory compiler on whatever input files we specify.  Here we use the `ivoryFile`
+quasiquoter to compile the file `example.ivory`. The line `main = runCompiler`
+mentions `example`. The name `example` is created by the `ivoryFile` line by
+concatenating directory names and dropping the `.ivory` suffix. For instance,
+if the file was at the path `directory1/directory2/my_input.ivory`, then we
+would use `direcotry1directory2my_input` as the module name passed to
+`runCompiler`:
+
+    ```
+    {-# LANGUAGE QuasiQuotes         #-}
+    {-# LANGUAGE DataKinds           #-}
+    module Main where
+    
+    import           Ivory.Compile.C.CmdlineFrontend
+    import           Ivory.Language
+    import           Ivory.Stdlib
+    
+    [ivoryFile|example.ivory|]
+    
+    main :: IO ()
+    main = runCompiler [example, stdlibStringModule] stdlibStringArtifacts
+      initialOpts {outDir = Just "ivory-example", constFold = True}
+    ```
+
+* Finally, we have our Ivory program that we want to translate to C: `example.ivory`
+
+    ```
+    void f() {}
+    ```
+
+This will create a directory, `ivory-example` and write the output there.
