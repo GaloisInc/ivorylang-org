@@ -17,7 +17,7 @@ void f () {}
 `alloc`, `store`, `break`, `const`, `struct`, `abstract`, `type`, `include`,
 `import`, `extern`, `bitdata`, `as`
   
-* Reserved identifiers used in the Ivory standard library (always in scope):
+* Reserved identifiers used in the Ivory standard library (in scope by default):
 `string`, `memcpy`, `abs`, `signum`, `exp`, `sqrt`, `log`, `pow`, `div`, `sin`,
 `cos`, `tan`, `asin`, `acos`, `atan`, `atan2`, `sinh`, `cosh`, `tanh`, `asinh`,
 `acosh`, `atanh`, `isnan`, `isinf`, `round`, `ceil`, `floor`, `fromIx`,
@@ -41,7 +41,7 @@ Definitions in Ivory programs needs to appear at the top-level. These include:
 function definitions, include and import statements, struct, type, and bitdata
 definitions, area definitions, and constants.
 
-### expressions
+### Expressions
 
 Expressions in Ivory are similar to expressions in C with the addition of
 macros are areas. In Ivory, a reference can be dereference in two ways: a)
@@ -97,7 +97,7 @@ function calls are, a) the macro names need to be prefix with `$` (eg., `$foo`)
 and b) function calls must always be followed by an argument list, which may be
 empty (eg., `()`), but macro invocations do not require an argument list.
 
-### statements
+### Statements
 
 Keeping with the similarity to C syntax, statements end with a semicolon (`;`).
 Notable differences between C syntax and Ivory syntax for statements:
@@ -144,7 +144,7 @@ either an iterator usage (`map`, `upTo`, `forever`, etc) or an if-statement.
 
 ```
 
-### functions
+### Functions
 
 Functions in Ivory are similar to C functions. The body of functions may only
 contain statements and not definitions. The simplest ivory function would be:
@@ -176,7 +176,7 @@ The syntax for functions is as follows:
                | 'post' '(' <exp> ')'
 ```
 
-#### Pre and post conditions
+#### Pre and Post Conditions
 
 Function definitions in Ivory may be followed by optional pre and post
 conditions on the function. These conditions are written as Ivory expressions
@@ -193,7 +193,7 @@ they must all hold.
 Ivory supports using an external SMT solver to automatically check pre and post
 conditions, but this topic is not covered here.
 
-### types
+### Types
 
 #### Values Types
 Ivory has many of the same basic types you would expect in C:
@@ -204,7 +204,7 @@ Note: there are no machine-dependent types in Ivory, like `int`, `short int`,
 `long int`.
 
 
-#### Memory area types
+#### Memory Area Types
 
 All allocated data in Ivory is associated with an area.
 
@@ -249,7 +249,7 @@ special type, `ix_t n`, where `n` is a natural number. An index type of `ix_t
 n` supports the values `0` through `n-1`. Any values manually assigned to the
 index will be taken modulo `n`, so that they are in the correct range.
 
-#### bitdata
+#### Bitdata
 
 At a first approximation, bitdata are a powerful form of enumerations where the
 programmer has precise control over the bit width and representation. The full
@@ -295,7 +295,7 @@ Here is the Ivory syntax for defining bitdata:
 <tyidentifier> ::= <capital letter>   [<alpha> <digit> [_ \']]*
 ```
 
-### struct
+### Struct
 
 Structs come in three varieties in Ivory:
 
@@ -317,7 +317,7 @@ the type of the field needs to begin with a `&` character. For the basic types,
 such as `int8_t`, Ivory can infer that the struct will need to store the value
 and hence the `&` may be omitted.
 
-#### string structs
+#### String Structs
 
 The string variant of structs is for creating fixed size arrays with two
 fields. The first field for tracking the current length of the string and the
@@ -355,7 +355,7 @@ Example macros in the stdLibStringModule:
 * `string_lit_store`: stores a string literal into a string variable
 * `string_lit_array`: stores a string literal into an array of `uint8_t`
 
-#### abstract structs
+#### Abstract Structs
 
 Abstract structs are used as pointers to structs that exist external to the
 Ivory program, such as those declared in C. The last parameter to declare an
@@ -371,7 +371,7 @@ have the following syntax:
 <constDef> ::= [ <type> ] <identifier> '=' <exp> ';'
 ```
 
-### alloc
+### Alloc
 
 Ivory supports allocation syntax for references, arrays, and structs.
 
@@ -384,7 +384,7 @@ Ivory supports allocation syntax for references, arrays, and structs.
                | '{' [ <identifier> '=' <exp> ',' ]* '}'
 ```
 
-### Includes, imports, and externs
+### Includes, Imports, and Externs
 
 Definitions from other Ivory modules are brought into scope using `include`.
 
@@ -405,7 +405,7 @@ to the C definition, the C name, the Ivory type, and the Ivory name.
 <header>       ::= [ <identifier> '/' ]* <identifier> '.' <identifier> -- file paths
 ```
 
-### iterators
+### Iterators
 
 Instead of providing traditional looping constructs, Ivory supports loops
 through the use of iterators. All of the forms of the iterator syntax, except
@@ -515,7 +515,7 @@ import (stdio.h, printf) int32_t printf_int8_t(string s, int8_t n)
 import (stdio.h, printf) int32_t printf_int32_t(string s, int32_t n)
 ```
 
-## Casting and conversion
+## Casting and Conversion
 
 Ivory is designed so that programs are not allowed to have undefined behavior
 and in turn this requires special support for casting operations. The C standard
