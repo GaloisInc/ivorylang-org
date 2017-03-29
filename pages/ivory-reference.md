@@ -1,6 +1,13 @@
 # Ivory Language Reference
 
+This document is meant to serve as a reference for the major features of Ivory
+and the concrete syntax of Ivory, but not as a completely exhaustive resource.
+
 ## Syntax
+
+We use a form of extended BNF notation. Repetition zero or more times is
+denoted with a `*` suffix (ex: ` <type>*`) and optional elements (zero or one
+times) are enclosed in brackets (ex: `[ <type> ]`).
 
 ### Comments
 
@@ -31,11 +38,10 @@ void f () {}
 
 ## Reserved Symbols
 
-The follow symbols are reserved in Ivory, most of which will have a familiar meaning for
-C programmers:
-`$`, `::`, `?`, `:`, `.`, `->`, `==`, `!=`, `*`, `/`, `+`, `-`, `%`, `=`, `<`,
-`<=`, `>=`, `>`, `|`, `&`, `^`, `~`, `!`, `&&`, `||`, `<<`, `>>`, `(`, `)`,
-`}`, `{`, `[`, `]`, `;`, `,`, `@`, `<-`, `_`, `#`
+The following symbols are reserved in Ivory, most of which will have a familiar
+meaning for C programmers: `$`, `::`, `?`, `:`, `.`, `->`, `==`, `!=`, `*`,
+`/`, `+`, `-`, `%`, `=`, `<`, `<=`, `>=`, `>`, `|`, `&`, `^`, `~`, `!`, `&&`,
+`||`, `<<`, `>>`, `(`, `)`, `}`, `{`, `[`, `]`, `;`, `,`, `@`, `<-`, `_`, `#`
 
 Definitions in Ivory programs needs to appear at the top-level. These include:
 function definitions, include and import statements, struct, type, and bitdata
@@ -44,19 +50,19 @@ definitions, area definitions, and constants.
 ### Expressions
 
 Expressions in Ivory are similar to expressions in C with the addition of
-macros are areas. In Ivory, a reference can be dereference in two ways: a)
+macros and areas. In Ivory, a reference can be dereference in two ways: a)
 first, like a C dereference where it evaluates to the value stored at the
 reference, b) second, to get a new reference similar to a C dereference
-followed by the address of (`&`) operator. Ivory references are never null.
+followed by the address of operator (`&`). Ivory references are never null.
 
-An example, of a C-style dereference for an area, would be:
+An example of a C-style dereference for an area:
 
 ```
 myArray[i] -- returns the value stored in the array at position i
 myStruct->f -- returns the value stored in field f of the struct
 ```
 
-Examples of Ivory dereferences that return references would be:
+Examples of Ivory dereferences that return references:
 ```
 myArray@i -- returns a reference to the ith position of the array
 myStruct.f -- returns a reference to the field f of the struct
@@ -212,7 +218,7 @@ The first area is the Global area. The Global area is always in scope and exists
 for the whole lifetime of the Ivory program. The Global area is abbreviated to
 `G` when it appears in a reference's type.
 
-The second area is the Stack area (abbreviate `S`). Each function gets its own
+The second area is the Stack area (abbreviated `S`). Each function gets its own
 Stack area and this area refers to the stack space of the C stack for the
 function.
 
@@ -254,8 +260,8 @@ index will be taken modulo `n`, so that they are in the correct range.
 At a first approximation, bitdata are a powerful form of enumerations where the
 programmer has precise control over the bit width and representation. The full
 power of bitdata is beyond the scope of this reference. We recommend the reader
-look at this [document for background on
-bitdata](http://yav.github.io/publications/bitdata.pdf).
+look at [this document](http://yav.github.io/publications/bitdata.pdf) for
+background on bitdata.
 
 Here is the Ivory syntax for defining bitdata:
 
@@ -299,7 +305,7 @@ Here is the Ivory syntax for defining bitdata:
 
 Structs come in three varieties in Ivory:
 
-  * C-style structs: create a C-style aggregations of types. 
+  * C-style structs: create a C-style aggregations of values. 
   * string
   * abstract
 
@@ -328,13 +334,13 @@ provides a standard library of functions for working with strings,
   * Ex initialization:
   `alloc s{} = $stringInit("foo");`
 
-Fully understand the usage of the string module requires reading the Haskell
+Fully understanding the usage of the string module requires reading the Haskell
 code, but here we cover some of the basics.
 
 Declaring a string:
 ```
 include stdlibStringModule -- Bring the stdlibStringModlue into scope
-string struct MyString 4
+string struct MyString 4;
 ```
 
 This will create a type named `ivory_string_MyString`. For example, a function
@@ -414,9 +420,9 @@ created and brought into scope automatically. The difference between the
 different iterator forms gives the programmer control over the range and/or
 order of the iteration.
 
-The iterators here are described by starting from simplest form and then moving
-to most elaborate forms, as the later iterators subsume the preceding ones. The
-explanations assume the reader is familiar with the preceding forms.
+The iterators here are described by starting from the simplest form and then
+moving to more elaborate forms, as the later iterators subsume the preceding
+ones. The explanations assume the reader is familiar with the preceding forms.
 
 * `forever`: The simplest iterator is the `forever` iterator that creates the
 equivalent of a C `while(1)` loop. It simply iterates without stopping and
@@ -553,7 +559,7 @@ negative, the behavior is implementation-specific, and may trap.
     this should optimize away to use zero instructions. However, the C
     standard also permits implementations that use one's complement or
     sign-magnitude representations, and this algorithm is expected to
-    work in those implementations as well.
+    work on those implementations as well.
 
 * `twosCompRep`
 
@@ -584,9 +590,6 @@ going. We assume you have a Haskell development toolchain already installed and
 setup. If not, we recommend [Haskell Platform
 Core](https://www.haskell.org/platform/).
 
-First, your project will need a cabal description file so that it can be built
-as a Haskell project.
-
 * First, your project will need a cabal description file so that it can be
 built as a Haskell Project. The most important detail for this file is the
 `build-depends` field. This tells cabal that we need the `ivory`,
@@ -616,22 +619,22 @@ named: `minimal-ivory-example.cabal`
       default-language:    Haskell2010
     ```
 
-* Cabal requires an additional file. This file is not important for this simple
-project and we use the default: `Setup.hs`
+* Second, cabal requires a `Setup.hs` file. This file is not important for this simple
+project and we use the default:
 
     ```
     import Distribution.Simple
     main = defaultMain
     ```
 
-* The `main` function for the project is in `src/Main.hs`. This file calls the
-Ivory compiler on whatever input files we specify.  Here we use the `ivoryFile`
-quasiquoter to compile the file `example.ivory`. The line `main = runCompiler`
-mentions `example`. The name `example` is created by the `ivoryFile` line by
-concatenating directory names and dropping the `.ivory` suffix. For instance,
-if the file was at the path `directory1/directory2/my_input.ivory`, then we
-would use `direcotry1directory2my_input` as the module name passed to
-`runCompiler`:
+* Third, The `main` function for the project is in `src/Main.hs`. This file
+calls the Ivory compiler on whatever input files we specify.  Here we use the
+`ivoryFile` quasiquoter to compile the file `example.ivory`. The line `main =
+runCompiler ..` mentions `example`. The name `example` is created by the line
+that starts with `ivoryFile`. The name `example` was created  by concatenating
+directory names and dropping the `.ivory` suffix. For instance, if the file was
+at the path `directory1/directory2/my_input.ivory`, then we would use
+`direcotry1directory2my_input` as the module name passed to `runCompiler`:
 
     ```
     {-# LANGUAGE QuasiQuotes         #-}
@@ -655,4 +658,5 @@ would use `direcotry1directory2my_input` as the module name passed to
     void f() {}
     ```
 
-This will create a directory, `ivory-example` and write the output there.
+If you build and run this example it should create a directory, `ivory-example`
+and write the output there.
