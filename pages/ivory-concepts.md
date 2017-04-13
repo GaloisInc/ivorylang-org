@@ -39,8 +39,8 @@ safety. Average case performance is often sacrificed in order to bound the worst
 case; the programmer can expect compiled Ivory programs to perhaps use more
 memory, code, or time than functionally equivalent safe programs written in C.
 
-While this means Ivory may not be a good language for all applications, Within
-the domain of creating high assurance software, these trade-offs are what make
+While this means Ivory may not be a good language for all applications, within
+the domain of creating high-assurance software, these trade-offs are what make
 Ivory ideal.
 
 ## Differences from the C Language
@@ -96,8 +96,6 @@ includes integration for CBMC verification of the SMACCMPilot source code.
 
 We also provide our own [symbolic simulator][mc] for verifying Ivory assertions using
 [CVC4][cvc4].
-
-Further documentation on Ivory's verification support is forthcoming.
 
 [embedded]:http://wikipedia.com/wiki/Domain-specific_language#Domain-specific_language_topics
 [cbmc]: http://www.cprover.org/cbmc/

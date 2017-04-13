@@ -20,7 +20,7 @@ at least be familar:
 [rwh]: http://book.realworldhaskell.org
 [spb]: http://github.com/galoisinc/smaccmpilot-build
 
-* Installing GHC and cabal. Ivory supports GHC 7.6.3 and the 7.8 series.
+* Installing GHC and cabal. Ivory supports GHC 7.8, 7.10 and the 8.0 series.
 * Good understanding of the type system. You are comfortable defining your
   own typeclasses, and perhaps you've dealt with existential quantification.
 * Monad concepts and syntax; Imperative style in Haskell. You understand how to
@@ -42,32 +42,32 @@ Here's an Ivory procedure which computes Fibonacci numbers by mutating values
 on the stack in a loop.
 
 ```haskell
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeOperators #-}
-
-import Ivory.Language
-import qualified Ivory.Compile.C.CmdlineFrontend as C (compile)
-
-fib_loop :: Def ('[Ix 1000] :-> Uint32)
-fib_loop  = proc "fib_loop" $ \ n -> body $ do
-  a <- local (ival 0)
-  b <- local (ival 1)
-
-  n `times` \ _ -> do
-    a' <- deref a
-    b' <- deref b
-    store a b'
-    store b (a' + b')
-
-  result <- deref a
-  ret result
-
-fib_tutorial_module :: Module
-fib_tutorial_module = package "fib_tutorial" $ do
-  incl fib_loop
-
-main :: IO ()
-main = C.compile [ fib_tutorial_module ]
+ 1. {-# LANGUAGE DataKinds #-}
+ 2. {-# LANGUAGE TypeOperators #-}
+ 3.
+ 4. import Ivory.Language
+ 5. import qualified Ivory.Compile.C.CmdlineFrontend as C (compile)
+ 6.
+ 7. fib_loop :: Def ('[Ix 1000] :-> Uint32)
+ 8. fib_loop  = proc "fib_loop" $ \ n -> body $ do
+ 9.   a <- local (ival 0)
+10.   b <- local (ival 1)
+11.
+12.   n `times` \ _ -> do
+13.     a' <- deref a
+14.     b' <- deref b
+15.     store a b'
+16.     store b (a' + b')
+17.
+18.   result <- deref a
+19.   ret result
+20.
+21. fib_tutorial_module :: Module
+22. fib_tutorial_module = package "fib_tutorial" $ do
+23.   incl fib_loop
+24.
+25. main :: IO ()
+26. main = C.compile [ fib_tutorial_module ]
 
 ```
 
@@ -156,7 +156,7 @@ the procedure will have when compiled. So, we know that the Ivory `Def` called
 `fib_loop` will also be compiled to a C function called `fib_loop`.
 
 The second argument to `proc` is an anonymous haskell function which takes an
-argument `n` and returns a the value from `body` on. The type of `n` is given
+argument `n` and returns the value from `body`. The type of `n` is given
 by the type arguments to the `Def` declared above. We noted that the procedure
 argument types were given as `'[Ix 1000]`, so here proc expects a function
 from a single value (here, `n`) with type `Ix 1000`.
@@ -221,7 +221,7 @@ primitives in Ivory take an `Ix` type so that a static upper bound is known.
 
 One of the looping primitives in Ivory is `times`. It does what you might
 expect: given an `Ix`-typed value, it runs the loop body the number of times
-specified. The loop body here is a function from `Ix 1000` to `Ivory eff ()`:
+specified. The loop body here is a function from `Ix 1000` to `Ivory eff ()`.
 `times` will provide a value to the loop body giving the number of times the
 loop has been run. In this example, we don't care what the current iteration
 of the loop is, so we discard this argument using `_`.
@@ -239,11 +239,11 @@ of C to enforce safety.
 Here is the loop again, with the loop body:
 
 ```haskell
-  n `times` \ _ -> do
-    a' <- deref a
-    b' <- deref b
-    store a b'
-    store b (a' + b')
+12.   n `times` \ _ -> do
+13.     a' <- deref a
+14.     b' <- deref b
+15.     store a b'
+16.     store b (a' + b')
 ```
 
 The loop body does a series of operations on the stack variables at
@@ -253,11 +253,11 @@ Ivory `Ref`s are a lot like Haskell's `Data.IORef`: they support reading
 (via `deref`) and writing (via `store`) with ordering enforced by the enclosing
 `Ivory` monad.
 
-In lines 7 and 8, we read the current value stored at the `Ref` with `deref`.
+In lines 13 and 14, we read the current value stored at the `Ref` with `deref`.
 That value is bound to the Haskell variables `a'` and `b'`. Since `a` has type
 `Ref s Uint32`, `a'` has type `Uint32`.
 
-In lines 9 and 10, we `store` new values into the references `a` and `b`. Note
+In lines 15 and 16, we `store` new values into the references `a` and `b`. Note
 that can use the ordinary Haskell Prelude function `+` on values of type `Uint32`.
 Ivory integers and floats are instances of the Haskell `Num` typeclass, so any
 purely functional code on Ivory integers and floats uses the same syntax as you
@@ -266,13 +266,13 @@ would with Haskell integers and floats.
 ----------
 
 ```haskell
-  result <- deref a
-  ret result
+18.   result <- deref a
+19.   ret result
 ```
 
 After the loop is complete, we have a value stored in `a` which is the `n`th
 Fibonacci number. Just as the statements `deref` and `store` in the loop body
-were run sequentially in the `Ivory` monad, the `deref` on line 12 will be run
+were run sequentially in the `Ivory` monad, the `deref` on line 18 will be run
 sequentially after the loop is complete.
 
 The `Ivory` statement `ret` takes a value of the procedure return type,
@@ -280,10 +280,10 @@ The `Ivory` statement `ret` takes a value of the procedure return type,
 analogous to the `return` keyword in C.
 
 Remember when we said above the Haskell type checker will infer `a` and `b` to
-have type `Uint32`?  The `ret` function on line 13 tells the type checker that
-the type of `result` on like 12 is the result type of the procedure from line
-1. It follows that `a` must be a Ref to that type, `a'` must have that type, and
-through the use of `+` on line 10, `b'` also must have that type.
+have type `Uint32`?  The `ret` function on line 19 tells the type checker that
+the type of `result` on line 12 is the result type of the procedure from line
+7. It follows that `a` must be a Ref to that type, `a'` must have that type, and
+through the use of `+` on line 16, `b'` also must have that type.
 
 This is a nice example of how using Haskell gives us strong guarantees of type
 correctness without having to write out a lot of type information explicitly.
@@ -308,7 +308,7 @@ implementation files with a name specified by the first argument to `package`.
 So, this Module will produce the files `fib_tutorial.h` and `fib_tutorial.c`.
 
 The second argument to `package` is a Monad of type `ModuleDef`. The Monad class
-here is just to provide a convenient syntax: really, `ModuleDef`s could be lists
+here is just to provide a convenient syntax - really, `ModuleDef`s could be lists
 or some other Monoid.
 
 The `incl` function takes an Ivory `Def` and adds it to a `ModuleDef`. The
@@ -345,7 +345,7 @@ compilation flags for the Ivory compiler. Try running the executable with the
 ### What's Next?
 
 One good next step to learning the Ivory Language is to go through the contents
-of the [`ivory-examples`][ivory-examples] package to see some more examples and
+of the [ivory-examples][ivory-examples] package to see some more examples and
 examine some of the generated C sources.
 
 You can also take a look at the [SMACCMPilot project](http://smaccmpilot.org),
