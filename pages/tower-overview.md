@@ -12,22 +12,21 @@ of each task. Tower compiles the specification for the program and delegates
 code generation to an operating-system specific backend.
 
 At the moment, Tower is still under active development and is not stable. There
-is no formal documentation, but there are some [examples][] and 
-[haddock documentation][tower-haddock].
-
-[tower-haddock]: http://smaccmpilot.org/haddock/tower/Ivory-Tower.html
+is no formal documentation, but there are some [examples][examples].
 
 ### Code Generation Backends
 
 At this time, Tower has [a backend][tower-freertos] for the [FreeRTOS][]
-operating system, and [a backend][tower-aadl] for an [AADL][] description of the
+operating system, a [backend][tower-echronos] for the [eChronos] operating system, and [a backend][tower-aadl] for an [AADL][] description of the
 system, designed for use with an external code generator. Users who want to use
-Tower for embedded systems will want to use the FreeRTOS backend.
+Tower for embedded systems will want to use the FreeRTOS or eChronos backend.
 
 [tower]: http://github.com/GaloisInc/tower
-[tower-freertos]: http://github.com/GaloisInc/tower/tree/master/tower-freertos
+[tower-freertos]: https://github.com/GaloisInc/ivory-tower-stm32/tree/master/tower-freertos-stm32
+[tower-echronos]: https://github.com/GaloisInc/ivory-tower-stm32/tree/master/tower-echronos-stm32
 [tower-aadl]: http://github.com/GaloisInc/tower/tree/master/tower-aadl
 [FreeRTOS]: http://freertos.org
+[eChronos]: https://github.com/galoisinc/echronos/tree/master
 [AADL]: https://www.sei.cmu.edu/architecture/research/model-based-engineering/aadl.cfm
 
 ### Tower Examples
@@ -36,6 +35,6 @@ Simple examples and tests of the Tower framework are found in
 [`tower-examples`][examples]. The [Simple][] example contains a number of
 trivial tasks demonstrating each type of communication primitive.
 
-[examples]: https://github.com/GaloisInc/tower/tree/master/tower-examples
-[Simple]: https://github.com/GaloisInc/tower/blob/master/tower-examples/examples/Simple.hs
+[examples]: https://github.com/GaloisInc/ivory-tower-stm32/tree/master/tower-freertos-stm32-tests
+[Simple]: https://github.com/GaloisInc/ivory-tower-stm32/blob/master/tower-freertos-stm32-tests/examples/Simple.hs
 

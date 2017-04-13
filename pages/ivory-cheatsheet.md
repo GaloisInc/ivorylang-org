@@ -4,7 +4,7 @@ This cheatsheet is to get you started with the most common constructs in Ivory.
 Many constructs are not covered here; see the Ivory Haddock documentation (as
 well as the Ivory standard library) for the full language definition.
 
-** This cheatsheet is incomplete! **
+**This cheatsheet is incomplete!**
 
 ## Types
 
@@ -269,7 +269,7 @@ for (int currIx = 0; currIx <= 3; currIx++) {
        to `0` for `Ix n`.
         - Example:
 ```haskell
-(ix :: Ix 4) `for` \currIx -> $ do
+(ix :: Ix 4) `times` \currIx -> $ do
   x <- deref ref
   store ref (x+1)
 ```
